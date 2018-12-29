@@ -1,0 +1,14 @@
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - Trackday</title>
+      {% else %}
+      <title>Willkommen zum Trackday</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>Trackday: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
