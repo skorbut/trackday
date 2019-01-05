@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <h1>Fuhrpark</h1>
+
+  {% for car in cars %}
+  <div class = "car">
+    <div class = "car-image">
+      <img src = "{{ car.image_link }}" />
+    </div>
+    <div class = "car-data">
+      <ul>
+        <li>{{ car.name }}</li>
+        <li>{{ car.order_number }}</li>
+        <li>{{ car.description }}</li>
+      </ul>
+    </div>
+  </div>
+  {% endfor %}
+
+{% endblock %}
