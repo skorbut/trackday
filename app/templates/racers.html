@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+  <h1>Registrierte Fahrer</h1>
+
+  <a href="{{ url_for('racer_registration') }}">Neuen Rennfahrer aufnehmen</a>
+
+  {% for racer in racers %}
+  <div class = "racer">
+    <div class = "racer-data">
+      <ul>
+        <li>{{ racer.name }}</li>
+      </ul>
+    </div>
+  </div>
+  {% endfor %}
+
+{% endblock %}

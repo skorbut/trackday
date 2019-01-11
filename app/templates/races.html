@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+  <h1>Erstellte Rennen</h1>
+
+  <a href="{{ url_for('race_registration') }}">Neues Rennen starten</a>
+
+  <table width = "80%">
+    <tr>
+      <th>ID</th>
+      <th>Erstellt am</th>
+      <th>Typ</th>
+      <th>Dauer</th>
+      <th>Status</th>
+      <th>Fahrerfeld</th>
+    </tr>
+    {% for race in races %}
+    <tr>
+      <td>{{ race.id }}</td>
+      <td>{{ race.created_at.strftime('%d.%m.%Y %H:%M:%S') }}</td>
+      <td>{{ race.type }}</td>
+      <td>{{ race.duration }}</td>
+      <td>{{ race.status }}</td>
+      <td>
+        {% if race.parsed_grid() %}
+          {% for grid_entry in race.parsed_grid() %}
+            {{ grid_entry['controller'] }}. {{ grid_entry['racer'].name }} ({{ grid_entry['car'].name }})<br/>
+          {% endfor %}
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h1>Neues Rennen</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <h2>Grundeinstellungen</h2>
+        {{ form.status }}
+        <p>
+            {{ form.type.label }}<br>
+            {{ form.type }}
+            {% for error in form.type.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.duration.label }}<br>
+            {{ form.duration }}
+            {% for error in form.duration.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <h2>Fahrerfeld</h2>
+        {% for error in form.grid.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        <div id = "grid">
+            <p>
+                {% for grid_entry in form.grid %}
+                    {% for field in grid_entry %}
+                        {{ field() }}
+                    {% endfor %}
+                {% endfor %}
+            </p>
+        </div>
+        <button class="add_grid_entry">Fahrer hinzufügen</button>
+        <button class="remove_grid_entry">Letzten Fahrer entfernen</button>
+
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
+
+
+{% block scripts %}
+    {{super()}}
+    <script>
+        $(document).ready(function() {
+            var max_racers = 4; //maximum input boxes allowed
+            var grid_subform = $("#grid"); //Fields wrapper
+            var addButton = $(".add_grid_entry"); //Add button class
+            var removeButton = $(".remove_grid_entry"); //remove button ID
+            var racer_counter = 1;
+            $(addButton).click(function(e){ //on add input button click
+                e.preventDefault();
+                if(racer_counter < max_racers){ //max input box allowed
+                    racer_counter++;
+                    $("#grid").append(duplicate_grid_entry());
+                }
+                else { window.alert('Mehr Rennfahrer sind nicht möglich')}
+            });
+            $(removeButton).click(function(e){ //on remove input button click
+                e.preventDefault();
+                if(racer_counter > 1){ //make sure at least one field is there
+                    $('#grid_'+racer_counter).remove();
+                    racer_counter--;}
+                else { window.alert('Mindestens ein Rennfahrer muß bleiben')}
+            });
+            function duplicate_grid_entry() {
+                var first_grid_entry = $("#grid p").first().html();
+                return "<p id = \"grid_" + racer_counter + "\">" + first_grid_entry.replace(/rid-0/g, "rid-" + racer_counter) + "</p>";
+            };
+        });
+    </script>
+{% endblock %}

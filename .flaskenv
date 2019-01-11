@@ -1,1 +1,2 @@
 FLASK_APP=trackday.py
+FLASK_DEBUG=1

@@ -1,4 +1,26 @@
-from app import db
+import datetime, json
+from app import app, db
+
+class Race(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  type = db.Column(db.String(16))
+  duration = db.Column(db.Integer)
+  grid = db.Column(db.String(128))
+  status = db.Column(db.Integer)
+  created_at = db.Column(db.DateTime)
+  started_at = db.Column(db.DateTime)
+  finished_at = db.Column(db.DateTime)
+
+  def parsed_grid(self):
+    if self.grid is None:
+      return None
+    #parse to json
+    #replace racer and car with objects
+    return list(map(lambda grid_entry: {'controller': grid_entry['controller'], 'racer': Racer.query.get(grid_entry['racer']), 'car': Car.query.get(grid_entry['car'])}, json.loads(self.grid)))
+
+  def cancel(self):
+    self.status = "cancelled"
+    self.finished_at = datetime.datetime.now()
 
 class Racer(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -20,27 +42,9 @@ class Car(db.Model):
 class Lap(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   car_id = db.Column(db.Integer, db.ForeignKey('car.id'))
-
   time = db.Column(db.Integer, index=False, unique=False)
 
   def __repr__(self):
     return '<Lap {}>'.format(self.car_id)
 
-class TrackState(db.Model):
-  id = db.Column(db.Integer, primary_key=True)
-  timestamp = db.Column(db.DateTime)
-  fuel_levels = db.Column(db.String(8)) # Eight-item list of fuel levels (0..15)
-  cars_in_pit = db.Column(db.String(8)) # 8-bit pit lane bit mask
-  start_light = db.Column(db.Integer)
-  cars_to_display = db.Column(db.Integer)
-  mode = db.Column(db.Integer)
-  processed = db.Column(db.Boolean)
-
-  def __repr__(self):
-    return '<TrackEvent timestamp = {}, fuel_levels = {}, cars_in_pit = {}, start_light = {}>'.format(self.timestamp, self.fuel_levels, self.cars_in_pit, self.start_light)
-
-  def fuel_array(self):
-    return list(map(lambda x : int(x,16), list(self.fuel_levels)))
-  def pit_array(self):
-    return list(map(lambda x : bool(int(x)), list(self.cars_in_pit)))
 

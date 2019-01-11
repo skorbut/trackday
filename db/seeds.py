@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import Car, Racer, TrackState
+from app.models import Car, Racer
 
 @app.cli.command()
 def seed():
@@ -14,9 +14,6 @@ def seed():
   app.logger.info('Registering Racers..')
   db.session.add(Racer(name = 'Mika'))
   db.session.add(Racer(name = 'Papa'))
-
-  app.logger.info('Creating initial Track Status')
-  db.session.add(TrackState(id = 0, fuel_levels = 'e37fff00', cars_in_pit = '10000000', start_light = 1, cars_to_display = 8, mode = 5))
 
   db.session.commit()
   app.logger.info('..finished')

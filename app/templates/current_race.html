@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+  <h1>Aktuelles Rennen</h1>
+
+  {% if current_race and current_race.parsed_grid()%}
+    <div class="d-flex flex-row race-grid">
+      {% for grid_entry in current_race.parsed_grid()%}
+      <div class= "p-2" id = "grid_entry<_{{ grid_entry['controller'] }}">
+        <div>{{ grid_entry['racer'].name }} ({{ grid_entry['car'].name }})</div>
+        <div id = "fuel_{{ grid_entry['controller'] }}">
+          <i class="fa fa-gas-pump"></i>
+        </div>
+        <div id = "in_pit_{{ grid_entry['controller'] }}"></div>
+      </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    var socket = io.connect('http://' + document.domain + ':' + location.port + '/track_events', {
+    upgrade: false,
+    transports: ['websocket']});
+    socket.on('connect', function() {
+        socket.emit('track_events', {data: 'I\'m connected!'});
+    });
+    socket.on('control_unit_connected', function() {
+      console.log("Control Unit connected");
+    });
+    socket.on('control_unit_not_connected', function() {
+      console.log("Control Unit not connected");
+    });
+
+    socket.on('track_events', function(msg) {
+      console.log(msg);
+    });
+    socket.on('message', function(msg) {
+      console.log(msg);
+    });
+    socket.on('event', function(msg){
+      console.log(msg);
+    });
+  </script>
+{% endblock %}
