@@ -1,3 +1,59 @@
 body {
   font-family: 'Orbitron', sans-serif;
 }
+
+.car-image {
+  max-width:50%;
+}
+
+.racer-name {
+  font-size: 90%;
+}
+
+.in-pit {
+  background-color: #66FF66;
+}
+
+.square {
+  width: 10px;
+  height: 15px;
+  margin-left: 2px;
+  background: grey;
+}
+
+.grid-entry {
+  margin-left: 5px;
+}
+
+#grid-entry-0 {
+  background-color: #FF6666;
+}
+
+#grid-entry-1 {
+  background-color: #6666FF;
+}
+
+#grid-entry-2 {
+  background-color: #FFFF66;
+}
+
+#grid-entry-6 {
+  background-color: #E6E6E6;
+}
+
+.fuel-0 { background-color: #FF0000;}
+.fuel-1 { background-color: #FF1A00;}
+.fuel-2 { background-color: #FF4D00;}
+.fuel-3 { background-color: #FF6600;}
+.fuel-4 { background-color: #FFB300;}
+.fuel-5 { background-color: #FFCC00;}
+.fuel-6 { background-color: #FFE600;}
+.fuel-7 { background-color: #FFFF00;}
+.fuel-8 { background-color: #E6FF00;}
+.fuel-9 { background-color: #CCFF00;}
+.fuel-10 { background-color: #B3FF00;}
+.fuel-11 { background-color: #80FF00;}
+.fuel-12 { background-color: #80FF00;}
+.fuel-13 { background-color: #66FF00;}
+.fuel-14 { background-color: #33FF00;}
+.fuel-15 { background-color: #00FF00;}

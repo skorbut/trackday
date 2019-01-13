@@ -22,6 +22,10 @@ class Race(db.Model):
     self.status = "cancelled"
     self.finished_at = datetime.datetime.now()
 
+  @staticmethod
+  def current():
+    return next(iter(Race.query.filter(Race.status=='created').all()), None)
+
 class Racer(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(64), index=True, unique=True)
@@ -41,10 +45,11 @@ class Car(db.Model):
 
 class Lap(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  car_id = db.Column(db.Integer, db.ForeignKey('car.id'))
+  race_id = db.Column(db.Integer, db.ForeignKey('race.id'))
+  controller = db.column(db.Integer)
   time = db.Column(db.Integer, index=False, unique=False)
 
   def __repr__(self):
-    return '<Lap {}>'.format(self.car_id)
+    return '<Lap {} {}>'.format(self.controller, self.time)
 
 

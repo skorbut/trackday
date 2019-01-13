@@ -33,6 +33,6 @@ if not app.debug:
 app.logger.info('Trackday App started successfully')
 
 
-from app import routes, models, errors, jobs
+from app import routes, models, errors, services
 # to re init database use this import
 #from app import models

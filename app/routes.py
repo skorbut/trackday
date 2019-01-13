@@ -1,7 +1,7 @@
 import datetime, json
 
 from flask import request, render_template, flash, redirect, jsonify, url_for
-from app import app, db
+from app import app, db, services
 from app.forms import CarRegistrationForm, RaceRegistrationForm, RacerRegistrationForm
 from app.models import Car, Race, Racer
 
@@ -30,7 +30,8 @@ def races():
 
 @app.route('/current_race')
 def current_race():
-  return render_template('current_race.html', title='Aktuelles Rennen', current_race=find_current_race())
+  services.try_control_unit_connection()
+  return render_template('current_race.html', title='Aktuelles Rennen', current_race=Race.current())
 
 @app.route('/racer_registration', methods=['GET', 'POST'])
 def racer_registration():
@@ -61,7 +62,7 @@ def race_registration():
         db.session.add(race)
         db.session.commit()
         flash('Ein neues Rennen wurde registriert.')
-        return redirect(url_for('track_state'))
+        return redirect(url_for('current_race'))
     return render_template('race_registration.html', title='Rennen anlegen', form=form)
 
 @app.route('/car_registration', methods=['GET', 'POST'])
@@ -75,12 +76,8 @@ def register():
         return redirect(url_for('index'))
     return render_template('car_registration.html', title='Neues Auto registrieren', form=form)
 
-
-def find_current_race():
-  return next(iter(Race.query.filter(Race.status=='created').all()), None)
-
 def cancel_current_race():
-  race = find_current_race()
+  race = Race.current()
   if race is None:
     return;
   race.cancel()
