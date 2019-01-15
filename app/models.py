@@ -22,6 +22,10 @@ class Race(db.Model):
     self.status = "cancelled"
     self.finished_at = datetime.datetime.now()
 
+  def start(self):
+    self.status = "started_at"
+    self.started_at = datetime.datetime.now()
+
   @staticmethod
   def current():
     return next(iter(Race.query.filter(Race.status=='created').all()), None)
