@@ -2,6 +2,19 @@ body {
   font-family: 'Orbitron', sans-serif;
 }
 
+.status-label: {
+  font-weight: 800;
+  margin-right: 10px;
+
+}
+.lap-number {
+  font-family: 'Faster One', cursive;
+}
+
+.lap-time {
+  font-family: 'Faster One', cursive;
+}
+
 .car-image {
   max-width:50%;
 }
@@ -22,7 +35,7 @@ body {
 }
 
 .grid-entry {
-  margin-left: 5px;
+  flex-grow: 1;
 }
 
 #grid-entry-0 {

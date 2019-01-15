@@ -7,6 +7,8 @@ from app import app, socketio
 
 from app.models import Race, Lap
 
+control_unit_connection_thread = None
+
 def connect_control_unit(serial_port):
   cu = None
   last_status = None
@@ -55,11 +57,15 @@ def connect_control_unit(serial_port):
 
 
 def try_control_unit_connection():
-  app.logger.info('Initializing cu listener thread')
-  serial_port = os.getenv('SERIAL_PORT')
+  global control_unit_connection_thread
+  if control_unit_connection_thread is None:
+    app.logger.info('Initializing cu listener thread')
+    serial_port = os.getenv('SERIAL_PORT')
 
-  if not serial_port:
-    print('SERIAL_PORT is not defined')
-    sys.exit(1)
+    if not serial_port:
+      print('SERIAL_PORT is not defined')
+      sys.exit(1)
 
-  eventlet.spawn(connect_control_unit, serial_port)
+    control_unit_connection_thread = eventlet.spawn(connect_control_unit, serial_port)
+  else:
+    app.logger.info('control_unit_connection thread is already created')

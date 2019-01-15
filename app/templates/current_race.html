@@ -3,19 +3,17 @@
 
   <h1>Aktuelles Rennen</h1>
 
-  <div class="d-flex flex-row justify-content-right mb1 status">
-    <div class="p2">
-      <dl>
-        <dt>CU:</dt>
-        <dd id="control_unit_status">nicht verbunden</dd>
-      </dl>
+  <div class="d-flex flex-row-reverse mb1 status">
+    <div class="p2 d-flex flex-row status_item">
+      <p class="p2 status-label">CU:</p>
+      <p class="p2 status-value" id="control_unit_status">nicht verbunden</p>
     </div>
   </div>
 
   {% if current_race and current_race.parsed_grid()%}
     <div class="d-flex flex-row justify-content-center  mb-3 bd-highlight ">
       {% for grid_entry in current_race.parsed_grid()%}
-      <div class= "p-2 grid-entry" id = "grid-entry-{{ grid_entry['controller'] }}">
+      <div class= "p-2 flex-fill grid-entry" id = "grid-entry-{{ grid_entry['controller'] }}">
         <div class= "racer-name">{{ grid_entry['racer'].name }} ({{ grid_entry['car'].name }})</div>
         <div id = "fuel_{{ grid_entry['controller'] }}" class = "d-flex flex-row">
           <i class="fa fa-gas-pump p-2"></i>
@@ -23,7 +21,6 @@
             <div class = "square fuel-{{i}}" id="fuel-level-{{grid_entry['controller']}}-{{i}}"> </div>
           {% endfor %}
         </div>
-        <div id = "in_pit_{{ grid_entry['controller'] }}"></div>
       </div>
       {% endfor %}
     </div>
@@ -50,21 +47,20 @@
     socket.on('connect', function() {
         socket.emit('pit_events', {data: 'I\'m connected!'});
     });
-    socket.on('control_unit_connected', function() {
-      console.log("Control Unit connected");
+    socket.on('pit_status', function(msg) {
+      console.log("Pit status: " + msg);
     });
-    socket.on('control_unit_not_connected', function() {
-      console.log("Control Unit not connected");
-    });
+  </script>
 
-    socket.on('track_events', function(msg) {
-      console.log(msg);
+  <script type="text/javascript" charset="utf-8">
+    var socket = io.connect('http://' + document.domain + ':' + location.port + '/fuel_events', {
+    upgrade: false,
+    transports: ['websocket']});
+    socket.on('connect', function() {
+        socket.emit('pit_events', {data: 'I\'m connected!'});
     });
-    socket.on('message', function(msg) {
-      console.log(msg);
-    });
-    socket.on('event', function(msg){
-      console.log(msg);
+    socket.on('fuel_levels', function(msg) {
+      console.log("Fuel Levels: " + msg);
     });
   </script>
 {% endblock %}
