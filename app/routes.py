@@ -81,4 +81,3 @@ def cancel_current_race():
   if race is None:
     return;
   race.cancel()
-  db.session.add(race)

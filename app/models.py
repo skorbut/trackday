@@ -21,10 +21,14 @@ class Race(db.Model):
   def cancel(self):
     self.status = "cancelled"
     self.finished_at = datetime.datetime.now()
+    db.add(self)
+    db.commit()
 
   def start(self):
     self.status = "started_at"
     self.started_at = datetime.datetime.now()
+    db.add(self)
+    db.commit()
 
   @staticmethod
   def current():

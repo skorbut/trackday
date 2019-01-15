@@ -1,9 +1,9 @@
-import os, sys, eventlet, serial
+import os, sys, eventlet, serial, json
 eventlet.monkey_patch()
 
 from flask_socketio import send, emit
 from carreralib import ControlUnit
-from app import app, socketio
+from app import app, socketio, db
 
 from app.models import Race, Lap
 
@@ -15,13 +15,16 @@ def connect_control_unit(serial_port):
     app.logger.info("Connecting Control Unit...")
 
     try:
-        return ControlUnit(serial_port)
+        cu = ControlUnit(serial_port)
+        version = cu.version
+        app.logger.info("...connected to Control Unit Version: {}", repr(version))
+        break
     except serial.serialutil.SerialException:
         app.logger.info("control unit not connected")
         socketio.emit('status', 'not_connected', namespace='/control_unit_events')
     eventlet.sleep(30)
 
-  app.logger.info("...connected to Control Unit")
+  app.logger.info("returning Control Unit")
   socketio.emit('status', 'connected', namespace='/control_unit_events')
   return cu;
 
@@ -29,7 +32,7 @@ def handle_control_unit_events(serial_port):
   cu = connect_control_unit(serial_port)
   last_status = None
   current_race = Race.current()
-  if current_race.status == 'created'
+  if current_race.status == 'created':
     current_race.start
     db.session.add(current_race)
     db.session.commit()
