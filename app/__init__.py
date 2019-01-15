@@ -22,14 +22,13 @@ socketio = SocketIO(app, logger=True, engineio_logger=True)
 if __name__ == '__main__':
     socketio.run(app)
 
-if not app.debug:
-    if not os.path.exists('logs'):
-        os.mkdir('logs')
-    file_handler = RotatingFileHandler('logs/trackday.log', maxBytes=10240, backupCount=10)
-    file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
-    file_handler.setLevel(logging.DEBBUG)
-    app.logger.addHandler(file_handler)
-    app.logger.setLevel(logging.DEBUG)
+if not os.path.exists('logs'):
+    os.mkdir('logs')
+file_handler = RotatingFileHandler('logs/trackday.log', maxBytes=10240, backupCount=10)
+file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+file_handler.setLevel(logging.DEBUG)
+app.logger.addHandler(file_handler)
+app.logger.setLevel(logging.DEBUG)
 
 app.logger.info('Trackday App started successfully')
 
