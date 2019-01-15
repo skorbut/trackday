@@ -49,6 +49,17 @@
     });
     socket.on('pit_status', function(msg) {
       console.log("Pit status: " + msg);
+      pit_status = JSON.parse(msg);
+      pit_status.forEach(function(in_pit, index) {
+        selector = $("#fuel_" + index)
+        if (selector.length == 0) {
+          if(in_pit == 'TRUE') {
+            selector.addClass('in-pit')
+          } else {
+            selector.removeClass('in-pit')
+          }
+        }
+      });
     });
   </script>
 
@@ -57,10 +68,13 @@
     upgrade: false,
     transports: ['websocket']});
     socket.on('connect', function() {
-        socket.emit('pit_events', {data: 'I\'m connected!'});
+        socket.emit('fuel_events', {data: 'I\'m connected!'});
     });
     socket.on('fuel_levels', function(msg) {
       console.log("Fuel Levels: " + msg);
+      fuel_levels = JSON.parse(msg);
+      fuel_levels.forEach(function(fuel_level, index) {
+      });
     });
   </script>
 {% endblock %}
