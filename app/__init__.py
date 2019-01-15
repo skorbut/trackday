@@ -6,10 +6,11 @@ from flask_migrate import Migrate
 from flask_bootstrap import Bootstrap
 from flask_socketio import SocketIO
 from logging.handlers import RotatingFileHandler
+from dotenv import load_dotenv
 
+load_dotenv()
 
-
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -26,9 +27,9 @@ if not app.debug:
         os.mkdir('logs')
     file_handler = RotatingFileHandler('logs/trackday.log', maxBytes=10240, backupCount=10)
     file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
-    file_handler.setLevel(logging.INFO)
+    file_handler.setLevel(logging.DEBBUG)
     app.logger.addHandler(file_handler)
-    app.logger.setLevel(logging.INFO)
+    app.logger.setLevel(logging.DEBUG)
 
 app.logger.info('Trackday App started successfully')
 
