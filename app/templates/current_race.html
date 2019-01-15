@@ -28,7 +28,7 @@
 
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
   <script type="text/javascript" charset="utf-8">
-    var socket = io.connect('http://' + document.domain + ':' + location.port + '/control_unit_events', {
+    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + '/control_unit_events', {
     upgrade: false,
     transports: ['websocket']});
     socket.on('connect', function() {
@@ -41,7 +41,7 @@
   </script>
 
   <script type="text/javascript" charset="utf-8">
-    var socket = io.connect('http://' + document.domain + ':' + location.port + '/pit_events', {
+    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + '/pit_events', {
     upgrade: false,
     transports: ['websocket']});
     socket.on('connect', function() {
@@ -53,7 +53,7 @@
   </script>
 
   <script type="text/javascript" charset="utf-8">
-    var socket = io.connect('http://' + document.domain + ':' + location.port + '/fuel_events', {
+    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + '/fuel_events', {
     upgrade: false,
     transports: ['websocket']});
     socket.on('connect', function() {

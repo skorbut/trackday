@@ -46,7 +46,7 @@ class Car(db.Model):
 class Lap(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   race_id = db.Column(db.Integer, db.ForeignKey('race.id'))
-  controller = db.column(db.Integer)
+  controller = db.Column(db.Integer)
   time = db.Column(db.Integer, index=False, unique=False)
 
   def __repr__(self):
