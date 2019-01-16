@@ -25,7 +25,8 @@ class Race(db.Model):
     db.session.commit()
 
   def start(self):
-    self.status = "started_at"
+    app.logger.info("setting race status to started and adding started_at timestamp")
+    self.status = "started"
     self.started_at = datetime.datetime.now()
     db.session.add(self)
     db.session.commit()

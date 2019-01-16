@@ -49,11 +49,11 @@
     });
     socket.on('pit_status', function(msg) {
       console.log("Pit status: " + msg);
-      pit_status = JSON.parse(msg);
+      var pit_status = JSON.parse(msg);
       pit_status.forEach(function(in_pit, index) {
-        selector = $("#gas-pump-" + index)
+        var selector = $("#gas-pump-" + index + " i")
         if (selector.length > 0) {
-          if(in_pit == 'TRUE') {
+          if(in_pit) {
             selector.addClass('in-pit')
           } else {
             selector.removeClass('in-pit')
@@ -72,10 +72,10 @@
     });
     socket.on('fuel_levels', function(msg) {
       console.log("Fuel Levels: " + msg);
-      fuel_levels = JSON.parse(msg);
+      var fuel_levels = JSON.parse(msg);
       fuel_levels.forEach(function(fuel_level, index) {
         for(var i=0; i < 16; i++){
-          selector = $("#fuel-level-" + index + "-" + i)
+          var selector = $("#fuel-level-" + index + "-" + i)
           if(selector.length > 0) {
             if(i <= fuel_level) {
               selector.removeClass('empty')

@@ -24,7 +24,8 @@ body {
 }
 
 .in-pit {
-  background-color: #66FF66;
+  color: #66FF66;
+  animation: blinker 1s linear infinite;
 }
 
 .empty {
@@ -74,3 +75,8 @@ body {
 .fuel-13 { background-color: #66FF00;}
 .fuel-14 { background-color: #33FF00;}
 .fuel-15 { background-color: #00FF00;}
+
+
+@keyframes blinker {
+  50% { opacity: 0; }
+}

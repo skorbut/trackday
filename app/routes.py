@@ -30,7 +30,8 @@ def races():
 
 @app.route('/current_race')
 def current_race():
-  services.try_control_unit_connection()
+  #services.try_control_unit_connection()
+  services.mock_control_unit_connection()
   return render_template('current_race.html', title='Aktuelles Rennen', current_race=Race.current())
 
 @app.route('/racer_registration', methods=['GET', 'POST'])
