@@ -27,6 +27,10 @@ body {
   background-color: #66FF66;
 }
 
+.empty {
+  background-color: grey !important;
+}
+
 .square {
   width: 10px;
   height: 15px;
