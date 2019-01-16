@@ -45,10 +45,13 @@ def handle_control_unit_events(serial_port):
       status_or_timer = cu.request()
       event_name = type(status_or_timer).__name__
       if 'Status' == event_name:
+        app.logger.info("processing a status " + repr(status_or_timer))
         if last_status != status_or_timer:
           socketio.emit('fuel_levels', json.dumps(status_or_timer.fuel), namespace='/fuel_events')
           socketio.emit('pit_status', json.dumps(status_or_timer.pit), namespace='/pit_events')
           socketio.emit('startlight_status', status_or_timer.start, namespace='/start_light_status')
+        else:
+          app.logger.info('status has not changed, not reporting')
         last_status = status_or_timer
       elif 'Timer' == event_name:
         # store lap
