@@ -62,9 +62,9 @@ def handle_control_unit_events(serial_port):
         app.logger.info("new lap " + repr(lap))
       else:
         app.logger.info("unknown event received: %s" % event_name)
-      eventlet.sleep(0.1)
+      eventlet.sleep(0.3)
     except serial.serialutil.SerialException:
-        app.logger.info("control unit disconnected")
+        app.logger.info("control unit disconnected, exiting loop")
         socketio.emit('status', 'disconnected', namespace='/control_unit_events')
         cu = connect_control_unit(serial_port)
 
