@@ -4,16 +4,15 @@
   <h1>Aktuelles Rennen</h1>
 
   <div class="d-flex flex-row-reverse mb1 status">
-    {% if current_race%}
-    <div class="p2 d-flex flex-row action_item">
-      <a href="{{ url_for('race_stop', race_id=current_race.id) }}">Rennen stoppen</a>
-    </div>
-    {% endif %}
-    </div>
-    <div class="p2 d-flex flex-row status_item">
+    <div class="p2 d-flex flex-row status-item">
       <p class="p2 status-label">CU:</p>
       <p class="p2 status-value" id="control_unit_status">nicht verbunden</p>
     </div>
+    {% if current_race%}
+    <div class="p2 d-flex flex-row action-item">
+      <a href="{{ url_for('race_stop', race_id=current_race.id) }}">Rennen stoppen</a>
+    </div>
+    {% endif %}
   </div>
 
   {% if current_race and current_race.parsed_grid()%}
@@ -26,6 +25,18 @@
           {% for i in range(0,16) %}
             <div class = "square fuel-{{i}}" id="fuel-level-{{grid_entry['controller']}}-{{i}}"> </div>
           {% endfor %}
+        </div>
+        <div class = "d-flex flex-row lap-data">
+          <div class="p-2 flex-fill">
+            <p>Gefahrene Runden:</p>
+            <p class="lap-number" id = "lap-number-{{ grid_entry['controller'] }}">0</p>
+          </div>
+          <div class="p-2 flex-fill">
+            <p>Letzte Rundenzeit:</p>
+            <p class="lap-time" id = "lap-time-{{ grid_entry['controller'] }}">0 s</p>
+            <p>Beste Rundenzeit:</p>
+            <p class="lap-time" id = "best-time-{{ grid_entry['controller'] }}">0 s</p>
+          </div>
         </div>
       </div>
       {% endfor %}
@@ -91,6 +102,23 @@
           }
         }
       });
+    });
+  </script>
+
+  <script type="text/javascript" charset="utf-8">
+    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + '/lap_events', {
+    upgrade: false,
+    transports: ['websocket']});
+    socket.on('connect', function() {
+        socket.emit('fuel_events', {data: 'I\'m connected!'});
+    });
+    socket.on('lap_finished', function(msg) {
+      console.log("A lap was finished: " + msg);
+      var lap_data = JSON.parse(msg);
+      var controller = lap_data["controller"]
+      $("#lap-number-" + controller).text(lap_data["lap_number"])
+      $("#lap-time-" + controller).html(Math.floor(lap_data["lap_time"] / 1000) + "<small>s</small>" + (lap_data["lap_time"] % 1000) + "<small>ms</small>")
+      $("#best-time-" + controller).html(Math.floor(lap_data["best_time"] / 1000) + "<small>s</small>" + (lap_data["best_time"] % 1000) + "<small>ms</small>")
     });
   </script>
 {% endblock %}

@@ -7,12 +7,27 @@ body {
   margin-right: 10px;
 
 }
+
+.action-item: {
+  margin-right: 10px;
+}
+
+.status-item: {
+  margin-right: 10px;
+}
 .lap-number {
   font-family: 'Faster One', cursive;
+  font-size: 4rem;
+  text-align: center;
 }
 
 .lap-time {
   font-family: 'Faster One', cursive;
+  font-size: 2rem;
+}
+
+.lap-time small {
+  font-size: 50%;
 }
 
 .car-image {
@@ -41,6 +56,7 @@ body {
 
 .grid-entry {
   flex-grow: 1;
+  margin: 5px;
 }
 
 #grid-entry-0 {

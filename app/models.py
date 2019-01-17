@@ -1,4 +1,5 @@
 import datetime, json
+from sqlalchemy import inspect
 from app import app, db
 
 class Race(db.Model):
@@ -75,5 +76,8 @@ class Lap(db.Model):
 
   def __repr__(self):
     return '<Lap {} {}>'.format(self.controller, self.time)
+
+  def to_json(self):
+    return json.dumps({c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs})
 
 

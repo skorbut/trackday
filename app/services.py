@@ -10,6 +10,21 @@ from app.models import Race, Lap
 
 control_unit_connection_thread = None
 
+class Timing(object):
+  def __init__(self, num):
+    self.num = num
+    self.time = None
+    self.laptime = None
+    self.bestlap = None
+    self.laps = 0
+
+    def newlap(self, timer):
+      if self.time is not None:
+        self.laptime = timer.timestamp - self.time
+        if self.bestlap is None or self.laptime < self.bestlap:
+          self.bestlap = self.laptime
+        self.laps += 1
+      self.time = timer.timestamp
 
 def connect_control_unit(serial_port):
   while True:
@@ -31,8 +46,9 @@ def connect_control_unit(serial_port):
 
 def handle_control_unit_events(serial_port):
   cu = connect_control_unit(serial_port)
-  last_status = None
+  last_status_or_timer = None
   current_race = Race.current()
+  timings = [Timing(num) for num in range(0, 8)]
   if current_race.status == 'created':
     current_race.start
     db.session.add(current_race)
@@ -44,25 +60,22 @@ def handle_control_unit_events(serial_port):
   while True:
     try:
       status_or_timer = cu.request()
-      event_name = type(status_or_timer).__name__
-      if 'Status' == event_name:
+      if status_or_timer == last_status_or_timer:
+        continue
+      if isinstance(status_or_timer, ControlUnit.Status):
         app.logger.info("processing a status " + repr(status_or_timer))
-        if last_status != status_or_timer:
-          socketio.emit('fuel_levels', json.dumps(status_or_timer.fuel), namespace='/fuel_events')
-          socketio.emit('pit_status', json.dumps(status_or_timer.pit), namespace='/pit_events')
-          socketio.emit('startlight_status', status_or_timer.start, namespace='/start_light_status')
-        else:
-          app.logger.info('status has not changed, not reporting')
-        last_status = status_or_timer
-      elif 'Timer' == event_name:
-        # store lap
-        lap = Lap(race_id = current_race.id, controller = status_or_timer.address, time = status_or_timer.timestamp)
+        socketio.emit('fuel_levels', json.dumps(status_or_timer.fuel), namespace='/fuel_events')
+        socketio.emit('pit_status', json.dumps(status_or_timer.pit), namespace='/pit_events')
+        socketio.emit('startlight_status', status_or_timer.start, namespace='/start_light_status')
+      elif isinstance(status_or_timer, ControlUnit.Timer):
+        timing = timings[status_or_timer.address]
+        timing.newlap(status_or_timer)
+        lap = Lap(race_id = current_race.id, controller = status_or_timer.address, time = timing.lap_time)
         db.session.add(lap)
         db.session.commit()
-        socketio.emit('lap_finished', lap, namespace='/lap_events')
+        socketio.emit('lap_finished', json.dumps({'controller': status_or_timer.address, 'lap_number': timing.lap, 'lap_time': timing.lap_time, 'best_time': timing.best_time}), namespace='/lap_events')
         app.logger.info("new lap " + repr(lap))
-      else:
-        app.logger.info("unknown event received: %s" % event_name)
+      last_status_or_timer = status_or_timer
       eventlet.sleep(0.3)
     except serial.serialutil.SerialException:
         app.logger.info("control unit disconnected, exiting loop")
@@ -86,11 +99,7 @@ def mock_control_unit_events(serial_port):
 
     else:
       app.logger.info("mocking a lap")
-      lap = Lap(race_id = current_race.id, controller = randint(0,8), time = datetime.datetime.now())
-      db.session.add(lap)
-      db.session.commit()
-      socketio.emit('lap_finished', lap, namespace='/lap_events')
-      app.logger.info("new lap " + repr(lap))
+      socketio.emit('lap_finished', json.dumps({'controller': randint(0,7), 'lap_number': randint(0,100), 'lap_time': randint(32000, 64000), 'best_time': randint(32000, 64000)}), namespace='/lap_events')
     eventlet.sleep(randint(0, 9))
 
 
