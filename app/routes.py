@@ -28,6 +28,18 @@ def races():
   app.logger.info('got races:' + repr(races))
   return render_template('races.html', title='Erstellte Rennen', races=races)
 
+@app.route('/races/<int:race_id>/stop')
+def race_stop(race_id):
+  race = Race.query.get(race_id)
+  if not race is None:
+    race.stop()
+    db.session.add(race)
+    db.session.commit()
+    services.disconnect_control_unit()
+    app.logger.info('stopping race:' + repr(race))
+    flash('Rennen gestoppt')
+  return render_template('races.html', title='Erstellte Rennen', races=Race.query.all())
+
 @app.route('/current_race')
 def current_race():
   #services.try_control_unit_connection()
@@ -82,3 +94,5 @@ def cancel_current_race():
   if race is None:
     return;
   race.cancel()
+  db.session.add(race)
+  db.session.commit()

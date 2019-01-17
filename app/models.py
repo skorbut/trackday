@@ -21,15 +21,30 @@ class Race(db.Model):
   def cancel(self):
     self.status = "cancelled"
     self.finished_at = datetime.datetime.now()
-    db.session.add(self)
-    db.session.commit()
 
   def start(self):
     app.logger.info("setting race status to started and adding started_at timestamp")
     self.status = "started"
     self.started_at = datetime.datetime.now()
-    db.session.add(self)
-    db.session.commit()
+
+  def stop(self):
+    app.logger.info("stopping race and adding finished_at timestamp")
+    self.status = "stopped"
+    self.finished_at = datetime.datetime.now()
+
+  def controller_for_racer(self, racer):
+    for grid_entry in race.parsed_grid():
+      if(grid_entry['Racer'] == racer):
+        return grid_entry['Controller']
+    return None
+
+  def lap_count_by_racer(self, racer):
+    return self.lap_count_by_controller(racer)
+
+  def lap_count_by_controller(self, controller):
+    if controller is None:
+      return 0
+    return Lap.query.filter_by(race_id=self.id, controller=controller).count()
 
   @staticmethod
   def current():

@@ -16,7 +16,7 @@ def connect_control_unit(serial_port):
     app.logger.info("Connecting Control Unit...")
 
     try:
-        cu = ControlUnit(serial_port)
+        cu = ControlUnit(serial_port, timeout=0.1)
         version = cu.version
         app.logger.info("...connected to Control Unit Version: {}", repr(version))
         break
@@ -122,3 +122,11 @@ def try_control_unit_connection():
     control_unit_connection_thread = eventlet.spawn(handle_control_unit_events, serial_port)
   else:
     app.logger.info('control_unit_connection thread is already created')
+
+def disconnect_control_unit():
+  global control_unit_connection_thread
+  if not control_unit_connection_thread is None:
+    app.logger.info('disconnecting Control Unit...')
+    control_unit_connection_thread.kill()
+    control_unit_connection_thread = None
+    app.logger.info('control_unit_connection thread killed')

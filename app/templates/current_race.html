@@ -4,6 +4,12 @@
   <h1>Aktuelles Rennen</h1>
 
   <div class="d-flex flex-row-reverse mb1 status">
+    {% if current_race%}
+    <div class="p2 d-flex flex-row action_item">
+      <a href="{{ url_for('race_stop', race_id=current_race.id) }}">Rennen stoppen</a>
+    </div>
+    {% endif %}
+    </div>
     <div class="p2 d-flex flex-row status_item">
       <p class="p2 status-label">CU:</p>
       <p class="p2 status-value" id="control_unit_status">nicht verbunden</p>
