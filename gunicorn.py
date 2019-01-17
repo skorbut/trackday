@@ -1,4 +1,4 @@
-bind = localhost:8000
+bind = 'localhost:8000'
 
 worker_class = 'eventlet'
 workers = 1
