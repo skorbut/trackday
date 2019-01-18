@@ -37,7 +37,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container trackday">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
@@ -48,5 +48,7 @@
 
         {# application content needs to be provided in the app_content block #}
         {% block app_content %}{% endblock %}
+        <div class="photo-attribution-text">Photo by <a href="https://www.pexels.com/@devonrockola?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Devon Rockola</a> from <a href="https://www.pexels.com/photo/photography-of-person-driving-porsche-800629/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Pexels</a>
+        </div>
     </div>
 {% endblock %}

@@ -18,8 +18,13 @@
   {% if current_race and current_race.parsed_grid()%}
     <div class="d-flex flex-row justify-content-center  mb-3 bd-highlight ">
       {% for grid_entry in current_race.parsed_grid()%}
-      <div class= "p-2 flex-fill grid-entry" id = "grid-entry-{{ grid_entry['controller'] }}">
-        <div class= "racer-name">{{ grid_entry['racer'].name }} ({{ grid_entry['car'].name }})</div>
+      <div class= "p-2 flex-fill grid-entry">
+        <div class="horizontal-line" id="grid-entry-{{grid_entry['controller']}}">
+        </div>
+        <div class= "racer-and-car">
+          <p class= "racer-name">{{ grid_entry['racer'].name }}</p>
+          <p class= "car-name">({{ grid_entry['car'].name }})</p>
+        </div>
         <div id = "gas-pump-{{ grid_entry['controller'] }}" class = "d-flex flex-row">
           <i class="fa fa-gas-pump p-2"></i>
           {% for i in range(0,16) %}
@@ -37,6 +42,8 @@
             <p>Beste Rundenzeit:</p>
             <p class="lap-time" id = "best-time-{{ grid_entry['controller'] }}">0 s</p>
           </div>
+        </div>
+        <div class="horizontal-line" id="grid-entry-{{grid_entry['controller']}}">
         </div>
       </div>
       {% endfor %}

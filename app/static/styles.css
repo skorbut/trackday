@@ -1,23 +1,34 @@
 body {
   font-family: 'Orbitron', sans-serif;
+  background-image: url('/static/images/auto-racing-car-championship-800629.jpg');
+  background-size:cover;
 }
 
-.status-label: {
+h1 {
+  padding-top: .5rem;
+}
+
+.trackday {
+  background-color: rgba(255,255,255,0.5);
+}
+
+.status-label {
   font-weight: 800;
   margin-right: 10px;
 
 }
 
-.action-item: {
+.action-item {
   margin-right: 10px;
 }
 
-.status-item: {
+.status-item {
   margin-right: 10px;
 }
 .lap-number {
   font-family: 'Faster One', cursive;
-  font-size: 4rem;
+  font-size: 6rem;
+  line-height: 1;
   text-align: center;
 }
 
@@ -35,7 +46,7 @@ body {
 }
 
 .racer-name {
-  font-size: 90%;
+  font-size: 150%;
 }
 
 .in-pit {
@@ -54,8 +65,13 @@ body {
   background: grey;
 }
 
+.horizontal-line {
+  height: 5px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
 .grid-entry {
-  flex-grow: 1;
   margin: 5px;
 }
 
@@ -91,6 +107,11 @@ body {
 .fuel-13 { background-color: #66FF00;}
 .fuel-14 { background-color: #33FF00;}
 .fuel-15 { background-color: #00FF00;}
+
+.photo-attribution-text {
+  text-align: right;
+  font-size: 0.5rem;
+}
 
 
 @keyframes blinker {
