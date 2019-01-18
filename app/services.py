@@ -18,13 +18,13 @@ class Timing(object):
     self.bestlap = None
     self.laps = 0
 
-    def newlap(self, timer):
-      if self.time is not None:
-        self.laptime = timer.timestamp - self.time
-        if self.bestlap is None or self.laptime < self.bestlap:
-          self.bestlap = self.laptime
-        self.laps += 1
-      self.time = timer.timestamp
+  def newlap(self, timer):
+    if self.time is not None:
+      self.laptime = timer.timestamp - self.time
+      if self.bestlap is None or self.laptime < self.bestlap:
+        self.bestlap = self.laptime
+      self.laps += 1
+    self.time = timer.timestamp
 
 def connect_control_unit(serial_port):
   while True:
