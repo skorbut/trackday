@@ -105,17 +105,12 @@ def mock_control_unit_events(serial_port):
 
 def mock_control_unit_connection():
   global control_unit_connection_thread
-  if control_unit_connection_thread is None:
-    app.logger.info('Initializing cu listener thread')
-    serial_port = os.getenv('SERIAL_PORT')
 
-    if not serial_port:
-      print('SERIAL_PORT is not defined')
-      sys.exit(1)
+  if not control_unit_connection_thread is None:
+    control_unit_connection_thread.kill()
+    control_unit_connection_thread = None
 
-    control_unit_connection_thread = eventlet.spawn(mock_control_unit_events, serial_port)
-  else:
-    app.logger.info('control_unit_connection thread is already created')
+  control_unit_connection_thread = eventlet.spawn(mock_control_unit_events, 'not needed here')
 
 
 def try_control_unit_connection():

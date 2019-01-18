@@ -9,7 +9,7 @@ h1 {
 }
 
 .trackday {
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,0.65);
 }
 
 .status-label {
@@ -55,7 +55,7 @@ h1 {
 }
 
 .empty {
-  background-color: grey !important;
+  background-color: #666666 !important;
 }
 
 .square {
