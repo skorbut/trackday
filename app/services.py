@@ -14,15 +14,15 @@ class Timing(object):
   def __init__(self, num):
     self.num = num
     self.time = None
-    self.laptime = None
-    self.bestlap = None
+    self.lap_time = None
+    self.best_lap = None
     self.laps = 0
 
   def newlap(self, timer):
     if self.time is not None:
-      self.laptime = timer.timestamp - self.time
-      if self.bestlap is None or self.laptime < self.bestlap:
-        self.bestlap = self.laptime
+      self.lap_time = timer.timestamp - self.time
+      if self.best_lap is None or self.lap_time < self.best_lap:
+        self.best_lap = self.lap_time
       self.laps += 1
     self.time = timer.timestamp
 
