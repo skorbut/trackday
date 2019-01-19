@@ -73,7 +73,7 @@ def handle_control_unit_events(serial_port):
         lap = Lap(race_id = current_race.id, controller = status_or_timer.address, time = timing.lap_time)
         db.session.add(lap)
         db.session.commit()
-        socketio.emit('lap_finished', json.dumps({'controller': status_or_timer.address, 'lap_number': timing.lap, 'lap_time': timing.lap_time, 'best_time': timing.best_time}), namespace='/lap_events')
+        socketio.emit('lap_finished', json.dumps({'controller': status_or_timer.address, 'lap_number': timing.laps, 'lap_time': timing.lap_time, 'best_time': timing.best_time}), namespace='/lap_events')
         app.logger.info("new lap " + repr(lap))
       last_status_or_timer = status_or_timer
       eventlet.sleep(0.3)
