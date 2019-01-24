@@ -3,6 +3,7 @@ eventlet.monkey_patch()
 
 from flask_socketio import send, emit
 from carreralib import ControlUnit
+from carreralib import connection
 from random import randint, getrandbits
 from app import app, socketio, db
 
@@ -38,7 +39,7 @@ def connect_control_unit(serial_port):
     except serial.serialutil.SerialException:
         app.logger.info("Control unit not connected to Raspberry")
         socketio.emit('status', 'not_connected', namespace='/control_unit_events')
-    except carreralib.connection.TimeoutError
+    except connection.TimeoutError:
         app.logger.info("Timeout while trying to connect control unit")
         socketio.emit('status', 'Timeout', namespace='/control_unit_events')
 
@@ -87,7 +88,7 @@ def handle_control_unit_events(serial_port):
         app.logger.info("control unit disconnected, exiting loop")
         socketio.emit('status', 'disconnected', namespace='/control_unit_events')
         cu = connect_control_unit(serial_port)
-    except carreralib.connection.TimeoutError
+    except connection.TimeoutError:
         app.logger.info("Timeout while retrieving status from control unit({})", repr(timeouts))
         socketio.emit('status', 'Timeout', namespace='/control_unit_events')
         timeouts += 1
