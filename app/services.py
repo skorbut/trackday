@@ -36,9 +36,13 @@ def connect_control_unit(serial_port):
         app.logger.info("...connected to Control Unit Version: {}", repr(version))
         break
     except serial.serialutil.SerialException:
-        app.logger.info("control unit not connected")
+        app.logger.info("Control unit not connected to Raspberry")
         socketio.emit('status', 'not_connected', namespace='/control_unit_events')
-    eventlet.sleep(30)
+    except carreralib.connection.TimeoutError
+        app.logger.info("Timeout while trying to connect control unit")
+        socketio.emit('status', 'Timeout', namespace='/control_unit_events')
+
+    eventlet.sleep(10)
 
   app.logger.info("returning Control Unit")
   socketio.emit('status', 'connected', namespace='/control_unit_events')
@@ -49,6 +53,7 @@ def handle_control_unit_events(serial_port):
   last_status_or_timer = None
   current_race = Race.current()
   timings = [Timing(num) for num in range(0, 8)]
+  timeouts = 0
   if current_race.status == 'created':
     current_race.start
     db.session.add(current_race)
@@ -76,11 +81,16 @@ def handle_control_unit_events(serial_port):
         socketio.emit('lap_finished', json.dumps({'controller': status_or_timer.address, 'lap_number': timing.laps, 'lap_time': timing.lap_time, 'best_time': timing.best_time}), namespace='/lap_events')
         app.logger.info("new lap " + repr(lap))
       last_status_or_timer = status_or_timer
+      timeouts = 0
       eventlet.sleep(0.3)
     except serial.serialutil.SerialException:
         app.logger.info("control unit disconnected, exiting loop")
         socketio.emit('status', 'disconnected', namespace='/control_unit_events')
         cu = connect_control_unit(serial_port)
+    except carreralib.connection.TimeoutError
+        app.logger.info("Timeout while retrieving status from control unit({})", repr(timeouts))
+        socketio.emit('status', 'Timeout', namespace='/control_unit_events')
+        timeouts += 1
 
 def mock_control_unit_events(serial_port):
   current_race = Race.current()
