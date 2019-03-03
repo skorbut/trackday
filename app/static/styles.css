@@ -8,6 +8,16 @@ h1 {
   padding-top: .5rem;
 }
 
+td {
+  padding-top: 10px;
+  vertical-align: top;
+}
+
+tr {
+  border-top-width: 2px;
+  border-top-color: black;
+}
+
 .trackday {
   background-color: rgba(255,255,255,0.65);
 }

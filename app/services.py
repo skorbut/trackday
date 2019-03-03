@@ -37,7 +37,7 @@ def connect_control_unit(serial_port):
         app.logger.info("...connected to Control Unit Version: {}", repr(version))
         break
     except serial.serialutil.SerialException as e:
-        app.logger.info("Control unit not connected to Raspberry due to {}", str(e))
+        app.logger.info("Control unit not connected to Raspberry due to " + str(e))
         socketio.emit('status', 'not_connected', namespace='/control_unit_events')
     except connection.TimeoutError:
         app.logger.info("Timeout while trying to connect control unit")
