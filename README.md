@@ -2,15 +2,16 @@
 
 ## Setup
 
-### MySQL
-Connect to local MySQL
+### Postgres
+* Connect to local Postgres
 ```
-mysql -u root -h127.0.0.1 -p
+psql -h localhost -d trackday -U trackday
 ```
-
-Create Schema (172.17.0.1 is the IP used by clients connecting to the docker container. Use 172.0.0.1 if to connect local mysql instances)
+* Create Schema
 ```
-CREATE USER 'trackday'@'172.17.0.1' IDENTIFIED WITH mysql_native_password BY 'trackday';
+psql -h localhost -U postgres
+CREATE USER trackday;
+ALTER USER trackday WITH PASSWORD 'trackday';
 CREATE DATABASE trackday;
-GRANT ALL ON trackday.* TO 'trackday'@'172.17.0.1'
+GRANT ALL PRIVILEGES ON DATABASE trackday to trackday;
 ```
