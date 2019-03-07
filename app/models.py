@@ -11,6 +11,7 @@ class Race(db.Model):
   created_at = db.Column(db.DateTime)
   started_at = db.Column(db.DateTime)
   finished_at = db.Column(db.DateTime)
+  demo_mode = db.Column(db.Boolean, default=True)
 
   def parsed_grid(self):
     if self.grid is None:
