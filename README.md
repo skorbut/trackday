@@ -1,16 +1,25 @@
 # trackday
 
+A small race monitor for carrera digital.
+
 ## Setup
 
-### MySQL
-Connect to local MySQL
-```
-mysql -u root -h127.0.0.1 -p
+Trackday uses a SQLite database to store race and driver data. Initialize/reset the database via:
+
+```sh
+. ./venv/bin/activate
+rm app.db
+rm -rf migrations
+flask db init
+flask db migrate
+flask db upgrade
+flask seed
 ```
 
-Create Schema (172.17.0.1 is the IP used by clients connecting to the docker container. Use 172.0.0.1 if to connect local mysql instances)
+Run the server locally via virtualenv
+```sh
+. ./venv/bin/activate
+flask run
 ```
-CREATE USER 'trackday'@'172.17.0.1' IDENTIFIED WITH mysql_native_password BY 'trackday';
-CREATE DATABASE trackday;
-GRANT ALL ON trackday.* TO 'trackday'@'172.17.0.1'
-```
+
+Point your browser at http://127.0.0.1:5000 to access the app
