@@ -1,4 +1,5 @@
-import logging, os
+import logging
+import os
 from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
@@ -24,8 +25,16 @@ if __name__ == '__main__':
 
 if not os.path.exists('logs'):
     os.mkdir('logs')
-file_handler = RotatingFileHandler('logs/trackday.log', maxBytes=10240, backupCount=10)
-file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+file_handler = RotatingFileHandler(
+    'logs/trackday.log',
+    maxBytes=10240,
+    backupCount=10
+)
+file_handler.setFormatter(
+    logging.Formatter(
+        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
+    )
+)
 file_handler.setLevel(logging.INFO)
 app.logger.addHandler(file_handler)
 app.logger.setLevel(logging.INFO)
@@ -37,4 +46,4 @@ app.logger.info('Trackday App started successfully')
 
 from app import routes, models, errors, services
 # to re init database use this import
-#from app import models
+# from app import models
