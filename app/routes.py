@@ -2,6 +2,7 @@ import datetime
 import json
 
 from flask import request, render_template, flash, redirect, url_for
+from flask_babel import lazy_gettext as _l
 from app import app, db, services
 from app.forms import CarRegistrationForm, RaceRegistrationForm, RacerRegistrationForm
 from app.models import Car, Race, Racer
@@ -43,7 +44,7 @@ def race_stop(race_id):
         db.session.commit()
         services.disconnect_control_unit()
         app.logger.info('stopping race:' + repr(race))
-        flash('Rennen gestoppt')
+        flash(_l('Race stopped'))
     return render_template('races.html', title='Erstellte Rennen', races=Race.query.all())
 
 
@@ -67,7 +68,7 @@ def racer_registration():
         racer = Racer(name=form.name.data)
         db.session.add(racer)
         db.session.commit()
-        flash('Ein neuer Fahrer wurde registriert.')
+        flash(_l('New racer registered'))
         return redirect(url_for('racers'))
     return render_template('racer_registration.html', title='Fahrer registrieren', form=form)
 
@@ -88,7 +89,7 @@ def race_registration():
         )
         db.session.add(race)
         db.session.commit()
-        flash('Ein neues Rennen wurde registriert.')
+        flash(_l('New race registered.'))
         return redirect(url_for('current_race'))
     return render_template('race_registration.html', title='Rennen anlegen', form=form)
 
@@ -100,7 +101,7 @@ def register():
         car = Car(name=form.name.data, description=form.description.data, order_number=form.order_number.data, image_link=form.image_link.data)
         db.session.add(car)
         db.session.commit()
-        flash('Ein neues Auto wurde dem Fuhrpark hinzugefügt')
+        flash(_l('New car added to car park'))
         return redirect(url_for('index'))
     return render_template('car_registration.html', title='Neues Auto registrieren', form=form)
 

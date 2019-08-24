@@ -3,6 +3,7 @@ import json
 from sqlalchemy import inspect
 from app import app, db
 
+
 class Race(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(16))

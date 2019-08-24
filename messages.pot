@@ -1,0 +1,127 @@
+# Translations template for PROJECT.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-08-23 22:50+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: app/forms.py:10
+msgid "Ghost"
+msgstr ""
+
+#: app/forms.py:11
+msgid "Racer"
+msgstr ""
+
+#: app/forms.py:12
+msgid "Car"
+msgstr ""
+
+#: app/forms.py:18
+msgid "Free roam"
+msgstr ""
+
+#: app/forms.py:18
+msgid "Training"
+msgstr ""
+
+#: app/forms.py:18
+msgid "Qualifying"
+msgstr ""
+
+#: app/forms.py:18
+msgid "Race"
+msgstr ""
+
+#: app/forms.py:18
+msgid "Time trial"
+msgstr ""
+
+#: app/forms.py:23
+msgid "unlimited"
+msgstr ""
+
+#: app/forms.py:24
+msgid "5 Minutes"
+msgstr ""
+
+#: app/forms.py:25
+msgid "10 Minutes"
+msgstr ""
+
+#: app/forms.py:26
+msgid "20 Minutes"
+msgstr ""
+
+#: app/forms.py:27
+msgid "100 Laps"
+msgstr ""
+
+#: app/forms.py:28
+msgid "500 Laps"
+msgstr ""
+
+#: app/forms.py:33
+msgid "Start Race"
+msgstr ""
+
+#: app/forms.py:37 app/forms.py:47
+msgid "Name"
+msgstr ""
+
+#: app/forms.py:38
+msgid "Register Racer"
+msgstr ""
+
+#: app/forms.py:43
+msgid "Racer already registered."
+msgstr ""
+
+#: app/forms.py:48
+msgid "description"
+msgstr ""
+
+#: app/forms.py:49
+msgid "Order No."
+msgstr ""
+
+#: app/forms.py:50
+msgid "Image URL"
+msgstr ""
+
+#: app/forms.py:51
+msgid "Add to Car Park"
+msgstr ""
+
+#: app/forms.py:56
+msgid "Car already registered"
+msgstr ""
+
+#: app/routes.py:46
+msgid "Race stopped"
+msgstr ""
+
+#: app/routes.py:70
+msgid "New racer registered"
+msgstr ""
+
+#: app/routes.py:91
+msgid "New race registered."
+msgstr ""
+
+#: app/routes.py:103
+msgid "New car added to car park"
+msgstr ""
+

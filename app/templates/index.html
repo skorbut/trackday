@@ -2,6 +2,24 @@
 
 {% block app_content %}
     <h1>Hallo Racer!</h1>
+    <p>
+      Von hier aus hast du Zugriff auf alle Renninformationen, registrierte Fahrer, den Fuhrpark und zur Historie mit allen bisher gefahrenen Rennen. Und du kanns ein neues Rennen starten.
+    </p>
 
-    <a href="{{ url_for('race_registration') }}">Neues Rennen</a>
+    <h3><a href="{{ url_for('race_registration') }}">Neues Rennen</a></h3>
+    <p>
+      Klicke die Überschrift um ein neues Rennen einzustellen und zu starten.
+    </p>
+    <h3><a href="{{ url_for('racers') }}">Ins Fahrerlager</a></h3>
+    <p>
+      Schaue dir an welche Fahrer registriert sind und füge neue Fahrer hinzu.
+    </p>
+    <h3><a href="{{ url_for('cars') }}">Zum Fuhrpark</a></h3>
+    <p>
+      Hier kannst du sehen, welche Autos gefahren werden können.
+    </p>
+    <h3><a href="{{ url_for('races') }}">Rennhistorie</a></h3>
+    <p>
+      Hier findest du eine Liste aller bisher aufgezeichneten Rennen.
+    </p>
 {% endblock %}
