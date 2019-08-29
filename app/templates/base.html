@@ -25,11 +25,11 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('index') }}">Startseite</a></li>
-                    <li><a href="{{ url_for('racers') }}">Ins Fahrerlager</a></li>
-                    <li><a href="{{ url_for('cars') }}">In den Fuhrpark</a></li>
-                    <li><a href="{{ url_for('current_race') }}">Zum Rennen</a></li>
-                    <li><a href="{{ url_for('races') }}">Zu den vergangenen Rennen</a></li>
+                    <li><a href="{{ url_for('index') }}">{{ _('Index') }}</a></li>
+                    <li><a href="{{ url_for('racers') }}">{{ _('Racers') }}</a></li>
+                    <li><a href="{{ url_for('cars') }}">{{ _('Car park') }}</a></li>
+                    <li><a href="{{ url_for('current_race') }}">{{ _('Current race') }}</a></li>
+                    <li><a href="{{ url_for('races') }}">{{ _('Previous races') }}</a></li>
                 </ul>
             </div>
         </div>

@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block app_content %}
 
-  <h1>Aktuelles Rennen</h1>
+  <h1>{{ _('Current race') }}</h1>
 
   <div class="d-flex flex-row-reverse mb1 status">
     <div class="p2 d-flex flex-row status-item">
-      <p class="p2 status-label">CU:</p>
-      <p class="p2 status-value" id="control_unit_status">nicht verbunden</p>
+      <p class="p2 status-label">{{ _('CU') }}:</p>
+      <p class="p2 status-value" id="control_unit_status"> {{ _('not connected') }}</p>
     </div>
     {% if current_race%}
     <div class="p2 d-flex flex-row action-item">
-      <a href="{{ url_for('race_stop', race_id=current_race.id) }}">Rennen stoppen</a>
+      <a href="{{ url_for('race_stop', race_id=current_race.id) }}">{{ _('Cancel race') }}</a>
     </div>
     {% endif %}
   </div>
@@ -33,13 +33,13 @@
         </div>
         <div class = "d-flex flex-row lap-data">
           <div class="p-2 flex-fill">
-            <p>Gefahrene Runden:</p>
+            <p>{{ _('Laps') }}:</p>
             <p class="lap-number" id = "lap-number-{{ grid_entry['controller'] }}">0</p>
           </div>
           <div class="p-2 flex-fill">
-            <p>Letzte Rundenzeit:</p>
+            <p>{{ _('Last lap') }}:</p>
             <p class="lap-time" id = "lap-time-{{ grid_entry['controller'] }}">0 s</p>
-            <p>Beste Rundenzeit:</p>
+            <p>{{ _('Best lap') }}:</p>
             <p class="lap-time" id = "best-time-{{ grid_entry['controller'] }}">0 s</p>
           </div>
         </div>

@@ -1,7 +1,27 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <h1>Hallo Racer!</h1>
+    <h1>{{ _('Greetings Racer') }}!</h1>
+    <p>
+      {{ _('Here you have access to all race information, registered racers, the car park and the history of previous races. And you can start a new race here.') }}
+    </p>
 
-    <a href="{{ url_for('race_registration') }}">Neues Rennen</a>
+    <h3><a href="{{ url_for('race_registration') }}">{{ _('New race') }}</a></h3>
+    <p>
+      {{ _('Click the headline to configure and start a new race.') }}
+
+    </p>
+    <h3><a href="{{ url_for('racers') }}">{{ _('Registered racers') }}</a></h3>
+    <p>
+      {{ _('Find all registered racers and add new racers.') }}
+    </p>
+    <h3><a href="{{ url_for('cars') }}">{{ _('Car park') }}</a></h3>
+    <p>
+      {{ _('Here you find all available race cars.') }}
+
+    </p>
+    <h3><a href="{{ url_for('races') }}">{{ _('Previous races') }}</a></h3>
+    <p>
+      {{ _('Have a look at past races.') }}
+    </p>
 {% endblock %}

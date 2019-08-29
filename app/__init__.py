@@ -1,6 +1,7 @@
 import logging
 import os
-from flask import Flask
+from flask import Flask, request
+from flask_babel import Babel
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -19,6 +20,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 bootstrap = Bootstrap(app)
 socketio = SocketIO(app, logger=True, engineio_logger=True)
+babel = Babel(app)
 
 if __name__ == '__main__':
     socketio.run(app)
@@ -42,6 +44,12 @@ app.logger.setLevel(logging.INFO)
 app.config['SQLALCHEMY_ECHO'] = True
 
 app.logger.info('Trackday App started successfully')
+
+
+@babel.localeselector
+def get_locale():
+    app.logger.info("trying to get texts in language {}".format(request.accept_languages.best_match(app.config['LANGUAGES'])))
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 from app import routes, models, errors, services
