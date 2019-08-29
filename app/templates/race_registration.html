@@ -2,10 +2,10 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1>Neues Rennen</h1>
+    <h1>{{ _('New race') }}</h1>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
-        <h2>Grundeinstellungen</h2>
+        <h2>{{ _('Settings') }}</h2>
         {{ form.status }}
         <p>
             {{ form.type.label }}<br>
@@ -22,7 +22,7 @@
             {% endfor %}
         </p>
 
-        <h2>Fahrerfeld</h2>
+        <h2>{{ _('Grid') }}</h2>
         {% for error in form.grid.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
@@ -35,8 +35,8 @@
                 {% endfor %}
             </p>
         </div>
-        <button class="add_grid_entry">Fahrer hinzufügen</button>
-        <button class="remove_grid_entry">Letzten Fahrer entfernen</button>
+        <button class="add_grid_entry">{{ _('Add racer') }}</button>
+        <button class="remove_grid_entry">{{ _('Remove last racer') }}</button>
 
         <p>{{ form.submit() }}</p>
     </form>
@@ -58,14 +58,14 @@
                     racer_counter++;
                     $("#grid").append(duplicate_grid_entry());
                 }
-                else { window.alert('Mehr Rennfahrer sind nicht möglich')}
+                else { window.alert(_('Cannot add more racers'))}
             });
             $(removeButton).click(function(e){ //on remove input button click
                 e.preventDefault();
                 if(racer_counter > 1){ //make sure at least one field is there
                     $('#grid_'+racer_counter).remove();
                     racer_counter--;}
-                else { window.alert('Mindestens ein Rennfahrer muß bleiben')}
+                else { window.alert(_('At least one racer must stay in the grid'))}
             });
             function duplicate_grid_entry() {
                 var first_grid_entry = $("#grid p").first().html();
