@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+  <h1>{{ _('Previous race of') }} {{ race.created_at }}</h1>
+
+  <div class="d-flex flex-row justify-content-center  mb-3 bd-highlight ">
+    {% for grid_entry in race.parsed_grid()%}
+      <div class= "p-2 flex-fill grid-entry">
+        <div class="horizontal-line">
+        </div>
+        <div class= "racer-and-car">
+          <p class= "racer-name">{{ grid_entry['racer'].name }}</p>
+          <p class= "car-name">({{ grid_entry['car'].name }})</p>
+        </div>
+        <div class = "d-flex flex-row lap-data">
+          <div class="p-2 flex-fill">
+            <p>{{ _('Laps') }}:</p>
+            <p class="lap-statistics">{{ race.statistics().lap_count_by_controller(grid_entry['controller'])}}</p>
+          </div>
+        </div>
+        <div class = "d-flex flex-row lap-data">
+          <div class="p-2 flex-fill">
+            <p>{{ _('Race duration') }}:</p>
+            <p class="lap-statistics">{{ race.statistics().race_time_by_controller(grid_entry['controller'])}}</p>
+          </div>
+        </div>
+        <div class = "d-flex flex-row lap-data">
+          <div class="p-2 flex-fill">
+            <p>{{ _('Fastest Lap') }}:</p>
+            <p class="lap-statistics">{{race.statistics().fastest_lap_by_controller(grid_entry['controller']) }} <small>s</small></p>
+          </div>
+        </div>
+        <div class = "d-flex flex-row lap-data">
+          <div class="p-2 flex-fill">
+            <p>{{ _('Average Lap') }}:</p>
+            <p class="lap-statistics">{{race.statistics().average_lap_by_controller(grid_entry['controller']) }} <small>s</small></p>
+          </div>
+        </div>
+        <div class = "d-flex flex-row lap-data">
+          <div class="p-2 flex-fill">
+            <p>{{ _('Slowest Lap') }}:</p>
+            <p class="lap-statistics">{{race.statistics().slowest_lap_by_controller(grid_entry['controller']) }} <small>s</small></p>
+          </div>
+        </div>
+        <div class="horizontal-line" id="grid-entry-{{grid_entry['controller']}}">
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

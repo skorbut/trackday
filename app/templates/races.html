@@ -3,7 +3,7 @@
 
   <h1>{{ _('Previous races') }}</h1>
 
-  <a href="{{ url_for('race_registration') }}">{{ _('Star a new race') }}</a>
+  <a href="{{ url_for('race_registration') }}">{{ _('Start a new race') }}</a>
 
   <table width = "80%">
     <tr>
@@ -17,7 +17,7 @@
     {% for race in races %}
     <tr>
       <td>{{ race.id }}</td>
-      <td>{{ race.created_at.strftime('%d.%m.%Y %H:%M:%S') }}</td>
+      <td><a href="{{ url_for('race', race_id=race.id) }}">{{ race.created_at.strftime('%d.%m.%Y %H:%M:%S') }}</a></td>
       <td>{{ race.type }}</td>
       <td>{{ race.duration }}</td>
       <td>{{ race.status }}</td>

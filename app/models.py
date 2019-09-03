@@ -1,6 +1,6 @@
 import datetime
 import json
-from sqlalchemy import inspect
+from sqlalchemy import inspect, func
 from app import app, db
 
 
@@ -13,7 +13,6 @@ class Race(db.Model):
     created_at = db.Column(db.DateTime)
     started_at = db.Column(db.DateTime)
     finished_at = db.Column(db.DateTime)
-    demo_mode = db.Column(db.Boolean, default=True)
 
     def parsed_grid(self):
         if self.grid is None:
@@ -55,7 +54,15 @@ class Race(db.Model):
     def lap_count_by_controller(self, controller):
         if controller is None:
             return 0
-        return Lap.query.filter_by(race_id=self.id, controller=controller).count()
+        return self.statistics().lap_count_by_controller(controller)
+
+    def laps_by_controller(self, controller):
+        if controller is None:
+            return 0
+        return Lap.query.filter_by(race_id=self.id, controller=controller)
+
+    def statistics(self):
+        return Statistics(self)
 
     @staticmethod
     def current():
@@ -109,3 +116,61 @@ class Timing(object):
             self.best_time = self.lap_time
         self.laps += 1
         self.time = timer.timestamp
+
+
+class Statistics:
+    def __init__(self, race):
+        self.race = race
+
+    def race_time_by_controller(self, controller):
+        if controller is None:
+            return 0
+        race_time = Lap.query.with_entities(
+            func.sum(Lap.time).label('race_time')
+        ).filter(
+            Lap.time > 1000,
+            Lap.controller == controller,
+            Lap.race_id == self.race.id
+        ).one()[0]
+        return datetime.timedelta(milliseconds=race_time)
+
+    def lap_count_by_controller(self, controller):
+        if controller is None:
+            return 0
+        return Lap.query.filter_by(race_id=self.race.id, controller=controller).count()
+
+    def fastest_lap_by_controller(self, controller):
+        if controller is None:
+            return 0
+        min_lap_time = Lap.query.with_entities(
+            func.min(Lap.time).label('minimum_lap_time')
+        ).filter(
+            Lap.time > 1000,
+            Lap.controller == controller,
+            Lap.race_id == self.race.id
+        ).one()[0]
+        return datetime.timedelta(milliseconds=min_lap_time)
+
+    def slowest_lap_by_controller(self, controller):
+        if controller is None:
+            return 0
+        max_lap_time = Lap.query.with_entities(
+            func.max(Lap.time).label('maximum_lap_time')
+        ).filter(
+            Lap.time > 1000,
+            Lap.controller == controller,
+            Lap.race_id == self.race.id
+        ).one()[0]
+        return datetime.timedelta(milliseconds=max_lap_time)
+
+    def average_lap_by_controller(self, controller):
+        if controller is None:
+            return 0
+        average_lap_time = Lap.query.with_entities(
+            func.avg(Lap.time).label('average_lap_time')
+        ).filter(
+            Lap.time > 1000,
+            Lap.controller == controller,
+            Lap.race_id == self.race.id
+        ).one()[0]
+        return datetime.timedelta(milliseconds=average_lap_time)
