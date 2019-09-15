@@ -9,22 +9,16 @@
     <tr>
       <th>{{ _('ID') }}</th>
       <th>{{ _('Created at') }}</th>
-      <th>{{ _('Type') }}</th>
-      <th>{{ _('Duration') }}</th>
-      <th>{{ _('State') }}</th>
       <th>{{ _('Grid') }}</th>
     </tr>
     {% for race in races %}
     <tr>
       <td>{{ race.id }}</td>
       <td><a href="{{ url_for('race', race_id=race.id) }}">{{ race.created_at.strftime('%d.%m.%Y %H:%M:%S') }}</a></td>
-      <td>{{ race.type }}</td>
-      <td>{{ race.duration }}</td>
-      <td>{{ race.status }}</td>
       <td>
         {% if race.parsed_grid() %}
           {% for grid_entry in race.parsed_grid() %}
-            {{ grid_entry['controller'] }}. {{ grid_entry['racer'].name }} ({{ grid_entry['car'].name }})<br/>
+            {{ grid_entry['racer'].name }} ({{ grid_entry['car'].name }}) - {{ race.lap_count_by_controller(grid_entry['controller'])}} Laps<br/>
           {% endfor %}
         {% endif %}
       </td>

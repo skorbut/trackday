@@ -48,6 +48,18 @@ def race_stop(race_id):
     return render_template('races.html', title='Erstellte Rennen', races=Race.query.all())
 
 
+@app.route('/races/<int:race_id>/delete')
+def race_delete(race_id):
+    race = Race.query.get(race_id)
+    if race is not None:
+        race.stop()
+        db.session.delete(race)
+        db.session.commit()
+        app.logger.info('deleting race:' + repr(race))
+        flash(_l('Race deleted'))
+    return render_template('races.html', title='Erstellte Rennen', races=Race.query.all())
+
+
 @app.route('/demo')
 def demo():
     services.mock_control_unit_connection()

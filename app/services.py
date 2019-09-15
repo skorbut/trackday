@@ -65,7 +65,14 @@ def handle_control_unit_events(serial_port):
             elif isinstance(status_or_timer, ControlUnit.Timer):
                 timing = timings[status_or_timer.address]
                 timing.newlap(status_or_timer)
-                lap = Lap(race_id=current_race.id, controller=status_or_timer.address, time=timing.lap_time)
+                controller = int(status_or_timer.address)
+                lap = Lap(
+                    race_id=current_race.id,
+                    controller=controller,
+                    time=timing.lap_time,
+                    racer_id=current_race.racer(controller).id,
+                    car_id=current_race.car(controller).id
+                )
                 db.session.add(lap)
                 db.session.commit()
                 socketio.emit(
@@ -82,7 +89,6 @@ def handle_control_unit_events(serial_port):
                 )
                 app.logger.info("new lap " + repr(lap))
             last_status_or_timer = status_or_timer
-            timeouts = 0
             eventlet.sleep(0.3)
         except serial.serialutil.SerialException:
             app.logger.info("control unit disconnected, exiting loop")
@@ -91,7 +97,7 @@ def handle_control_unit_events(serial_port):
         except connection.TimeoutError:
             app.logger.info("Timeout while retrieving status from control unit({})", repr(timeouts))
             socketio.emit('status', 'Timeout', namespace='/control_unit_events')
-            timeouts += 1
+            cu = connect_control_unit(serial_port)
 
 
 def try_control_unit_connection():
@@ -116,3 +122,6 @@ def disconnect_control_unit():
         control_unit_connection_thread.kill()
         control_unit_connection_thread = None
         app.logger.info('control_unit_connection thread killed')
+
+def store_lap():
+
