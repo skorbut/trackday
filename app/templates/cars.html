@@ -4,19 +4,18 @@
   <h1>{{ _('Car park') }}</h1>
   <div class = "d-flex flex-column bd-highlight mb-3">
     {% for car in cars %}
-    <div class = "p-2 bd-highlight car">
       <div class = "d-flex flex-row mb-2">
         <div class = "p-2 car-image">
           <img class = "car-image" src = "{{ car.image_link }}" />
         </div>
         <div class = "p-2 car-data">
           <ul>
-            <li>{{ car.name }}</li>
+            <li><a href="{{ url_for('car', car_id= car.id) }}">{{ car.name }}</a></li>
             <li>{{ car.order_number }}</li>
             <li>{{ car.description }}</li>
           </ul>
         </div>
-    </div>
+      </div>
     {% endfor %}
   </div>
 

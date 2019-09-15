@@ -39,6 +39,14 @@ def seed():
             image_link='https://slotcardatenbank.de/car/30793_1847/1929172378.jpeg'
         )
     )
+    db.session.add(
+        Car(
+            name='Chevrolet Corvette C7.R',
+            description='Carrera Digital 132 Chevrolet Corvette C7.R Corvette Racing Nr.3',
+            order_number='30701',
+            image_link='https://slotcardatenbank.de/car/30701_874/58602446.jpeg'
+        )
+    )
 
     app.logger.info('Registering Racers..')
     db.session.add(Racer(name='Mika'))

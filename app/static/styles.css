@@ -14,8 +14,9 @@ td {
 }
 
 tr {
-  border-top-width: 2px;
+  border-top-width: 1px;
   border-top-color: black;
+  border-top-style: solid;
 }
 
 .trackday {
@@ -47,7 +48,12 @@ tr {
   font-size: 2rem;
 }
 
-.lap-time small {
+.lap-statistics {
+  font-family: 'Faster One', cursive;
+  font-size: 2rem;
+}
+
+.lap-time .lap_statistics small {
   font-size: 50%;
 }
 

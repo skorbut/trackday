@@ -21,6 +21,11 @@ def cars():
     return render_template('cars.html', title='Fuhrpark', cars=cars)
 
 
+@app.route('/cars/<int:car_id>')
+def car(car_id):
+    return render_template('car.html', title='Auto', car=Car.query.get(car_id))
+
+
 @app.route('/racers')
 def racers():
     racers = Racer.query.all()
@@ -48,6 +53,18 @@ def race_stop(race_id):
     return render_template('races.html', title='Erstellte Rennen', races=Race.query.all())
 
 
+@app.route('/races/<int:race_id>/delete')
+def race_delete(race_id):
+    race = Race.query.get(race_id)
+    if race is not None:
+        race.stop()
+        db.session.delete(race)
+        db.session.commit()
+        app.logger.info('deleting race:' + repr(race))
+        flash(_l('Race deleted'))
+    return render_template('races.html', title='Erstellte Rennen', races=Race.query.all())
+
+
 @app.route('/demo')
 def demo():
     services.mock_control_unit_connection()
@@ -58,6 +75,11 @@ def demo():
 def current_race():
     services.try_control_unit_connection()
     return render_template('current_race.html', title='Aktuelles Rennen', current_race=Race.current())
+
+
+@app.route('/races/<int:race_id>')
+def race(race_id):
+    return render_template('race.html', title='Rennen vom ', race=Race.query.get(race_id))
 
 
 @app.route('/racer_registration', methods=['GET', 'POST'])

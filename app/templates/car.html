@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+  <h1>{{ car.name }}</h1>
+  <p>
+      {{ car.description }}
+  </p>
+  <div class = "d-flex flex-column bd-highlight mb-3">
+    <div class = "d-flex flex-row mb-2">
+      <div class = "p-2 car-image">
+        <img class = "car-image" src = "{{ car.image_link }}" />
+      </div>
+      <div class = "p-2 car-data">
+        <h3>{{ _('Fastest Laps') }}</h3>
+        <table width = "80%">
+          <tr>
+            <th>{{ _('Time') }}</th>
+            <th>{{ _('Racer') }}</th>
+          </tr>
+          {% for lap in car.fastest_laps() %}
+            <tr>
+              <td>{{ lap.formatted_time() }}</td>
+              <td>{{ lap.racer().name }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
