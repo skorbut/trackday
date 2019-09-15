@@ -31,3 +31,14 @@ Wrap all strings to be localized in `_l()` calls. For templates use: `{{ _() }}`
 Initialize babel via `pybabel extract -F babel.cfg -k _l -o messages.pot .`. Generate the german language catalog via `pybabel init -i messages.pot -d app/translations -l de`. Compile the language files via `pybabel compile -d app/translations`.
 
 To update the translation do `pybabel extract -F babel.cfg -k _l -o messages.pot .` to collect new translation, update the language files via `pybabel update -i messages.pot -d app/translations`. After that you need to recompile using `pybabel compile -d app/translations`.
+
+## Changes
+
+### 20190915 - denormalize Laps
+
+In order to fetch racer and car based statistics the lap information must be denormalized:
+```
+flask shell
+for r in Race.query.all():
+    r.denormalize_laps()
+```
