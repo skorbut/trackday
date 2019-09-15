@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-08-29 22:00+0200\n"
+"POT-Creation-Date: 2019-09-15 21:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,15 +113,19 @@ msgstr ""
 msgid "Race stopped"
 msgstr ""
 
-#: app/routes.py:71
+#: app/routes.py:59
+msgid "Race deleted"
+msgstr ""
+
+#: app/routes.py:88
 msgid "New racer registered"
 msgstr ""
 
-#: app/routes.py:92
+#: app/routes.py:109
 msgid "New race registered."
 msgstr ""
 
-#: app/routes.py:104
+#: app/routes.py:121
 msgid "New car added to car park"
 msgstr ""
 
@@ -171,7 +175,7 @@ msgstr ""
 msgid "Cancel race"
 msgstr ""
 
-#: app/templates/current_race.html:36
+#: app/templates/current_race.html:36 app/templates/race.html:19
 msgid "Laps"
 msgstr ""
 
@@ -218,11 +222,35 @@ msgstr ""
 msgid "Have a look at past races."
 msgstr ""
 
+#: app/templates/race.html:4
+msgid "Previous race of"
+msgstr ""
+
+#: app/templates/race.html:6
+msgid "Delete this race"
+msgstr ""
+
+#: app/templates/race.html:25
+msgid "Race duration"
+msgstr ""
+
+#: app/templates/race.html:31
+msgid "Fastest Lap"
+msgstr ""
+
+#: app/templates/race.html:37
+msgid "Average Lap"
+msgstr ""
+
+#: app/templates/race.html:43
+msgid "Slowest Lap"
+msgstr ""
+
 #: app/templates/race_registration.html:8
 msgid "Settings"
 msgstr ""
 
-#: app/templates/race_registration.html:25 app/templates/races.html:15
+#: app/templates/race_registration.html:25 app/templates/races.html:12
 msgid "Grid"
 msgstr ""
 
@@ -239,7 +267,7 @@ msgid "Register a new racer"
 msgstr ""
 
 #: app/templates/races.html:6
-msgid "Star a new race"
+msgid "Start a new race"
 msgstr ""
 
 #: app/templates/races.html:10
@@ -248,17 +276,5 @@ msgstr ""
 
 #: app/templates/races.html:11
 msgid "Created at"
-msgstr ""
-
-#: app/templates/races.html:12
-msgid "Type"
-msgstr ""
-
-#: app/templates/races.html:13
-msgid "Duration"
-msgstr ""
-
-#: app/templates/races.html:14
-msgid "State"
 msgstr ""
 
