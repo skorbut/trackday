@@ -21,6 +21,11 @@ def cars():
     return render_template('cars.html', title='Fuhrpark', cars=cars)
 
 
+@app.route('/cars/<int:car_id>')
+def car(car_id):
+    return render_template('car.html', title='Auto', car=Car.query.get(car_id))
+
+
 @app.route('/racers')
 def racers():
     racers = Racer.query.all()

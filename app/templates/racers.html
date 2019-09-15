@@ -9,7 +9,22 @@
   <div class = "racer">
     <div class = "racer-data">
       <ul>
-        <li>{{ racer.name }}</li>
+        <li>
+          <h2> {{ racer.name }} </h2>
+          <h3>{{ _('Fastest Laps') }}</h3>
+          <table width = "80%">
+            <tr>
+              <th>{{ _('Time') }}</th>
+              <th>{{ _('Racer') }}</th>
+            </tr>
+            {% for lap in racer.fastest_laps() %}
+              <tr>
+                <td>{{ lap.formatted_time() }}</td>
+                <td>{{ lap.car().name }}</td>
+              </tr>
+            {% endfor %}
+          </table>
+        </li>
       </ul>
     </div>
   </div>

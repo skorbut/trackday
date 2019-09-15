@@ -90,6 +90,9 @@ class Racer(db.Model):
     def __repr__(self):
         return '<Racer {}>'.format(self.name)
 
+    def fastest_laps(self):
+        return Lap.query.filter(Lap.time > 1000, Lap.racer_id == self.id).order_by(Lap.time).limit(5).all()
+
 
 class Car(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -100,6 +103,9 @@ class Car(db.Model):
 
     def __repr__(self):
         return '<Car {}>'.format(self.name)
+
+    def fastest_laps(self):
+        return Lap.query.filter(Lap.time > 1000, Lap.car_id == self.id).order_by(Lap.time).limit(5).all()
 
 
 class Lap(db.Model):
@@ -115,6 +121,15 @@ class Lap(db.Model):
 
     def to_json(self):
         return json.dumps({c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs})
+
+    def racer(self):
+        return Racer.query.get(self.racer_id)
+
+    def car(self):
+        return Car.query.get(self.car_id)
+
+    def formatted_time(self):
+        return '{:05.3f} s'.format(self.time / 1000)
 
 
 class Timing(object):

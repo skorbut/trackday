@@ -122,6 +122,3 @@ def disconnect_control_unit():
         control_unit_connection_thread.kill()
         control_unit_connection_thread = None
         app.logger.info('control_unit_connection thread killed')
-
-def store_lap():
-
