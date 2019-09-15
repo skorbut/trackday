@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-09-15 21:25+0200\n"
+"POT-Creation-Date: 2019-09-15 23:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Ghost"
 msgstr ""
 
-#: app/forms.py:12
+#: app/forms.py:12 app/templates/car.html:18 app/templates/racers.html:18
 msgid "Racer"
 msgstr ""
 
@@ -109,23 +109,23 @@ msgstr ""
 msgid "Car already registered"
 msgstr ""
 
-#: app/routes.py:47
+#: app/routes.py:52
 msgid "Race stopped"
 msgstr ""
 
-#: app/routes.py:59
+#: app/routes.py:64
 msgid "Race deleted"
 msgstr ""
 
-#: app/routes.py:88
+#: app/routes.py:93
 msgid "New racer registered"
 msgstr ""
 
-#: app/routes.py:109
+#: app/routes.py:114
 msgid "New race registered."
 msgstr ""
 
-#: app/routes.py:121
+#: app/routes.py:126
 msgid "New car added to car park"
 msgstr ""
 
@@ -157,6 +157,14 @@ msgstr ""
 #: app/templates/base.html:32 app/templates/index.html:23
 #: app/templates/races.html:4
 msgid "Previous races"
+msgstr ""
+
+#: app/templates/car.html:14 app/templates/racers.html:14
+msgid "Fastest Laps"
+msgstr ""
+
+#: app/templates/car.html:17 app/templates/racers.html:17
+msgid "Time"
 msgstr ""
 
 #: app/templates/car_registration.html:5
