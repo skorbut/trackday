@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-09-15 23:29+0200\n"
+"POT-Creation-Date: 2019-09-16 19:58+0200\n"
 "PO-Revision-Date: 2019-08-23 22:50+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -118,15 +118,15 @@ msgstr "Rennen gestoppt"
 msgid "Race deleted"
 msgstr "Rennen gelöscht"
 
-#: app/routes.py:93
-msgid "New racer registered"
-msgstr "Neuer Fahrer registriert"
-
-#: app/routes.py:114
+#: app/routes.py:81 app/routes.py:132
 msgid "New race registered."
 msgstr "Neues Rennen angelegt"
 
-#: app/routes.py:126
+#: app/routes.py:111
+msgid "New racer registered"
+msgstr "Neuer Fahrer registriert"
+
+#: app/routes.py:144
 msgid "New car added to car park"
 msgstr "Neues Auto hinzugefügt"
 
@@ -184,7 +184,7 @@ msgstr "nicht verbunden"
 msgid "Cancel race"
 msgstr "Rennen abbrechen"
 
-#: app/templates/current_race.html:36 app/templates/race.html:19
+#: app/templates/current_race.html:36 app/templates/race.html:20
 msgid "Laps"
 msgstr "Runden"
 
@@ -244,19 +244,23 @@ msgstr "Vergangenes Rennen vom"
 msgid "Delete this race"
 msgstr "Dieses Rennen löschen"
 
-#: app/templates/race.html:25
+#: app/templates/race.html:7
+msgid "Copy this race"
+msgstr "Rennen wie dieses anlegen"
+
+#: app/templates/race.html:26
 msgid "Race duration"
 msgstr "Renndauer"
 
-#: app/templates/race.html:31
+#: app/templates/race.html:32
 msgid "Fastest Lap"
 msgstr "Schnellste Runde"
 
-#: app/templates/race.html:37
+#: app/templates/race.html:38
 msgid "Average Lap"
 msgstr "Durchschnittliche Rundenzeit"
 
-#: app/templates/race.html:43
+#: app/templates/race.html:44
 msgid "Slowest Lap"
 msgstr "Langsamste Runde"
 

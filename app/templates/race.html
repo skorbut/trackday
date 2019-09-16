@@ -4,6 +4,7 @@
   <h1>{{ _('Previous race of') }} {{ race.created_at }}</h1>
 
   <a href="{{ url_for('race_delete', race_id=race.id) }}">{{ _('Delete this race') }}</a>
+  <a href="{{ url_for('race_copy', race_id=race.id) }}">{{ _('Copy this race') }}</a>
 
   <div class="d-flex flex-row justify-content-center  mb-3 bd-highlight ">
     {% for grid_entry in race.parsed_grid()%}

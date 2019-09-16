@@ -18,7 +18,7 @@
       <td>
         {% if race.parsed_grid() %}
           {% for grid_entry in race.parsed_grid() %}
-            {{ grid_entry['racer'].name }} (<a href="{{ url_for('car', car_id=grid_entry['car'].id) }}">{{ grid_entry['car'].name }}</a>) - {{ race.lap_count_by_controller(grid_entry['controller'])}} Laps<br/>
+            {{ grid_entry['racer'].name }} (<a href="{{ url_for('car', car_id=grid_entry['car'].id) }}">{{ grid_entry['car'].name }}</a>) - {{ race.lap_count_by_controller(grid_entry['controller'])}} {{_('Laps')}}<br/>
           {% endfor %}
         {% endif %}
       </td>

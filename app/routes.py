@@ -65,6 +65,24 @@ def race_delete(race_id):
     return render_template('races.html', title='Erstellte Rennen', races=Race.query.all())
 
 
+@app.route('/races/<int:race_id>/copy')
+def race_copy(race_id):
+    race = Race.query.get(race_id)
+    if race is not None:
+        new_race = Race(
+            type=race.type,
+            duration=race.duration,
+            status='created',
+            created_at=datetime.datetime.now(),
+            grid=race.grid
+        )
+        db.session.add(new_race)
+        db.session.commit()
+        flash(_l('New race registered.'))
+        return redirect(url_for('current_race'))
+    return render_template('races.html', title='Erstellte Rennen', races=Race.query.all())
+
+
 @app.route('/demo')
 def demo():
     services.mock_control_unit_connection()
