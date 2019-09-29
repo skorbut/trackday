@@ -32,6 +32,10 @@ Initialize babel via `pybabel extract -F babel.cfg -k _l -o messages.pot .`. Gen
 
 To update the translation do `pybabel extract -F babel.cfg -k _l -o messages.pot .` to collect new translation, update the language files via `pybabel update -i messages.pot -d app/translations`. After that you need to recompile using `pybabel compile -d app/translations`.
 
+### USB Serial Connection on Mac
+
+You can check via `ioreg -c IOSerialBSDClient | grep usb` where the serial connection is available.
+
 ## Changes
 
 ### 20190915 - denormalize Laps

@@ -12,10 +12,15 @@
     <div class="p2 d-flex flex-row action-item">
       <a href="{{ url_for('race_stop', race_id=current_race.id) }}">{{ _('Cancel race') }}</a>
     </div>
+    {% else %}
+    <div class="p2 d-flex flex-row action-item">
+      <a href="{{ url_for('race_registration') }}">{{ _('Start a new race') }}</a>
+    </div>
     {% endif %}
   </div>
 
   {% if current_race and current_race.parsed_grid()%}
+    <p> {{ _('Status of current race: ')}}{{ current_race.status}}
     <div class="d-flex flex-row justify-content-center  mb-3 bd-highlight ">
       {% for grid_entry in current_race.parsed_grid()%}
       <div class= "p-2 flex-fill grid-entry">

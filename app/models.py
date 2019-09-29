@@ -36,11 +36,25 @@ class Race(db.Model):
         app.logger.info("setting race status to started and adding started_at timestamp")
         self.status = "started"
         self.started_at = datetime.datetime.now()
+        db.session.add(self)
+        db.session.commit()
 
     def stop(self):
         app.logger.info("stopping race and adding finished_at timestamp")
         self.status = "stopped"
         self.finished_at = datetime.datetime.now()
+
+    def add_lap(self, controller, time):
+        lap = Lap(
+            race_id=self.id,
+            controller=controller,
+            time=time,
+            racer_id=self.racer(controller).id,
+            car_id=self.car(controller).id
+        )
+        db.session.add(lap)
+        db.session.commit()
+        return lap
 
     def controller_for_racer(self, racer):
         for grid_entry in self.parsed_grid():
