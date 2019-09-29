@@ -36,6 +36,13 @@ To update the translation do `pybabel extract -F babel.cfg -k _l -o messages.pot
 
 You can check via `ioreg -c IOSerialBSDClient | grep usb` where the serial connection is available.
 
+### Update the raspberrypi
+
+- connect to raspberrypi via the deploy user using `ssh deploy@raspberrypi`
+- change to trackday directory and pull the latest changes from git
+- restart the server via `sudo supervisorctl restart trackday`
+
+
 ## Changes
 
 ### 20190915 - denormalize Laps
