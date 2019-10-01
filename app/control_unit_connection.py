@@ -2,7 +2,7 @@ import eventlet
 import serial
 
 from app import app
-from app.socket_connection import emit_cu_status
+from app.socket_connection import emit_cu_status, emit_startlight_status
 from carreralib import ControlUnit, connection
 
 
@@ -21,6 +21,7 @@ def connect():
         except serial.serialutil.SerialException as e:
             app.logger.info("Control unit not connected to Raspberry due to " + str(e))
             emit_cu_status('not_connected', serial_port)
+            emit_startlight_status(counter % 10)
         except connection.TimeoutError:
             app.logger.info("Timeout while trying to connect control unit to " + serial_port)
             emit_cu_status('timeout', serial_port)
