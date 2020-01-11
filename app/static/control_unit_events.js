@@ -25,7 +25,6 @@ socket.on('status', function(msg) {
       selector.removeClass('green')
       selector.removeClass('grey')
       selector.addClass('red')
-    }
     } else {
       selector.removeClass('green')
       selector.removeClass('red')
