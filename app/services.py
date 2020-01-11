@@ -16,14 +16,14 @@ control_unit_connection_thread = None
 
 def handle_control_unit_events():
     app.logger.info("* starting handle_control_unit_events")
-    cu = connect()
-    app.logger.info("* got connection to cu")
     current_race = Race.current()
     if current_race is not None and current_race.status == 'created':
         current_race.start
-    app.logger.info("* resetting cu")
     while True:
         try:
+            cu = connect()
+            app.logger.info("* got connection to cu")
+            app.logger.info("* resetting cu")
             cu.reset()
             app.logger.info("* starting cu")
             cu.start()
@@ -31,7 +31,6 @@ def handle_control_unit_events():
         except connection.TimeoutError:
             app.logger.info('* got TimeoutError during cu.reset / cu.start')
             emit_cu_status('timeout', 'unknown')
-            cu = connect()
 
     timings = [Timing(num) for num in range(0, 8)]
     last_status_or_timer = None

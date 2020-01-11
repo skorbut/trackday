@@ -27,7 +27,7 @@ def connect():
             emit_cu_status('timeout', serial_port)
 
         counter += 1
-        eventlet.sleep(1)
+        eventlet.sleep(5)
 
     app.logger.info("returning Control Unit")
     emit_cu_status('connected', serial_ports[counter % 5])
