@@ -16,7 +16,7 @@ def connect():
 
         try:
             cu = ControlUnit(serial_port, timeout=0.1)
-            version = cu.version
+            version = cu.version()
             app.logger.info("...connected to Control Unit Version: {}", repr(version))
             break
         except serial.serialutil.SerialException as e:
