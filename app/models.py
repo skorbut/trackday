@@ -58,20 +58,20 @@ class Race(db.Model):
 
     def racer(self, controller):
         for grid_entry in self.parsed_grid():
-            if(grid_entry['Controller'] == controller):
-                return grid_entry['Racer']
+            if(grid_entry['controller'] == controller):
+                return grid_entry['racer']
         return None
 
     def car(self, controller):
         for grid_entry in self.parsed_grid():
-            if(grid_entry['Controller'] == controller):
-                return grid_entry['Car']
+            if(grid_entry['controller'] == controller):
+                return grid_entry['car']
         return None
 
     def controller_for_racer(self, racer):
         for grid_entry in self.parsed_grid():
-            if(grid_entry['Racer'] == racer):
-                return grid_entry['Controller']
+            if(grid_entry['racer'] == racer):
+                return grid_entry['controller']
         return None
 
     def lap_count_by_racer(self, racer):
@@ -80,7 +80,7 @@ class Race(db.Model):
     def lap_count_by_racers(self):
         lap_counts = {}
         for grid_entry in self.parsed_grid():
-            lap_counts[grid_entry['Racer']] = self.lap_count_by_controller(grid_entry['Controller'])
+            lap_counts[grid_entry['racer']] = self.lap_count_by_controller(grid_entry['controller'])
         return lap_counts
 
     def lap_count_by_controller(self, controller):
