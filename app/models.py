@@ -60,12 +60,14 @@ class Race(db.Model):
         for grid_entry in self.parsed_grid():
             if(grid_entry['controller'] == controller):
                 return grid_entry['racer']
+        app.logger.info("Unable to find racer for controller " + controller + " in grid " + repr(self.parsed_grid()))
         return None
 
     def car(self, controller):
         for grid_entry in self.parsed_grid():
             if(grid_entry['controller'] == controller):
                 return grid_entry['car']
+        app.logger.info("Unable to find car for controller " + controller + " in grid " + repr(self.parsed_grid()))
         return None
 
     def controller_for_racer(self, racer):
