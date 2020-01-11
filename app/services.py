@@ -39,7 +39,6 @@ def handle_control_unit_events():
         try:
             app.logger.info("* requesting cu data")
             status_or_timer = cu.request()
-            emit_cu_status('connected', 'unknown')
             app.logger.info("* processing cu data" + repr(status_or_timer))
             if status_or_timer == last_status_or_timer:
                 continue

@@ -23,6 +23,10 @@ tr {
   background-color: rgba(255,255,255,0.65);
 }
 
+.trackday a {
+  margin-right: 10px;
+}
+
 .status-label {
   font-weight: 800;
   margin-right: 10px;

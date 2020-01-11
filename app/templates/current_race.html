@@ -5,20 +5,19 @@
 
   <div class="d-flex flex-row-reverse mb1 status">
 
-      <div class="p2 flex-fill">
-        <div class="p2 d-flex flex-row status-item">
-          <p class="p2 status-label">{{ _('CU') }}:</p>
-          <div class = "circle grey" id="cu-status"> </div>
-        </div>
-        <div class = "p2 d-flex flex-row status-item startlight-box">
-          <p class="p2 status-label">{{ _('Start') }}:</p>
-          {% for i in range(0,5) %}
-            <div class = "circle grey" id="startlight-{{i}}"> </div>
-          {% endfor %}
-        </div>
+    <div class="p2 flex-fill">
+      <div class="p2 d-flex flex-row status-item">
+        <p class="p2 status-label">{{ _('CU') }}:</p>
+        <div class = "circle grey" id="cu-status"> </div>
       </div>
-
+      <div class = "p2 d-flex flex-row status-item startlight-box">
+        <p class="p2 status-label">{{ _('Start') }}:</p>
+        {% for i in range(0,5) %}
+          <div class = "circle grey" id="startlight-{{i}}"> </div>
+        {% endfor %}
+      </div>
     </div>
+
     {% if current_race%}
     <div class="p2 d-flex flex-row action-item">
       <a href="{{ url_for('race_stop', race_id=current_race.id) }}">{{ _('Cancel race') }}</a>
@@ -31,7 +30,7 @@
   </div>
 
   {% if current_race and current_race.parsed_grid()%}
-    <p> {{ _('Status of current race: ')}}{{ current_race.status}}
+    <p> {{ _('Status of current race: ')}}{{ current_race.status}} </p>
     <div class="d-flex flex-row justify-content-center  mb-3 bd-highlight ">
       {% for grid_entry in current_race.parsed_grid()%}
       <div class= "p-2 flex-fill grid-entry">
