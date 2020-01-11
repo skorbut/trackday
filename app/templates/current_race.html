@@ -123,7 +123,7 @@
     upgrade: false,
     transports: ['websocket']});
     socket.on('connect', function() {
-        socket.emit('fuel_events', {data: 'I\'m connected!'});
+        socket.emit('lap_events', {data: 'I\'m connected!'});
     });
     socket.on('lap_finished', function(msg) {
       console.log("A lap was finished: " + msg);
