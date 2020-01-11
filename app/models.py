@@ -56,6 +56,18 @@ class Race(db.Model):
         db.session.commit()
         return lap
 
+    def racer(self, controller):
+        for grid_entry in self.parsed_grid():
+            if(grid_entry['Controller'] == controller):
+                return grid_entry['Racer']
+        return None
+
+    def car(self, controller):
+        for grid_entry in self.parsed_grid():
+            if(grid_entry['Controller'] == controller):
+                return grid_entry['Car']
+        return None
+
     def controller_for_racer(self, racer):
         for grid_entry in self.parsed_grid():
             if(grid_entry['Racer'] == racer):
