@@ -18,7 +18,7 @@ def handle_control_unit_events():
     app.logger.info("* starting handle_control_unit_events")
     current_race = Race.current()
     if current_race is not None and current_race.status == 'created':
-        current_race.start
+        current_race.start()
     while True:
         try:
             cu = connect()
@@ -35,42 +35,34 @@ def handle_control_unit_events():
     timings = [Timing(num) for num in range(0, 8)]
     last_status_or_timer = None
     while True:
-        app.logger.info("*")
+        if current_race is None:
+            current_race = Race.current()
         try:
-            app.logger.info("* requesting cu data")
             status_or_timer = cu.request()
-            app.logger.info("* processing cu data" + repr(status_or_timer))
             if status_or_timer == last_status_or_timer:
                 continue
             if isinstance(status_or_timer, ControlUnit.Status):
-                app.logger.info("* processing a status " + repr(status_or_timer))
                 emit_status(status_or_timer)
 
             elif isinstance(status_or_timer, ControlUnit.Timer):
-                app.logger.info("* processing a timer " + repr(status_or_timer))
                 controller = int(status_or_timer.address)
                 timing = timings[controller]
                 timing.newlap(status_or_timer)
                 if current_race is not None:
                     current_race.add_lap(controller, timing.lap_time)
                 emit_lap(status_or_timer, timing)
-            app.logger.info("**")
             last_status_or_timer = status_or_timer
             eventlet.sleep(1.0)
         except serial.serialutil.SerialException:
-            app.logger.info('* got SerialExcpetion')
             emit_cu_status('disconnected', 'unknown')
             cu = connect()
         except connection.TimeoutError:
-            app.logger.info('* got TimeoutError during cu.request')
             emit_cu_status('timeout', 'unknown')
             cu = connect()
         except connection.ConnectionError:
-            app.logger.info('* got ConnectionError')
             emit_cu_status('connect_error', 'unknown')
             cu = connect()
         except eventlet.StopServe:
-            app.logger.info('* received eventlet.StopServe')
             return
     app.logger.info("* Out of processing loop, exiting...")
 
