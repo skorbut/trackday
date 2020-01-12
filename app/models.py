@@ -1,6 +1,6 @@
 import datetime
 import json
-from sqlalchemy import inspect, func
+from sqlalchemy import inspect, func, or_
 from app import app, db
 
 
@@ -108,7 +108,7 @@ class Race(db.Model):
 
     @staticmethod
     def current():
-        return next(iter(Race.query.filter(Race.status == 'created').all()), None)
+        return next(iter(Race.query.filter(or_(Race.status == 'created', Race.status == 'started')).all()), None)
 
 
 class Racer(db.Model):
