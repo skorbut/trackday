@@ -43,7 +43,6 @@ def handle_control_unit_events():
                 continue
             if isinstance(status_or_timer, ControlUnit.Status):
                 emit_status(status_or_timer)
-
             elif isinstance(status_or_timer, ControlUnit.Timer):
                 controller = int(status_or_timer.address)
                 timing = timings[controller]
@@ -52,7 +51,8 @@ def handle_control_unit_events():
                     current_race.add_lap(controller, timing.lap_time)
                 emit_lap(status_or_timer, timing)
             last_status_or_timer = status_or_timer
-            eventlet.sleep(1.0)
+            emit_cu_status('connected', 'unknown')
+            eventlet.sleep(0.5)
         except serial.serialutil.SerialException:
             emit_cu_status('disconnected', 'unknown')
             cu = connect()
