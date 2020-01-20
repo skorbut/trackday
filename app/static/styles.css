@@ -1,6 +1,6 @@
 body {
   font-family: 'Orbitron', sans-serif;
-  background-image: url('/static/images/auto-racing-car-championship-800629.jpg');
+  background-image: url('/static/images/background.jpg');
   background-size:cover;
 }
 
@@ -21,11 +21,17 @@ tr {
 
 .trackday {
   background-color: rgba(255,255,255,0.65);
+  padding-bottom: 15px;
+}
+
+.trackday a {
+  margin-right: 10px;
 }
 
 .status-label {
   font-weight: 800;
   margin-right: 10px;
+  width: 40px;
 
 }
 
@@ -35,6 +41,7 @@ tr {
 
 .status-item {
   margin-right: 10px;
+  width: 200px;
 }
 .lap-number {
   font-family: 'Faster One', cursive;
@@ -105,6 +112,33 @@ tr {
 
 #grid-entry-6 {
   background-color: #E6E6E6;
+}
+
+.startlight-box {
+  background-color: rgba(255,255,255,0.45);
+}
+
+.circle {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.grey {
+  background-color: #bbb;
+}
+
+.green {
+  background-color: #0f0;
+}
+
+.red {
+  background-color: #f00;
+}
+
+.blink {
+  animation: blinker 0.5s linear infinite;
 }
 
 .fuel-0 { background-color: #FF0000;}

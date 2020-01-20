@@ -4,18 +4,33 @@
   <h1>{{ _('Current race') }}</h1>
 
   <div class="d-flex flex-row-reverse mb1 status">
-    <div class="p2 d-flex flex-row status-item">
-      <p class="p2 status-label">{{ _('CU') }}:</p>
-      <p class="p2 status-value" id="control_unit_status"> {{ _('not connected') }}</p>
+
+    <div class="p2 flex-fill">
+      <div class="p2 d-flex flex-row status-item">
+        <p class="p2 status-label">{{ _('CU') }}:</p>
+        <div class = "circle grey" id="cu-status"> </div>
+      </div>
+      <div class = "p2 d-flex flex-row status-item startlight-box">
+        <p class="p2 status-label">{{ _('Start') }}:</p>
+        {% for i in range(0,5) %}
+          <div class = "circle grey" id="startlight-{{i}}"> </div>
+        {% endfor %}
+      </div>
     </div>
+
     {% if current_race%}
     <div class="p2 d-flex flex-row action-item">
       <a href="{{ url_for('race_stop', race_id=current_race.id) }}">{{ _('Cancel race') }}</a>
+    </div>
+    {% else %}
+    <div class="p2 d-flex flex-row action-item">
+      <a href="{{ url_for('race_registration') }}">{{ _('Start a new race') }}</a>
     </div>
     {% endif %}
   </div>
 
   {% if current_race and current_race.parsed_grid()%}
+    <p> {{ _('Status of current race: ')}}{{ current_race.status}} </p>
     <div class="d-flex flex-row justify-content-center  mb-3 bd-highlight ">
       {% for grid_entry in current_race.parsed_grid()%}
       <div class= "p-2 flex-fill grid-entry">
@@ -51,81 +66,8 @@
   {% endif %}
 
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-  <script type="text/javascript" charset="utf-8">
-    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + '/control_unit_events', {
-    upgrade: false,
-    transports: ['websocket']});
-    socket.on('connect', function() {
-        socket.emit('control_unit_events', {data: 'I\'m connected!'});
-    });
-    socket.on('status', function(msg) {
-      console.log("CU status: " + msg);
-      $("#control_unit_status").text(msg)
-    });
-  </script>
-
-  <script type="text/javascript" charset="utf-8">
-    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + '/pit_events', {
-    upgrade: false,
-    transports: ['websocket']});
-    socket.on('connect', function() {
-        socket.emit('pit_events', {data: 'I\'m connected!'});
-    });
-    socket.on('pit_status', function(msg) {
-      console.log("Pit status: " + msg);
-      var pit_status = JSON.parse(msg);
-      pit_status.forEach(function(in_pit, index) {
-        var selector = $("#gas-pump-" + index + " i")
-        if (selector.length > 0) {
-          if(in_pit) {
-            selector.addClass('in-pit')
-          } else {
-            selector.removeClass('in-pit')
-          }
-        }
-      });
-    });
-  </script>
-
-  <script type="text/javascript" charset="utf-8">
-    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + '/fuel_events', {
-    upgrade: false,
-    transports: ['websocket']});
-    socket.on('connect', function() {
-        socket.emit('fuel_events', {data: 'I\'m connected!'});
-    });
-    socket.on('fuel_levels', function(msg) {
-      console.log("Fuel Levels: " + msg);
-      var fuel_levels = JSON.parse(msg);
-      fuel_levels.forEach(function(fuel_level, index) {
-        for(var i=0; i < 16; i++){
-          var selector = $("#fuel-level-" + index + "-" + i)
-          if(selector.length > 0) {
-            if(i <= fuel_level) {
-              selector.removeClass('empty')
-            } else {
-              selector.addClass('empty')
-            }
-          }
-        }
-      });
-    });
-  </script>
-
-  <script type="text/javascript" charset="utf-8">
-    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + '/lap_events', {
-    upgrade: false,
-    transports: ['websocket']});
-    socket.on('connect', function() {
-        socket.emit('fuel_events', {data: 'I\'m connected!'});
-    });
-    socket.on('lap_finished', function(msg) {
-      console.log("A lap was finished: " + msg);
-      var lap_data = JSON.parse(msg);
-      var controller = lap_data["controller"]
-      $("#lap-number-" + controller).text(lap_data["lap_number"])
-      $("#lap-time-" + controller).html(Math.floor(lap_data["lap_time"] / 1000) + "<small>s</small>" + (lap_data["lap_time"] % 1000) + "<small>ms</small>")
-      $("#best-time-" + controller).html(Math.floor(lap_data["best_time"] / 1000) + "<small>s</small>" + (lap_data["best_time"] % 1000) + "<small>ms</small>")
-    });
-  </script>
+  <script type="text/javascript" src="{{url_for('static', filename='control_unit_events.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='startlight_events.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='pit_events.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='pit_events.js')}}"></script>
 {% endblock %}

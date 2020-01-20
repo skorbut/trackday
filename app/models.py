@@ -1,6 +1,6 @@
 import datetime
 import json
-from sqlalchemy import inspect, func
+from sqlalchemy import inspect, func, or_
 from app import app, db
 
 
@@ -36,16 +36,44 @@ class Race(db.Model):
         app.logger.info("setting race status to started and adding started_at timestamp")
         self.status = "started"
         self.started_at = datetime.datetime.now()
+        db.session.add(self)
+        db.session.commit()
 
     def stop(self):
         app.logger.info("stopping race and adding finished_at timestamp")
         self.status = "stopped"
         self.finished_at = datetime.datetime.now()
 
+    def add_lap(self, controller, time):
+        lap = Lap(
+            race_id=self.id,
+            controller=controller,
+            time=time,
+            racer_id=self.racer(controller).id,
+            car_id=self.car(controller).id
+        )
+        db.session.add(lap)
+        db.session.commit()
+        return lap
+
+    def racer(self, controller):
+        for grid_entry in self.parsed_grid():
+            if(grid_entry['controller'] == str(controller)):
+                return grid_entry['racer']
+        app.logger.info("Unable to find racer for controller " + repr(controller) + " in grid " + repr(self.parsed_grid()))
+        return None
+
+    def car(self, controller):
+        for grid_entry in self.parsed_grid():
+            if(grid_entry['controller'] == str(controller)):
+                return grid_entry['car']
+        app.logger.info("Unable to find car for controller " + repr(controller) + " in grid " + repr(self.parsed_grid()))
+        return None
+
     def controller_for_racer(self, racer):
         for grid_entry in self.parsed_grid():
-            if(grid_entry['Racer'] == racer):
-                return grid_entry['Controller']
+            if(grid_entry['racer'] == racer):
+                return grid_entry['controller']
         return None
 
     def lap_count_by_racer(self, racer):
@@ -54,7 +82,7 @@ class Race(db.Model):
     def lap_count_by_racers(self):
         lap_counts = {}
         for grid_entry in self.parsed_grid():
-            lap_counts[grid_entry['Racer']] = self.lap_count_by_controller(grid_entry['Controller'])
+            lap_counts[grid_entry['racer']] = self.lap_count_by_controller(grid_entry['controller'])
         return lap_counts
 
     def lap_count_by_controller(self, controller):
@@ -80,7 +108,7 @@ class Race(db.Model):
 
     @staticmethod
     def current():
-        return next(iter(Race.query.filter(Race.status == 'created').all()), None)
+        return next(iter(Race.query.filter(or_(Race.status == 'created', Race.status == 'started')).all()), None)
 
 
 class Racer(db.Model):
