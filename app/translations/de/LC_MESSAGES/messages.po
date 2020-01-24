@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-09-16 19:58+0200\n"
+"POT-Creation-Date: 2020-01-24 22:11+0100\n"
 "PO-Revision-Date: 2019-08-23 22:50+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -18,117 +18,126 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: app/forms.py:11
+#: app/forms.py:12
 msgid "Ghost"
 msgstr "Geist"
 
-#: app/forms.py:12 app/templates/car.html:18 app/templates/racers.html:18
+#: app/forms.py:13 app/templates/car.html:18
 msgid "Racer"
 msgstr "Fahrer"
 
-#: app/forms.py:13
+#: app/forms.py:14 app/templates/racers.html:27 app/templates/racers.html:41
+#: app/templates/racers.html:55
 msgid "Car"
 msgstr "Auto"
 
-#: app/forms.py:19
+#: app/forms.py:20
 msgid "Free roam"
 msgstr "Freie Fahrt"
 
-#: app/forms.py:19
+#: app/forms.py:20
 msgid "Training"
 msgstr "Training"
 
-#: app/forms.py:19
+#: app/forms.py:20
 msgid "Qualifying"
 msgstr "Qualifikation"
 
-#: app/forms.py:19
+#: app/forms.py:20
 msgid "Race"
 msgstr "Rennen"
 
-#: app/forms.py:19
+#: app/forms.py:20
 msgid "Time trial"
 msgstr "Zeitrennen"
 
-#: app/forms.py:24
+#: app/forms.py:25
 msgid "unlimited"
 msgstr "unbegrenzt"
 
-#: app/forms.py:25
+#: app/forms.py:26
 msgid "5 Minutes"
 msgstr "5 Minuten"
 
-#: app/forms.py:26
+#: app/forms.py:27
 msgid "10 Minutes"
 msgstr "10 Minuten"
 
-#: app/forms.py:27
+#: app/forms.py:28
 msgid "20 Minutes"
 msgstr "20 Minuten"
 
-#: app/forms.py:28
+#: app/forms.py:29
 msgid "100 Laps"
 msgstr "100 Runnen"
 
-#: app/forms.py:29
+#: app/forms.py:30
 msgid "500 Laps"
 msgstr "500 Runden"
 
-#: app/forms.py:34
+#: app/forms.py:35
 msgid "Start Race"
 msgstr "Rennen starten"
 
-#: app/forms.py:38 app/forms.py:48
+#: app/forms.py:39 app/forms.py:49
 msgid "Name"
 msgstr "Name"
 
-#: app/forms.py:39
+#: app/forms.py:40
 msgid "Register Racer"
 msgstr "Fahrer registrieren"
 
-#: app/forms.py:44
+#: app/forms.py:45
 msgid "Racer already registered."
 msgstr "Fahrer bereits registriert"
 
-#: app/forms.py:49
+#: app/forms.py:50 app/forms.py:62
 msgid "description"
 msgstr "Beschreibung"
 
-#: app/forms.py:50
+#: app/forms.py:51
 msgid "Order No."
 msgstr "Bestellnummer"
 
-#: app/forms.py:51
+#: app/forms.py:52
 msgid "Image URL"
 msgstr "Bildlink"
 
-#: app/forms.py:52
+#: app/forms.py:53
 msgid "Add to Car Park"
 msgstr "Zum Fuhrpark hinzufügen"
 
-#: app/forms.py:57
+#: app/forms.py:58
 msgid "Car already registered"
 msgstr "Auto bereits registriert"
 
-#: app/routes.py:52
+#: app/forms.py:65
+msgid "Add Season"
+msgstr "Saison hinzufügen"
+
+#: app/routes.py:54
 msgid "Race stopped"
 msgstr "Rennen gestoppt"
 
-#: app/routes.py:64
+#: app/routes.py:66
 msgid "Race deleted"
 msgstr "Rennen gelöscht"
 
-#: app/routes.py:81 app/routes.py:132
+#: app/routes.py:83 app/routes.py:135
 msgid "New race registered."
 msgstr "Neues Rennen angelegt"
 
-#: app/routes.py:111
+#: app/routes.py:114
 msgid "New racer registered"
 msgstr "Neuer Fahrer registriert"
 
-#: app/routes.py:144
+#: app/routes.py:147
 msgid "New car added to car park"
 msgstr "Neues Auto hinzugefügt"
+
+#: app/routes.py:164
+msgid "New season created"
+msgstr "Neue Saison hinzugefügt"
 
 #: app/templates/404.html:4
 msgid "Page not found"
@@ -142,20 +151,25 @@ msgstr "Zurück zur Startseite"
 msgid "Index"
 msgstr "Index"
 
-#: app/templates/base.html:29
+#: app/templates/base.html:29 app/templates/index.html:22
+#: app/templates/seasons.html:4
+msgid "Seasons"
+msgstr "Saisons"
+
+#: app/templates/base.html:30
 msgid "Racers"
 msgstr "Fahrer"
 
-#: app/templates/base.html:30 app/templates/cars.html:4
+#: app/templates/base.html:31 app/templates/cars.html:4
 #: app/templates/index.html:18
 msgid "Car park"
 msgstr "Fuhrpark"
 
-#: app/templates/base.html:31 app/templates/current_race.html:4
+#: app/templates/base.html:32 app/templates/current_race.html:4
 msgid "Current race"
 msgstr "Aktuelles Rennen"
 
-#: app/templates/base.html:32 app/templates/index.html:23
+#: app/templates/base.html:33 app/templates/index.html:26
 #: app/templates/races.html:4
 msgid "Previous races"
 msgstr "Vergangene Rennen"
@@ -164,7 +178,8 @@ msgstr "Vergangene Rennen"
 msgid "Fastest Laps"
 msgstr "Schnellste Runden"
 
-#: app/templates/car.html:17 app/templates/racers.html:17
+#: app/templates/car.html:17 app/templates/racers.html:26
+#: app/templates/racers.html:40 app/templates/racers.html:54
 msgid "Time"
 msgstr "Zeit"
 
@@ -172,27 +187,36 @@ msgstr "Zeit"
 msgid "Add new car to car park"
 msgstr "Neues Auto zum Fuhrpark hinzufügen"
 
-#: app/templates/current_race.html:8
+#: app/templates/current_race.html:10
 msgid "CU"
 msgstr "CU"
 
-#: app/templates/current_race.html:9
-msgid "not connected"
-msgstr "nicht verbunden"
+#: app/templates/current_race.html:14
+msgid "Start"
+msgstr "Start"
 
-#: app/templates/current_race.html:13
+#: app/templates/current_race.html:23
 msgid "Cancel race"
 msgstr "Rennen abbrechen"
 
-#: app/templates/current_race.html:36 app/templates/race.html:20
+#: app/templates/current_race.html:27 app/templates/races.html:6
+msgid "Start a new race"
+msgstr "Neues Rennen starten"
+
+#: app/templates/current_race.html:33
+msgid "Status of current race: "
+msgstr "Status des aktuellen Rennens:"
+
+#: app/templates/current_race.html:51 app/templates/race.html:20
+#: app/templates/races.html:21
 msgid "Laps"
 msgstr "Runden"
 
-#: app/templates/current_race.html:40
+#: app/templates/current_race.html:55
 msgid "Last lap"
 msgstr "Letzte Runde"
 
-#: app/templates/current_race.html:42
+#: app/templates/current_race.html:57
 msgid "Best lap"
 msgstr "Beste Runde"
 
@@ -232,7 +256,11 @@ msgstr "Schaue dir die registrierten Fahrer an und registriere neue Rennfahrer."
 msgid "Here you find all available race cars."
 msgstr "Hier findest du den Fuhrpark"
 
-#: app/templates/index.html:25
+#: app/templates/index.html:24
+msgid "Create new seasons"
+msgstr "Neue Saisons anlegen"
+
+#: app/templates/index.html:28
 msgid "Have a look at past races."
 msgstr "Schaue dir vergangene Rennen an."
 
@@ -284,9 +312,17 @@ msgstr "Letzten Fahrer löschen"
 msgid "Register a new racer"
 msgstr "Einen neuen Fahrer hinzufügen"
 
-#: app/templates/races.html:6
-msgid "Start a new race"
-msgstr "Neues Rennen starten"
+#: app/templates/racers.html:18
+msgid "overall"
+msgstr "gesamt"
+
+#: app/templates/racers.html:19
+msgid "current season"
+msgstr "aktuelle Saison"
+
+#: app/templates/racers.html:20
+msgid "last season"
+msgstr "letzte Saison"
 
 #: app/templates/races.html:10
 msgid "ID"
@@ -296,6 +332,10 @@ msgstr "ID"
 msgid "Created at"
 msgstr "Angelegt am"
 
+#: app/templates/season_registration.html:5 app/templates/seasons.html:6
+msgid "Create a new season"
+msgstr "Eine neue Saison anlegen"
+
 #~ msgid "Type"
 #~ msgstr "Typ"
 
@@ -304,4 +344,7 @@ msgstr "Angelegt am"
 
 #~ msgid "State"
 #~ msgstr "Status"
+
+#~ msgid "not connected"
+#~ msgstr "nicht verbunden"
 

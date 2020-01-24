@@ -12,7 +12,7 @@ def seed():
             name='BMW M1',
             description='Carrera Digital 132 BMW M1 Procar Lotus Martini Mario Andretti Nr.1 1979',
             order_number='30814',
-            image_link = 'https://slotcardatenbank.de/car/30814_1851/2120305396.jpeg'
+            image_link='https://slotcardatenbank.de/car/30814_1851/2120305396.jpeg'
         )
     )
     db.session.add(
@@ -20,7 +20,7 @@ def seed():
             name='Porsche 911 GT3 RSR',
             description='Carrera Digital 132 Porsche 911 GT3 RSR Lechner Racing Carrera Race Taxi',
             order_number='30828',
-            image_link = 'https://slotcardatenbank.de/car/30828_2253/895352019.jpeg'
+            image_link='https://slotcardatenbank.de/car/30828_2253/895352019.jpeg'
         )
     )
     db.session.add(

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+  <h1>{{ _('Seasons') }}</h1>
+
+  <a href="{{ url_for('season_registration') }}">{{ _('Create a new season') }}</a>
+
+  {% if seasons %}
+    <div class = "season">
+      <div class = "season-data">
+        <ul>
+          {% for season in seasons %}
+            <li>
+              <p> {{ season.started_at.strftime('%d.%m.%Y') }} - {% if season.ended_at != None %}{{ season.ended_at.strftime('%d.%m.%Y') }}{% endif %}: {{ season.description }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+
+{% endblock %}
