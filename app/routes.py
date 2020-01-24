@@ -4,8 +4,8 @@ import json
 from flask import request, render_template, flash, redirect, url_for
 from flask_babel import lazy_gettext as _l
 from app import app, db, services
-from app.forms import CarRegistrationForm, RaceRegistrationForm, RacerRegistrationForm
-from app.models import Car, Race, Racer
+from app.forms import CarRegistrationForm, RaceRegistrationForm, RacerRegistrationForm, SeasonRegistrationForm
+from app.models import Car, Race, Racer, Season
 
 
 @app.route('/')
@@ -29,8 +29,10 @@ def car(car_id):
 @app.route('/racers')
 def racers():
     racers = Racer.query.all()
+    last_season = Season.query.filter(Season.ended_at.isnot(None)).order_by(Season.ended_at.desc()).first()
+    current_season = Season.query.filter(Season.ended_at.is_(None)).order_by(Season.started_at.desc()).first()
     app.logger.info('got racers:' + repr(racers))
-    return render_template('racers.html', title='Fahrer', racers=racers)
+    return render_template('racers.html', title='Fahrer', racers=racers, last_season=last_season, current_season=current_season)
 
 
 @app.route('/races')
@@ -94,6 +96,13 @@ def race(race_id):
     return render_template('race.html', title='Rennen vom ', race=Race.query.get(race_id))
 
 
+@app.route('/seasons')
+def seasons():
+    seasons = Season.query.all()
+    app.logger.info('got seasons:' + repr(seasons))
+    return render_template('seasons.html', title='Saison', seasons=seasons)
+
+
 @app.route('/racer_registration', methods=['GET', 'POST'])
 def racer_registration():
     form = RacerRegistrationForm()
@@ -138,6 +147,23 @@ def register():
         flash(_l('New car added to car park'))
         return redirect(url_for('index'))
     return render_template('car_registration.html', title='Neues Auto registrieren', form=form)
+
+
+@app.route('/season_registration', methods=['GET', 'POST'])
+def season_registration():
+    form = SeasonRegistrationForm()
+
+    if form.validate_on_submit():
+        season = Season(
+            description=form.description.data,
+            started_at=form.started_at.data,
+            ended_at=form.ended_at.data
+        )
+        db.session.add(season)
+        db.session.commit()
+        flash(_l('New season created'))
+        return redirect(url_for('seasons'))
+    return render_template('season_registration.html', title='Saison anlegen', form=form)
 
 
 def cancel_current_race():

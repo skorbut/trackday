@@ -1,14 +1,14 @@
 # Translations template for PROJECT.
-# Copyright (C) 2019 ORGANIZATION
+# Copyright (C) 2020 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-09-16 19:58+0200\n"
+"POT-Creation-Date: 2020-01-24 22:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,116 +17,125 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: app/forms.py:11
+#: app/forms.py:12
 msgid "Ghost"
 msgstr ""
 
-#: app/forms.py:12 app/templates/car.html:18 app/templates/racers.html:18
+#: app/forms.py:13 app/templates/car.html:18
 msgid "Racer"
 msgstr ""
 
-#: app/forms.py:13
+#: app/forms.py:14 app/templates/racers.html:27 app/templates/racers.html:41
+#: app/templates/racers.html:55
 msgid "Car"
 msgstr ""
 
-#: app/forms.py:19
+#: app/forms.py:20
 msgid "Free roam"
 msgstr ""
 
-#: app/forms.py:19
+#: app/forms.py:20
 msgid "Training"
 msgstr ""
 
-#: app/forms.py:19
+#: app/forms.py:20
 msgid "Qualifying"
 msgstr ""
 
-#: app/forms.py:19
+#: app/forms.py:20
 msgid "Race"
 msgstr ""
 
-#: app/forms.py:19
+#: app/forms.py:20
 msgid "Time trial"
 msgstr ""
 
-#: app/forms.py:24
+#: app/forms.py:25
 msgid "unlimited"
 msgstr ""
 
-#: app/forms.py:25
+#: app/forms.py:26
 msgid "5 Minutes"
 msgstr ""
 
-#: app/forms.py:26
+#: app/forms.py:27
 msgid "10 Minutes"
 msgstr ""
 
-#: app/forms.py:27
+#: app/forms.py:28
 msgid "20 Minutes"
 msgstr ""
 
-#: app/forms.py:28
+#: app/forms.py:29
 msgid "100 Laps"
 msgstr ""
 
-#: app/forms.py:29
+#: app/forms.py:30
 msgid "500 Laps"
 msgstr ""
 
-#: app/forms.py:34
+#: app/forms.py:35
 msgid "Start Race"
 msgstr ""
 
-#: app/forms.py:38 app/forms.py:48
+#: app/forms.py:39 app/forms.py:49
 msgid "Name"
 msgstr ""
 
-#: app/forms.py:39
+#: app/forms.py:40
 msgid "Register Racer"
 msgstr ""
 
-#: app/forms.py:44
+#: app/forms.py:45
 msgid "Racer already registered."
 msgstr ""
 
-#: app/forms.py:49
+#: app/forms.py:50 app/forms.py:62
 msgid "description"
 msgstr ""
 
-#: app/forms.py:50
+#: app/forms.py:51
 msgid "Order No."
 msgstr ""
 
-#: app/forms.py:51
+#: app/forms.py:52
 msgid "Image URL"
 msgstr ""
 
-#: app/forms.py:52
+#: app/forms.py:53
 msgid "Add to Car Park"
 msgstr ""
 
-#: app/forms.py:57
+#: app/forms.py:58
 msgid "Car already registered"
 msgstr ""
 
-#: app/routes.py:52
+#: app/forms.py:65
+msgid "Add Season"
+msgstr ""
+
+#: app/routes.py:54
 msgid "Race stopped"
 msgstr ""
 
-#: app/routes.py:64
+#: app/routes.py:66
 msgid "Race deleted"
 msgstr ""
 
-#: app/routes.py:81 app/routes.py:132
+#: app/routes.py:83 app/routes.py:135
 msgid "New race registered."
 msgstr ""
 
-#: app/routes.py:111
+#: app/routes.py:114
 msgid "New racer registered"
 msgstr ""
 
-#: app/routes.py:144
+#: app/routes.py:147
 msgid "New car added to car park"
+msgstr ""
+
+#: app/routes.py:164
+msgid "New season created"
 msgstr ""
 
 #: app/templates/404.html:4
@@ -141,20 +150,25 @@ msgstr ""
 msgid "Index"
 msgstr ""
 
-#: app/templates/base.html:29
+#: app/templates/base.html:29 app/templates/index.html:22
+#: app/templates/seasons.html:4
+msgid "Seasons"
+msgstr ""
+
+#: app/templates/base.html:30
 msgid "Racers"
 msgstr ""
 
-#: app/templates/base.html:30 app/templates/cars.html:4
+#: app/templates/base.html:31 app/templates/cars.html:4
 #: app/templates/index.html:18
 msgid "Car park"
 msgstr ""
 
-#: app/templates/base.html:31 app/templates/current_race.html:4
+#: app/templates/base.html:32 app/templates/current_race.html:4
 msgid "Current race"
 msgstr ""
 
-#: app/templates/base.html:32 app/templates/index.html:23
+#: app/templates/base.html:33 app/templates/index.html:26
 #: app/templates/races.html:4
 msgid "Previous races"
 msgstr ""
@@ -163,7 +177,8 @@ msgstr ""
 msgid "Fastest Laps"
 msgstr ""
 
-#: app/templates/car.html:17 app/templates/racers.html:17
+#: app/templates/car.html:17 app/templates/racers.html:26
+#: app/templates/racers.html:40 app/templates/racers.html:54
 msgid "Time"
 msgstr ""
 
@@ -171,27 +186,36 @@ msgstr ""
 msgid "Add new car to car park"
 msgstr ""
 
-#: app/templates/current_race.html:8
+#: app/templates/current_race.html:10
 msgid "CU"
 msgstr ""
 
-#: app/templates/current_race.html:9
-msgid "not connected"
+#: app/templates/current_race.html:14
+msgid "Start"
 msgstr ""
 
-#: app/templates/current_race.html:13
+#: app/templates/current_race.html:23
 msgid "Cancel race"
 msgstr ""
 
-#: app/templates/current_race.html:36 app/templates/race.html:20
+#: app/templates/current_race.html:27 app/templates/races.html:6
+msgid "Start a new race"
+msgstr ""
+
+#: app/templates/current_race.html:33
+msgid "Status of current race: "
+msgstr ""
+
+#: app/templates/current_race.html:51 app/templates/race.html:20
+#: app/templates/races.html:21
 msgid "Laps"
 msgstr ""
 
-#: app/templates/current_race.html:40
+#: app/templates/current_race.html:55
 msgid "Last lap"
 msgstr ""
 
-#: app/templates/current_race.html:42
+#: app/templates/current_race.html:57
 msgid "Best lap"
 msgstr ""
 
@@ -226,7 +250,11 @@ msgstr ""
 msgid "Here you find all available race cars."
 msgstr ""
 
-#: app/templates/index.html:25
+#: app/templates/index.html:24
+msgid "Create new seasons"
+msgstr ""
+
+#: app/templates/index.html:28
 msgid "Have a look at past races."
 msgstr ""
 
@@ -278,8 +306,16 @@ msgstr ""
 msgid "Register a new racer"
 msgstr ""
 
-#: app/templates/races.html:6
-msgid "Start a new race"
+#: app/templates/racers.html:18
+msgid "overall"
+msgstr ""
+
+#: app/templates/racers.html:19
+msgid "current season"
+msgstr ""
+
+#: app/templates/racers.html:20
+msgid "last season"
 msgstr ""
 
 #: app/templates/races.html:10
@@ -288,5 +324,9 @@ msgstr ""
 
 #: app/templates/races.html:11
 msgid "Created at"
+msgstr ""
+
+#: app/templates/season_registration.html:5 app/templates/seasons.html:6
+msgid "Create a new season"
 msgstr ""
 

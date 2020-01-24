@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_babel import lazy_gettext as _l
 from wtforms import StringField, TextField, SubmitField, SelectField, FieldList, FormField, HiddenField
-from wtforms.validators import ValidationError, DataRequired
+from wtforms.validators import ValidationError, DataRequired, Optional
+from wtforms.fields.html5 import DateField
 from app.models import Racer, Car
 
 
@@ -55,3 +56,10 @@ class CarRegistrationForm(FlaskForm):
         car = Car.query.filter_by(order_number=order_number.data).first()
         if car is not None:
             raise ValidationError(_l('Car already registered'))
+
+
+class SeasonRegistrationForm(FlaskForm):
+    description = TextField(_l('description'), validators=[DataRequired()])
+    started_at = DateField('DatePicker', format='%Y-%m-%d')
+    ended_at = DateField('DatePicker', format='%Y-%m-%d', validators=(Optional(),))
+    submit = SubmitField(_l('Add Season'))
