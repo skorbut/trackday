@@ -143,8 +143,19 @@ class Car(db.Model):
     def __repr__(self):
         return '<Car {}>'.format(self.name)
 
-    def fastest_laps(self):
-        return Lap.query.filter(Lap.time > 1000, Lap.car_id == self.id).order_by(Lap.time).limit(5).all()
+    def fastest_laps(self, season=None):
+        if season is None:
+            return Lap.query.filter(Lap.time > 1000, Lap.car_id == self.id).order_by(Lap.time).limit(5).all()
+        races_from = season.started_at
+        races_to = season.ended_at
+        if races_to is None:
+            races_to = datetime.datetime.now()
+        return Lap.query.join(Race).filter(
+            Race.created_at.between(races_from, races_to)
+        ).filter(
+            Lap.time > 2000,
+            Lap.racer_id == self.id
+        ).order_by(Lap.time).limit(5).all()
 
 
 class Lap(db.Model):

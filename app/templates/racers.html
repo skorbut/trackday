@@ -19,48 +19,49 @@
               <li><a href="#{{racer.id}}-current_season" data-toggle="tab">{{ _('current season') }}</a></li>
               <li><a href="#{{racer.id}}-last_season" data-toggle="tab">{{ _('last season') }}</a></li>
             </ul>
-          <div class="tab-content clearfix">
-            <div class="tab-pane active" id="{{racer.id}}-overall">
-              <table width = "80%">
-                <tr>
-                  <th>{{ _('Time') }}</th>
-                  <th>{{ _('Car') }}</th>
-                </tr>
-                {% for lap in racer.fastest_laps() %}
+            <div class="tab-content clearfix">
+              <div class="tab-pane active" id="{{racer.id}}-overall">
+                <table width = "80%">
                   <tr>
-                    <td>{{ lap.formatted_time() }}</td>
-                    <td>{{ lap.car().name }}</td>
+                    <th>{{ _('Time') }}</th>
+                    <th>{{ _('Car') }}</th>
                   </tr>
-                {% endfor %}
-              </table>
-            </div>
-            <div class="tab-pane" id="{{racer.id}}-current_season">
-              <table width = "80%">
-                <tr>
-                  <th>{{ _('Time') }}</th>
-                  <th>{{ _('Car') }}</th>
-                </tr>
-                {% for lap in racer.fastest_laps(season=current_season) %}
+                  {% for lap in racer.fastest_laps() %}
+                    <tr>
+                      <td>{{ lap.formatted_time() }}</td>
+                      <td>{{ lap.car().name }}</td>
+                    </tr>
+                  {% endfor %}
+                </table>
+              </div>
+              <div class="tab-pane" id="{{racer.id}}-current_season">
+                <table width = "80%">
                   <tr>
-                    <td>{{ lap.formatted_time() }}</td>
-                    <td>{{ lap.car().name }}</td>
+                    <th>{{ _('Time') }}</th>
+                    <th>{{ _('Car') }}</th>
                   </tr>
-                {% endfor %}
-              </table>
-            </div>
-            <div class="tab-pane" id="{{racer.id}}-last_season">
-              <table width = "80%">
-                <tr>
-                  <th>{{ _('Time') }}</th>
-                  <th>{{ _('Car') }}</th>
-                </tr>
-                {% for lap in racer.fastest_laps(season=last_season) %}
+                  {% for lap in racer.fastest_laps(season=current_season) %}
+                    <tr>
+                      <td>{{ lap.formatted_time() }}</td>
+                      <td>{{ lap.car().name }}</td>
+                    </tr>
+                  {% endfor %}
+                </table>
+              </div>
+              <div class="tab-pane" id="{{racer.id}}-last_season">
+                <table width = "80%">
                   <tr>
-                    <td>{{ lap.formatted_time() }}</td>
-                    <td>{{ lap.car().name }}</td>
+                    <th>{{ _('Time') }}</th>
+                    <th>{{ _('Car') }}</th>
                   </tr>
-                {% endfor %}
-              </table>
+                  {% for lap in racer.fastest_laps(season=last_season) %}
+                    <tr>
+                      <td>{{ lap.formatted_time() }}</td>
+                      <td>{{ lap.car().name }}</td>
+                    </tr>
+                  {% endfor %}
+                </table>
+              </div>
             </div>
           </div>
         </li>
