@@ -154,7 +154,7 @@ class Car(db.Model):
             Race.created_at.between(races_from, races_to)
         ).filter(
             Lap.time > 2000,
-            Lap.racer_id == self.id
+            Lap.car_id == self.id
         ).order_by(Lap.time).limit(5).all()
 
 
