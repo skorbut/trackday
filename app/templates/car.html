@@ -12,18 +12,55 @@
       </div>
       <div class = "p-2 car-data">
         <h3>{{ _('Fastest Laps') }}</h3>
-        <table width = "80%">
-          <tr>
-            <th>{{ _('Time') }}</th>
-            <th>{{ _('Racer') }}</th>
-          </tr>
-          {% for lap in car.fastest_laps() %}
-            <tr>
-              <td>{{ lap.formatted_time() }}</td>
-              <td>{{ lap.racer().name }}</td>
-            </tr>
-          {% endfor %}
-        </table>
+        <ul  class="nav nav-pills">
+          <li class="active"><a  href="#overall" data-toggle="tab">{{ _('overall') }}</a></li>
+          <li><a href="#current_season" data-toggle="tab">{{ _('current season') }}</a></li>
+          <li><a href="#last_season" data-toggle="tab">{{ _('last season') }}</a></li>
+        </ul>
+        <div class="tab-content clearfix">
+          <div class="tab-pane active" id="overall">
+            <table width = "80%">
+              <tr>
+                <th>{{ _('Time') }}</th>
+                <th>{{ _('Racer') }}</th>
+              </tr>
+              {% for lap in car.fastest_laps() %}
+                <tr>
+                  <td>{{ lap.formatted_time() }}</td>
+                  <td>{{ lap.racer().name }}</td>
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+          <div class="tab-pane" id="current_season">
+            <table width = "80%">
+              <tr>
+                <th>{{ _('Time') }}</th>
+                <th>{{ _('Racer') }}</th>
+              </tr>
+              {% for lap in car.fastest_laps(season=current_season) %}
+                <tr>
+                  <td>{{ lap.formatted_time() }}</td>
+                  <td>{{ lap.racer().name }}</td>
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+          <div class="tab-pane" id="last_season">
+            <table width = "80%">
+              <tr>
+                <th>{{ _('Time') }}</th>
+                <th>{{ _('Racer') }}</th>
+              </tr>
+              {% for lap in car.fastest_laps(season=last_season) %}
+                <tr>
+                  <td>{{ lap.formatted_time() }}</td>
+                  <td>{{ lap.racer().name }}</td>
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
