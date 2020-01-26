@@ -15,8 +15,8 @@ def calculate_sleep_time(race, status):
         return 0.5
     # if someone in pit - sleep a fifth of a second
     if car_in_pit(status):
-        return 0.2
+        return 0.1
     # if startlight changing - sleep a fifth of a second
     if startlight_changing(status):
-        return 0.2
-    return 0.5
+        return 0.1
+    return 0.3

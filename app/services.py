@@ -30,7 +30,7 @@ def handle_control_unit_events():
                 current_race.start()
             break
         except connection.TimeoutError:
-            app.logger.info('* got TimeoutError during cu.reset / cu.start')
+            app.logger.info("* got TimeoutError during cu.reset / cu.start")
             emit_cu_status('timeout', 'unknown')
 
     timings = [Timing(num) for num in range(0, 8)]
@@ -55,7 +55,9 @@ def handle_control_unit_events():
                 emit_lap(status_or_timer, timing)
             last_status_or_timer = status_or_timer
             emit_cu_status('connected', 'unknown')
-            eventlet.sleep(calculate_sleep_time(current_race, last_status))
+            calculated_sleep_time = calculate_sleep_time(current_race, last_status)
+            app.logger.info("* waiting calculated sleep time of " + str(calculated_sleep_time))
+            eventlet.sleep(calculated_sleep_time)
         except serial.serialutil.SerialException:
             emit_cu_status('disconnected', 'unknown')
             cu = connect()
