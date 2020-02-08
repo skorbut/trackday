@@ -11,15 +11,6 @@ socket.on('fuel_levels', function(msg) {
   console.log("Fuel Levels: " + msg);
   var fuel_levels = JSON.parse(msg);
   fuel_levels.forEach(function(fuel_level, index) {
-    for(var i=0; i < 16; i++){
-      var selector = $("#fuel-level-" + index + "-" + i)
-      if(selector.length > 0) {
-        if(i <= fuel_level) {
-          selector.removeClass('empty')
-        } else {
-          selector.addClass('empty')
-        }
-      }
-    }
+    $("#fuel-gauge-canvas-" + index)[0].setAttribute('data-value', fuel_level);
   });
 });
