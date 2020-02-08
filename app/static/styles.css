@@ -20,7 +20,7 @@ tr {
 }
 
 .trackday {
-  background-color: rgba(255,255,255,0.65);
+  background-color: rgba(240,240,240,0.9);
   padding-bottom: 15px;
 }
 
@@ -43,16 +43,26 @@ tr {
   margin-right: 10px;
   width: 200px;
 }
+
+.laps {
+  flex: 1;
+}
 .lap-number {
   font-family: 'Faster One', cursive;
   font-size: 6rem;
   line-height: 1;
-  text-align: center;
+  text-align: right;
 }
 
 .lap-time {
+  margin-bottom: 5px;
   font-family: 'Faster One', cursive;
-  font-size: 2rem;
+  font-size: 1.6rem;
+  text-align: right;
+}
+
+.lap-time-label {
+  margin-bottom: 5px;
 }
 
 .lap-statistics {
@@ -115,7 +125,7 @@ tr {
 }
 
 .startlight-box {
-  background-color: rgba(255,255,255,0.45);
+
 }
 
 .circle {
@@ -140,23 +150,6 @@ tr {
 .blink {
   animation: blinker 0.5s linear infinite;
 }
-
-.fuel-0 { background-color: #FF0000;}
-.fuel-1 { background-color: #FF1A00;}
-.fuel-2 { background-color: #FF4D00;}
-.fuel-3 { background-color: #FF6600;}
-.fuel-4 { background-color: #FFB300;}
-.fuel-5 { background-color: #FFCC00;}
-.fuel-6 { background-color: #FFE600;}
-.fuel-7 { background-color: #FFFF00;}
-.fuel-8 { background-color: #E6FF00;}
-.fuel-9 { background-color: #CCFF00;}
-.fuel-10 { background-color: #B3FF00;}
-.fuel-11 { background-color: #80FF00;}
-.fuel-12 { background-color: #80FF00;}
-.fuel-13 { background-color: #66FF00;}
-.fuel-14 { background-color: #33FF00;}
-.fuel-15 { background-color: #00FF00;}
 
 .photo-attribution-text {
   text-align: right;
