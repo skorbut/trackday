@@ -5,7 +5,7 @@ from app import socketio
 def emit_status(status):
     socketio.emit('fuel_levels', json.dumps(status.fuel), namespace='/fuel_events')
     socketio.emit('pit_status', json.dumps(status.pit), namespace='/pit_events')
-    emit_startlight_status(status.start)
+    socketio.emit('startlight_status', status.start, namespace='/startlight_events')
 
 
 def emit_lap(timer, timing):
@@ -18,7 +18,3 @@ def emit_lap(timer, timing):
 def emit_cu_status(message, serial_port):
     [message, serial_port]
     socketio.emit('status', ' to '.join([message, serial_port]), namespace='/control_unit_events')
-
-
-def emit_startlight_status(status):
-    socketio.emit('startlight_status', status, namespace='/startlight_events')

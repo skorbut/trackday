@@ -3,6 +3,7 @@ import serial
 
 from app.socket_connection import emit_status, emit_lap, emit_cu_status
 from app.control_unit_connection import connect
+from app.sleep_calculator import calculate_sleep_time
 from app import app
 from app.models import Race, Timing
 from carreralib import connection
@@ -29,11 +30,12 @@ def handle_control_unit_events():
                 current_race.start()
             break
         except connection.TimeoutError:
-            app.logger.info('* got TimeoutError during cu.reset / cu.start')
+            app.logger.info("* got TimeoutError during cu.reset / cu.start")
             emit_cu_status('timeout', 'unknown')
 
     timings = [Timing(num) for num in range(0, 8)]
     last_status_or_timer = None
+    last_status = None
     while True:
         if current_race is None:
             current_race = Race.current()
@@ -43,6 +45,7 @@ def handle_control_unit_events():
                 continue
             if isinstance(status_or_timer, ControlUnit.Status):
                 emit_status(status_or_timer)
+                last_status = status_or_timer
             elif isinstance(status_or_timer, ControlUnit.Timer):
                 controller = int(status_or_timer.address)
                 timing = timings[controller]
@@ -52,7 +55,9 @@ def handle_control_unit_events():
                 emit_lap(status_or_timer, timing)
             last_status_or_timer = status_or_timer
             emit_cu_status('connected', 'unknown')
-            eventlet.sleep(0.5)
+            calculated_sleep_time = calculate_sleep_time(current_race, last_status)
+            app.logger.info("* waiting calculated sleep time of " + str(calculated_sleep_time))
+            eventlet.sleep(calculated_sleep_time)
         except serial.serialutil.SerialException:
             emit_cu_status('disconnected', 'unknown')
             cu = connect()
