@@ -11,6 +11,9 @@ socket.on('fuel_levels', function(msg) {
   console.log("Fuel Levels: " + msg);
   var fuel_levels = JSON.parse(msg);
   fuel_levels.forEach(function(fuel_level, index) {
-    $("#fuel-gauge-canvas-" + index)[0].setAttribute('data-value', fuel_level);
+    var canvas = $("#fuel-gauge-canvas-" + index)[0]
+    if(typeof canvas !== "undefined") {
+      canvas.setAttribute('data-value', fuel_level);
+    }
   });
 });
