@@ -45,6 +45,10 @@ You can check via `ioreg -c IOSerialBSDClient | grep usb` where the serial conne
 
 ## Changes
 
+### 20200209 - new driver cockpit
+Get rid of the digit display for fuel levels - integrate gauge.js to display fuel levels
+Calculate sleep time for cu request thread based on current track status
+
 ### 20190915 - denormalize Laps
 
 In order to fetch racer and car based statistics the lap information must be denormalized:
