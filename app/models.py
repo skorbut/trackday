@@ -45,12 +45,17 @@ class Race(db.Model):
         self.finished_at = datetime.datetime.now()
 
     def add_lap(self, controller, time):
+        racer_id = self.racer(controller).id,
+        car_id = self.car(controller).id
+        return self.save_lap(controller, time, racer_id, car_id)
+
+    def save_lap(self, controller, time, racer_id, car_id):
         lap = Lap(
             race_id=self.id,
             controller=controller,
             time=time,
-            racer_id=self.racer(controller).id,
-            car_id=self.car(controller).id
+            racer_id=racer_id,
+            car_id=car_id
         )
         db.session.add(lap)
         db.session.commit()
@@ -198,14 +203,17 @@ class Timing(object):
         self.time = None
         self.lap_time = None
         self.best_time = None
-        self.laps = 0
+        self.laps = None
 
     def newlap(self, timer):
         if self.time is not None:
             self.lap_time = timer.timestamp - self.time
         if self.best_time is None or self.lap_time < self.best_time:
             self.best_time = self.lap_time
-        self.laps += 1
+        if self.laps is None:
+            self.laps = 0
+        else:
+            self.laps += 1
         self.time = timer.timestamp
 
 
