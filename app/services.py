@@ -52,7 +52,8 @@ def handle_control_unit_events():
                 timing.newlap(status_or_timer)
                 if current_race is not None:
                     current_race.add_lap(controller, timing.lap_time)
-                emit_lap(status_or_timer, timing)
+                if timing.lap_time is not None and timing.laps > 0:
+                    emit_lap(status_or_timer, timing)
             last_status_or_timer = status_or_timer
             emit_cu_status('connected', 'unknown')
             calculated_sleep_time = calculate_sleep_time(current_race, last_status)
