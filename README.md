@@ -45,6 +45,10 @@ You can check via `ioreg -c IOSerialBSDClient | grep usb` where the serial conne
 
 ## Changes
 
+### 20201111
+Update to python 3.9, restructure the code handling track communication and race management.
+Add result pages for race types.
+
 ### 20200209 - new driver cockpit
 Get rid of the digit display for fuel levels - integrate gauge.js to display fuel levels
 Calculate sleep time for cu request thread based on current track status
