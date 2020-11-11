@@ -4,3 +4,4 @@ logs/
 .env
 app.db
 .DS_Store
+*.bak

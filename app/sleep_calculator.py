@@ -6,17 +6,15 @@ def startlight_changing(status):
     return status.start > 1 and status.start != 9
 
 
-def calculate_sleep_time(race, status):
-    # if no race sleep a minute
-    if race is None:
-        return 60
+def calculate_sleep_time(status):
     # if no status yet - sleep half a second
     if status is None:
         return 0.5
-    # if someone in pit - sleep a fifth of a second
+    # if someone in pit - sleep a tenth of a second
     if car_in_pit(status):
         return 0.1
-    # if startlight changing - sleep a fifth of a second
+    # if startlight changing - sleep a tenth of a second
     if startlight_changing(status):
         return 0.1
-    return 0.3
+    # default
+    return 0.2

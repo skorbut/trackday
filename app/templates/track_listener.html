@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+  <h1>{{ _('Track Listener') }}</h1>
+
+  <a href="{{ url_for('track_listener_start') }}">{{ _('Start Track Listener') }}</a>
+  <a href="{{ url_for('track_listener_stop') }}">{{ _('Stop Track Listener') }}</a>
+
+  <div class = "track-listener">
+    Track Listener running: {{ track_listener_running }}
+  </div>
+
+{% endblock %}

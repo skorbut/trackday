@@ -1,0 +1,8 @@
+<h1>{{ _('Race') }} {{ _('of') }} {{ race.created_at.strftime('%d.%m.%Y %H:%M:%S') }}</h1>
+
+<a href="{{ url_for('race_delete', race_id=race.id) }}">{{ _('Delete this race') }}</a>
+<a href="{{ url_for('race_copy', race_id=race.id) }}">{{ _('Copy this race') }}</a>
+
+<div class="d-flex flex-row justify-content-left  mb-3 bd-highlight ">
+  {# display race result here 1st, 2nd, 3rd ... #}
+</div>

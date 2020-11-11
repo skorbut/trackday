@@ -16,6 +16,12 @@
           <div class = "circle grey" id="startlight-{{i}}"> </div>
         {% endfor %}
       </div>
+      {% if current_race%}
+        <div class = "p2 d-flex flex-row status-item startlight-box">
+          <p class="p2 status-label">{{ _('started at') }}:</p>
+          <p class="p2 status-label">{{ current_race.started_at.strftime('%H:%M:%S') }}:</p>
+        </div>
+      {% endif %}
     </div>
 
     {% if current_race%}
@@ -30,7 +36,7 @@
   </div>
 
   {% if current_race and current_race.parsed_grid()%}
-    <div class="d-flex flex-row justify-content-center  mb-3 bd-highlight ">
+    <div class="d-flex flex-row justify-content-left  mb-3 bd-highlight ">
       {% for grid_entry in current_race.parsed_grid()%}
       <div class= "p-2 flex-fill grid-entry">
         <div class="horizontal-line" id="grid-entry-{{grid_entry['controller']}}">
@@ -109,4 +115,5 @@
   <script type="text/javascript" src="{{url_for('static', filename='fuel_events.js')}}"></script>
   <script type="text/javascript" src="{{url_for('static', filename='pit_events.js')}}"></script>
   <script type="text/javascript" src="{{url_for('static', filename='lap_events.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='race_events.js')}}"></script>
 {% endblock %}

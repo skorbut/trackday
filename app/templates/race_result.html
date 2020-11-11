@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+  {% include 'race_result_{}.html'.format(race.type) %}
+
+{% endblock %}

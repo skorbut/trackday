@@ -18,3 +18,8 @@ def emit_lap(timer, timing):
 def emit_cu_status(message, serial_port):
     [message, serial_port]
     socketio.emit('status', ' to '.join([message, serial_port]), namespace='/control_unit_events')
+
+
+def emit_race_finished(message, serial_port):
+    [message, serial_port]
+    socketio.emit('race_finished', namespace='/race_events')
