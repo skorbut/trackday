@@ -3,6 +3,11 @@
 <a href="{{ url_for('race_delete', race_id=race.id) }}">{{ _('Delete this race') }}</a>
 <a href="{{ url_for('race_copy', race_id=race.id) }}">{{ _('Copy this race') }}</a>
 
-<div class="d-flex flex-row justify-content-left  mb-3 bd-highlight ">
+<div class="d-flex flex-column justify-content-left  mb-3 bd-highlight ">
   {# display best lap for each controller here sorted by time #}
+  {% for lap in race.statistics().fastest_laps():%}
+  <div>
+    {{loop.index}}. {{lap.racer().name}}({{lap.car().name}}): {{lap.formatted_time()}}
+  </div>
+  {% endfor %}
 </div>

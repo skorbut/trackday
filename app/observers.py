@@ -25,9 +25,16 @@ class EmittingRaceTimeObserver:
         self.race.add_lap(controller, timing.lap_time)
         if timing.lap_time is not None and timing.laps > 0:
             emit_lap(time, timing)
+        self.check_duration()
+
+    def notify_time_past(self):
+        app.logger.info("processing past time")
+        self.check_duration()
+
+    def check_duration(self):
         if self.race.has_reached_duration():
             self.race.stop()
-            emit_race_finished()
+            emit_race_finished(self.race.id)
 
 
 class LoggingDebugObserver:

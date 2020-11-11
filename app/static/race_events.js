@@ -16,7 +16,8 @@ socket.on(
 
 socket.on(
     'race_finished',
-    function(msg) {
-        console.log("The race was finished: " + msg);
+    function(race_id) {
+        console.log("The race was finished! Redirecting to stop");
+        window.location.replace("/races/" + race_id + "/stop")
     }
 );

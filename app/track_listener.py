@@ -17,6 +17,7 @@ def listen(status_observer, time_observer):
     last_status = None
     connection = ControlUnitConnection()
     if not connection.connected():
+        app.logger.info("we are not connected!")
         return
 
     app.logger.info("Starting event loop")
@@ -30,6 +31,8 @@ def listen(status_observer, time_observer):
                 elif isinstance(status_or_timer, ControlUnit.Timer):
                     app.logger.info("received new time from track")
                     time_observer.notify_timer(status_or_timer)
+            else:
+                time_observer.notify_time_past()
         except (eventlet.StopServe, greenlet.GreenletExit):
             app.logger.info("Received exeception. exit processing")
             return

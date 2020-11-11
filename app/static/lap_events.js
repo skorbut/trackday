@@ -9,7 +9,7 @@ var socket = io.connect(
 socket.on(
     'connect',
     function() {
-        socket.emit('race_events', {data: 'I\'m connected!'});
+        socket.emit('lap_events', {data: 'I\'m connected!'});
     }
 );
 

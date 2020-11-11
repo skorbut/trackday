@@ -53,7 +53,7 @@ def race_stop(race_id):
     if race is not None:
         race_handler.finish(race)
         flash(_l('Race stopped'))
-    return render_template('races.html', title='Erstellte Rennen', races=Race.query.all())
+    return redirect(url_for('race_result', race_id=race.id))
 
 
 @app.route('/races/<int:race_id>/delete')

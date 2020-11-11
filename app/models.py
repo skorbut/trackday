@@ -56,13 +56,7 @@ class Race(db.Model):
         return self.save_lap(controller, time, racer_id, car_id)
 
     def save_lap(self, controller, time, racer_id, car_id):
-        lap = Lap(
-            race_id=self.id,
-            controller=controller,
-            time=time,
-            racer_id=racer_id,
-            car_id=car_id
-        )
+        lap = Lap(race_id=self.id, controller=controller, time=time, racer_id=racer_id, car_id=car_id)
         db.session.add(lap)
         db.session.commit()
         return lap
@@ -210,6 +204,11 @@ class Lap(db.Model):
     def formatted_time(self):
         return '{:05.3f} s'.format(self.time / 1000)
 
+    @staticmethod
+    def fastest(race, controller):
+        app.logger.info("getting fastest lap for race {} and controller {}".format(repr(race), controller))
+        return Lap.query.filter(Lap.controller == controller, Lap.race_id == race.id).order_by(Lap.time).limit(1).first()
+
 
 class Season(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -247,9 +246,9 @@ class Statistics:
 
     def fastest_laps(self):
         fastest_laps = []
-        for grid_entry in self.parsed_grid():
-            fastest_laps.append(self.fastest_lap_by_controller(grid_entry['controller']))
-        return sorted(fastest_laps, key=attrgetter('time'))
+        for grid_entry in self.race.parsed_grid():
+            fastest_laps.append(Lap.fastest(self.race, grid_entry['controller']))
+        return sorted(filter(None, fastest_laps), key=attrgetter('time'))
 
     def maximum_laps(self):
         laps_for_controller = []

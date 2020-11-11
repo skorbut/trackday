@@ -17,4 +17,4 @@ def calculate_sleep_time(status):
     if startlight_changing(status):
         return 0.1
     # default
-    return 0.2
+    return 0.5
