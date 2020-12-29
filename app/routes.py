@@ -3,9 +3,11 @@ import json
 
 from flask import request, render_template, flash, redirect, url_for
 from flask_babel import lazy_gettext as _l
-from app import app, db, services
+from app import app, db, race_handler
 from app.forms import CarRegistrationForm, RaceRegistrationForm, RacerRegistrationForm, SeasonRegistrationForm
 from app.models import Car, Race, Racer, Season
+from app.track_listener import start_track_listener, stop_track_listener, track_listener_running
+from app.observers import LoggingDebugObserver
 
 
 @app.route('/')
@@ -49,13 +51,9 @@ def races():
 def race_stop(race_id):
     race = Race.query.get(race_id)
     if race is not None:
-        race.stop()
-        db.session.add(race)
-        db.session.commit()
-        services.disconnect_control_unit()
-        app.logger.info('stopping race:' + repr(race))
+        race_handler.finish(race)
         flash(_l('Race stopped'))
-    return render_template('races.html', title='Erstellte Rennen', races=Race.query.all())
+    return redirect(url_for('race_result', race_id=race.id))
 
 
 @app.route('/races/<int:race_id>/delete')
@@ -84,14 +82,26 @@ def race_copy(race_id):
         db.session.add(new_race)
         db.session.commit()
         flash(_l('New race registered.'))
+        race_handler.start(race)
         return redirect(url_for('current_race'))
     return render_template('races.html', title='Erstellte Rennen', races=Race.query.all())
 
 
+@app.route('/races/<int:race_id>/result')
+def race_result(race_id):
+    race = Race.query.get(race_id)
+    if race is not None:
+        return render_template('race_result.html', title='Rennen beendet', race=race)
+    return redirect(url_for('races'))
+
+
 @app.route('/current_race')
 def current_race():
-    services.try_control_unit_connection()
-    return render_template('current_race.html', title='Aktuelles Rennen', current_race=Race.current())
+    race = Race.current()
+    if race is not None:
+        if not race_handler.attach(race):
+            flash(_l('No control unit connection!'))
+    return render_template('current_race.html', title='Aktuelles Rennen', current_race=race)
 
 
 @app.route('/races/<int:race_id>')
@@ -135,8 +145,12 @@ def race_registration():
         )
         db.session.add(race)
         db.session.commit()
-        flash(_l('New race registered.'))
-        return redirect(url_for('current_race'))
+        if race_handler.start(race):
+            flash(_l('New race registered.'))
+            return redirect(url_for('current_race'))
+        else:
+            flash(_l('Race not started. No control unit connection!'))
+            return render_template('race.html', title='Rennen vom ', race=race)
     return render_template('race_registration.html', title='Rennen anlegen', form=form)
 
 
@@ -169,10 +183,25 @@ def season_registration():
     return render_template('season_registration.html', title='Saison anlegen', form=form)
 
 
+@app.route('/track_listener')
+def track_listener():
+    return render_template('track_listener.html', title='Verbindung zur Strecke', track_listener_running=track_listener_running())
+
+
+@app.route('/track_listener_start')
+def track_listener_start():
+    start_track_listener(LoggingDebugObserver(), LoggingDebugObserver())
+    return redirect(url_for('track_listener'))
+
+
+@app.route('/track_listener_stop')
+def track_listener_stop():
+    stop_track_listener()
+    return redirect(url_for('track_listener'))
+
+
 def cancel_current_race():
     race = Race.current()
     if race is None:
         return
-    race.cancel()
-    db.session.add(race)
-    db.session.commit()
+    race_handler.finish(race)

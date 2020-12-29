@@ -41,7 +41,8 @@ file_handler.setLevel(logging.INFO)
 app.logger.addHandler(file_handler)
 app.logger.setLevel(logging.INFO)
 
-app.config['SQLALCHEMY_ECHO'] = True
+# app.config['SQLALCHEMY_ECHO'] = True
+app.config['SQLALCHEMY_ECHO'] = False
 
 app.logger.info('Trackday App started successfully')
 
@@ -52,6 +53,5 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-from app import routes, models, errors, services
-# to re init database use this import
-# from app import models
+app.logger.info('Importing routes, models, errors and services')
+from app import routes, models, errors

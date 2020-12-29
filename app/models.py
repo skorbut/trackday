@@ -1,6 +1,7 @@
+from operator import attrgetter
 import datetime
 import json
-from sqlalchemy import inspect, func, or_
+from sqlalchemy import inspect, func
 from app import app, db
 
 
@@ -13,6 +14,9 @@ class Race(db.Model):
     created_at = db.Column(db.DateTime)
     started_at = db.Column(db.DateTime)
     finished_at = db.Column(db.DateTime)
+
+    def __repr__(self):
+        return '<Race id: {}, type: {}, status: {}>'.format(self.id, self.type, self.status)
 
     def parsed_grid(self):
         if self.grid is None:
@@ -43,23 +47,38 @@ class Race(db.Model):
         app.logger.info("stopping race and adding finished_at timestamp")
         self.status = "stopped"
         self.finished_at = datetime.datetime.now()
+        db.session.add(self)
+        db.session.commit()
 
     def add_lap(self, controller, time):
-        racer_id = self.racer(controller).id,
-        car_id = self.car(controller).id
-        return self.save_lap(controller, time, racer_id, car_id)
+        racer = self.racer(controller)
+        car = self.car(controller)
+        if racer is None or car is None:
+            app.logger.info("Lap not added for unknown racer or car.")
+            return None
+        return self.save_lap(controller, time, racer.id, car.id)
 
     def save_lap(self, controller, time, racer_id, car_id):
-        lap = Lap(
-            race_id=self.id,
-            controller=controller,
-            time=time,
-            racer_id=racer_id,
-            car_id=car_id
-        )
+        lap = Lap(race_id=self.id, controller=controller, time=time, racer_id=racer_id, car_id=car_id)
         db.session.add(lap)
         db.session.commit()
         return lap
+
+    def has_reached_duration(self):
+        if str(self.duration) == '0':
+            return False
+        if self.duration.endswith('l'):
+            return self.has_reached_laps(int(self.duration[0:-1]))
+        elif self.duration.endswith('m'):
+            return self.has_reached_time(int(self.duration[0:-1]))
+        else:
+            return False
+
+    def has_reached_laps(self, laps_to_reach):
+        return self.statistics().maximum_laps() >= laps_to_reach
+
+    def has_reached_time(self, minutes_to_reach):
+        return datetime.datetime.now() - self.started_at >= datetime.timedelta(minutes=minutes_to_reach)
 
     def racer(self, controller):
         for grid_entry in self.parsed_grid():
@@ -101,11 +120,11 @@ class Race(db.Model):
         return Lap.query.filter_by(race_id=self.id, controller=controller)
 
     def denormalize_laps(self):
-        for l in Lap.query.filter_by(race_id=self.id).all():
+        for lap in Lap.query.filter_by(race_id=self.id).all():
             for grid_entry in self.parsed_grid():
-                if(int(grid_entry['controller']) == l.controller):
-                    l.racer_id = grid_entry['racer'].id
-                    l.car_id = grid_entry['car'].id
+                if(int(grid_entry['controller']) == lap.controller):
+                    lap.racer_id = grid_entry['racer'].id
+                    lap.car_id = grid_entry['car'].id
                     db.session.commit()
 
     def statistics(self):
@@ -113,7 +132,9 @@ class Race(db.Model):
 
     @staticmethod
     def current():
-        return next(iter(Race.query.filter(or_(Race.status == 'created', Race.status == 'started')).all()), None)
+        current_race = next(iter(Race.query.filter(Race.status == 'started').all()), None)
+        app.logger.info("current race is: " + repr(current_race))
+        return current_race
 
 
 class Racer(db.Model):
@@ -172,7 +193,7 @@ class Lap(db.Model):
     time = db.Column(db.Integer, index=False, unique=False)
 
     def __repr__(self):
-        return '<Lap {} {}>'.format(self.controller, self.time)
+        return '<Lap {} {} {} {}>'.format(self.controller, self.time, self.racer_id, type(self.racer_id))
 
     def to_json(self):
         return json.dumps({c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs})
@@ -185,6 +206,11 @@ class Lap(db.Model):
 
     def formatted_time(self):
         return '{:05.3f} s'.format(self.time / 1000)
+
+    @staticmethod
+    def fastest(race, controller):
+        app.logger.info("getting fastest lap for race {} and controller {}".format(repr(race), controller))
+        return Lap.query.filter(Lap.controller == controller, Lap.race_id == race.id).order_by(Lap.time).limit(1).first()
 
 
 class Season(db.Model):
@@ -220,6 +246,18 @@ class Timing(object):
 class Statistics:
     def __init__(self, race):
         self.race = race
+
+    def fastest_laps(self):
+        fastest_laps = []
+        for grid_entry in self.race.parsed_grid():
+            fastest_laps.append(Lap.fastest(self.race, grid_entry['controller']))
+        return sorted(filter(None, fastest_laps), key=attrgetter('time'))
+
+    def maximum_laps(self):
+        laps_for_controller = []
+        for grid_entry in self.parsed_grid():
+            laps_for_controller.append(self.lap_count_by_controller(grid_entry['controller']))
+        return max(laps_for_controller)
 
     def race_time_by_controller(self, controller):
         time = self.function_on_laps_by_controller(controller, func.sum(Lap.time).label('race_time'))

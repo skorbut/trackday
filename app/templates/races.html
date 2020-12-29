@@ -10,6 +10,7 @@
       <th>{{ _('ID') }}</th>
       <th>{{ _('Created at') }}</th>
       <th>{{ _('Grid') }}</th>
+      <th>{{ _('Status') }}</th>
     </tr>
     {% for race in races %}
     <tr>
@@ -22,6 +23,7 @@
           {% endfor %}
         {% endif %}
       </td>
+      <td> {{ race.status }}
     </tr>
     {% endfor %}
   </table>

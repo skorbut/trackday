@@ -23,6 +23,7 @@ class RaceRegistrationForm(FlaskForm):
         'Dauer',
         choices=[
             ('0', _l('unlimited')),
+            ('1m', _l('1 Minute')),
             ('5m', _l('5 Minutes')),
             ('10m', _l('10 Minutes')),
             ('20m', _l('20 Minutes')),

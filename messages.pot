@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-01-24 22:11+0100\n"
+"POT-Creation-Date: 2020-11-11 19:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,8 @@ msgstr ""
 msgid "Ghost"
 msgstr ""
 
-#: app/forms.py:13 app/templates/car.html:18
+#: app/forms.py:13 app/templates/car.html:25 app/templates/car.html:39
+#: app/templates/car.html:53
 msgid "Racer"
 msgstr ""
 
@@ -30,23 +31,23 @@ msgstr ""
 msgid "Car"
 msgstr ""
 
-#: app/forms.py:20
+#: app/forms.py:20 app/templates/race_result_0.html:1
 msgid "Free roam"
 msgstr ""
 
-#: app/forms.py:20
+#: app/forms.py:20 app/templates/race_result_1.html:1
 msgid "Training"
 msgstr ""
 
-#: app/forms.py:20
+#: app/forms.py:20 app/templates/race_result_2.html:1
 msgid "Qualifying"
 msgstr ""
 
-#: app/forms.py:20
+#: app/forms.py:20 app/templates/race_result_3.html:1
 msgid "Race"
 msgstr ""
 
-#: app/forms.py:20
+#: app/forms.py:20 app/templates/race_result_4.html:1
 msgid "Time trial"
 msgstr ""
 
@@ -114,27 +115,35 @@ msgstr ""
 msgid "Add Season"
 msgstr ""
 
-#: app/routes.py:54
+#: app/routes.py:55
 msgid "Race stopped"
 msgstr ""
 
-#: app/routes.py:66
+#: app/routes.py:67
 msgid "Race deleted"
 msgstr ""
 
-#: app/routes.py:83 app/routes.py:135
+#: app/routes.py:84 app/routes.py:149
 msgid "New race registered."
 msgstr ""
 
-#: app/routes.py:114
+#: app/routes.py:103
+msgid "No control unit connection!"
+msgstr ""
+
+#: app/routes.py:127
 msgid "New racer registered"
 msgstr ""
 
-#: app/routes.py:147
-msgid "New car added to car park"
+#: app/routes.py:152
+msgid "Race not started. No control unit connection!"
 msgstr ""
 
 #: app/routes.py:164
+msgid "New car added to car park"
+msgstr ""
+
+#: app/routes.py:181
 msgid "New season created"
 msgstr ""
 
@@ -146,29 +155,29 @@ msgstr ""
 msgid "Back to index"
 msgstr ""
 
-#: app/templates/base.html:28
+#: app/templates/base.html:30
 msgid "Index"
 msgstr ""
 
-#: app/templates/base.html:29 app/templates/index.html:22
+#: app/templates/base.html:31 app/templates/index.html:22
 #: app/templates/seasons.html:4
 msgid "Seasons"
 msgstr ""
 
-#: app/templates/base.html:30
+#: app/templates/base.html:32
 msgid "Racers"
 msgstr ""
 
-#: app/templates/base.html:31 app/templates/cars.html:4
+#: app/templates/base.html:33 app/templates/cars.html:4
 #: app/templates/index.html:18
 msgid "Car park"
 msgstr ""
 
-#: app/templates/base.html:32 app/templates/current_race.html:4
+#: app/templates/base.html:34 app/templates/current_race.html:4
 msgid "Current race"
 msgstr ""
 
-#: app/templates/base.html:33 app/templates/index.html:26
+#: app/templates/base.html:35 app/templates/index.html:26
 #: app/templates/races.html:4
 msgid "Previous races"
 msgstr ""
@@ -177,7 +186,20 @@ msgstr ""
 msgid "Fastest Laps"
 msgstr ""
 
-#: app/templates/car.html:17 app/templates/racers.html:26
+#: app/templates/car.html:16 app/templates/racers.html:18
+msgid "overall"
+msgstr ""
+
+#: app/templates/car.html:17 app/templates/racers.html:19
+msgid "current season"
+msgstr ""
+
+#: app/templates/car.html:18 app/templates/racers.html:20
+msgid "last season"
+msgstr ""
+
+#: app/templates/car.html:24 app/templates/car.html:38
+#: app/templates/car.html:52 app/templates/racers.html:26
 #: app/templates/racers.html:40 app/templates/racers.html:54
 msgid "Time"
 msgstr ""
@@ -194,28 +216,29 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: app/templates/current_race.html:23
+#: app/templates/current_race.html:21
+msgid "started at"
+msgstr ""
+
+#: app/templates/current_race.html:29
 msgid "Cancel race"
 msgstr ""
 
-#: app/templates/current_race.html:27 app/templates/races.html:6
+#: app/templates/current_race.html:33 app/templates/races.html:6
 msgid "Start a new race"
 msgstr ""
 
-#: app/templates/current_race.html:33
-msgid "Status of current race: "
-msgstr ""
-
-#: app/templates/current_race.html:51 app/templates/race.html:20
-#: app/templates/races.html:21
+#: app/templates/current_race.html:50 app/templates/race.html:20
+#: app/templates/race_result_0.html:20 app/templates/race_result_1.html:20
+#: app/templates/races.html:22
 msgid "Laps"
 msgstr ""
 
-#: app/templates/current_race.html:55
+#: app/templates/current_race.html:98
 msgid "Last lap"
 msgstr ""
 
-#: app/templates/current_race.html:57
+#: app/templates/current_race.html:100
 msgid "Best lap"
 msgstr ""
 
@@ -262,27 +285,35 @@ msgstr ""
 msgid "Previous race of"
 msgstr ""
 
-#: app/templates/race.html:6
+#: app/templates/race.html:6 app/templates/race_result_0.html:3
+#: app/templates/race_result_1.html:3 app/templates/race_result_2.html:3
+#: app/templates/race_result_3.html:3 app/templates/race_result_4.html:3
 msgid "Delete this race"
 msgstr ""
 
-#: app/templates/race.html:7
+#: app/templates/race.html:7 app/templates/race_result_0.html:4
+#: app/templates/race_result_1.html:4 app/templates/race_result_2.html:4
+#: app/templates/race_result_3.html:4 app/templates/race_result_4.html:4
 msgid "Copy this race"
 msgstr ""
 
-#: app/templates/race.html:26
+#: app/templates/race.html:26 app/templates/race_result_0.html:26
+#: app/templates/race_result_1.html:26
 msgid "Race duration"
 msgstr ""
 
-#: app/templates/race.html:32
+#: app/templates/race.html:32 app/templates/race_result_0.html:32
+#: app/templates/race_result_1.html:32
 msgid "Fastest Lap"
 msgstr ""
 
-#: app/templates/race.html:38
+#: app/templates/race.html:38 app/templates/race_result_0.html:38
+#: app/templates/race_result_1.html:38
 msgid "Average Lap"
 msgstr ""
 
-#: app/templates/race.html:44
+#: app/templates/race.html:44 app/templates/race_result_0.html:44
+#: app/templates/race_result_1.html:44
 msgid "Slowest Lap"
 msgstr ""
 
@@ -302,20 +333,14 @@ msgstr ""
 msgid "Remove last racer"
 msgstr ""
 
+#: app/templates/race_result_0.html:1 app/templates/race_result_1.html:1
+#: app/templates/race_result_2.html:1 app/templates/race_result_3.html:1
+#: app/templates/race_result_4.html:1
+msgid "of"
+msgstr ""
+
 #: app/templates/racer_registration.html:5 app/templates/racers.html:6
 msgid "Register a new racer"
-msgstr ""
-
-#: app/templates/racers.html:18
-msgid "overall"
-msgstr ""
-
-#: app/templates/racers.html:19
-msgid "current season"
-msgstr ""
-
-#: app/templates/racers.html:20
-msgid "last season"
 msgstr ""
 
 #: app/templates/races.html:10
@@ -326,7 +351,23 @@ msgstr ""
 msgid "Created at"
 msgstr ""
 
+#: app/templates/races.html:13
+msgid "Status"
+msgstr ""
+
 #: app/templates/season_registration.html:5 app/templates/seasons.html:6
 msgid "Create a new season"
+msgstr ""
+
+#: app/templates/track_listener.html:4
+msgid "Track Listener"
+msgstr ""
+
+#: app/templates/track_listener.html:6
+msgid "Start Track Listener"
+msgstr ""
+
+#: app/templates/track_listener.html:7
+msgid "Stop Track Listener"
 msgstr ""
 
