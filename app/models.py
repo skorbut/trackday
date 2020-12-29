@@ -51,9 +51,12 @@ class Race(db.Model):
         db.session.commit()
 
     def add_lap(self, controller, time):
-        racer_id = self.racer(controller).id
-        car_id = self.car(controller).id
-        return self.save_lap(controller, time, racer_id, car_id)
+        racer = self.racer(controller)
+        car = self.car(controller)
+        if racer is None or car is None:
+            app.logger.info("Lap not added for unknown racer or car.")
+            return None
+        return self.save_lap(controller, time, racer.id, car.id)
 
     def save_lap(self, controller, time, racer_id, car_id):
         lap = Lap(race_id=self.id, controller=controller, time=time, racer_id=racer_id, car_id=car_id)
