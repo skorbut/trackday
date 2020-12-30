@@ -2,7 +2,7 @@ alembic==1.0.5
 amqp==2.4.0
 Babel==2.7.0
 billiard==3.5.0.5
-carreralib==0.6.0
+carreralib==0.7.0
 Click==7.0
 dnspython==1.16.0
 dominate==2.3.5
