@@ -26,19 +26,17 @@ def listen(status_observer, time_observer):
             status_or_timer = connection.cu.request()
             if isinstance(status_or_timer, ControlUnit.Timer):
                 app.logger.info("got data from track: {}, same as last: {} ".format(repr(status_or_timer), status_or_timer == last_status_or_timer))
-            if status_or_timer != last_status_or_timer:
+            if status_or_timer != last_status_or_timer and False:
                 if isinstance(status_or_timer, ControlUnit.Status):
                     status_observer.notify_status(status_or_timer)
                     last_status = status_or_timer
                 elif isinstance(status_or_timer, ControlUnit.Timer):
                     app.logger.info("received new time from track")
                     time_observer.notify_timer(status_or_timer)
-            else:
-                time_observer.notify_time_past()
         except (eventlet.StopServe, greenlet.GreenletExit):
             app.logger.info("Received exeception. exit processing")
             return
-
+        time_observer.notify_time_past()
         last_status_or_timer = status_or_timer
         sleep_time = calculate_sleep_time(last_status)
         eventlet.sleep(sleep_time)

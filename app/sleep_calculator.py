@@ -12,9 +12,9 @@ def calculate_sleep_time(status):
         return 0.5
     # if someone in pit - sleep a tenth of a second
     if car_in_pit(status):
-        return 0.1
+        return 0.05
     # if startlight changing - sleep a tenth of a second
     if startlight_changing(status):
-        return 0.1
+        return 0.05
     # default
-    return 0.1
+    return 0.05
