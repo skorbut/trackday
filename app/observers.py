@@ -28,7 +28,7 @@ class EmittingRaceTimeObserver:
         self.check_duration()
 
     def notify_time_past(self):
-        app.logger.info("processing past time")
+        app.logger.info("checking race duration")
         self.check_duration()
 
     def check_duration(self):
