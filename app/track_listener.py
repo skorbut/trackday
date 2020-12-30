@@ -24,7 +24,7 @@ def listen(status_observer, time_observer):
     while True:
         try:
             status_or_timer = connection.cu.request()
-            app.logger.info("got data from track: {}, same as last: {} ".format(repr(status_or_timer), status_or_timer != last_status_or_timer))
+            app.logger.info("got data from track: {}, same as last: {} ".format(repr(status_or_timer), status_or_timer == last_status_or_timer))
             if status_or_timer != last_status_or_timer:
                 if isinstance(status_or_timer, ControlUnit.Status):
                     status_observer.notify_status(status_or_timer)
