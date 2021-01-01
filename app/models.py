@@ -14,6 +14,7 @@ class Race(db.Model):
     created_at = db.Column(db.DateTime)
     started_at = db.Column(db.DateTime)
     finished_at = db.Column(db.DateTime)
+    cached_parsed_grid = None
 
     def __repr__(self):
         return '<Race id: {}, type: {}, status: {}>'.format(self.id, self.type, self.status)
@@ -21,6 +22,15 @@ class Race(db.Model):
     def parsed_grid(self):
         if self.grid is None:
             return None
+
+        if self.cached_parsed_grid is None:
+            app.logger.info("cached_parsed_grid is None, calling parse_grid")
+            self.cached_parsed_grid = self.parse_grid()
+        return self.cached_parsed_grid
+
+    def parse_grid(self):
+        # this method is expensive, it requests car and racer from the database. Result
+        # should be cached.
         return list(
             map(
                 lambda grid_entry: {
