@@ -25,8 +25,6 @@ def listen(status_observer, time_observer):
         loop_start = time.time()
         try:
             status_or_timer = connection.cu.request()
-            if isinstance(status_or_timer, ControlUnit.Timer):
-                app.logger.info("got data from track: {}, same as last: {} ".format(repr(status_or_timer), status_or_timer == last_status_or_timer))
             if status_or_timer != last_status_or_timer:
                 if isinstance(status_or_timer, ControlUnit.Status):
                     status_observer.notify_status(status_or_timer)
@@ -35,13 +33,14 @@ def listen(status_observer, time_observer):
                     app.logger.info("received new time from track")
                     time_observer.notify_timer(status_or_timer)
         except (eventlet.StopServe, greenlet.GreenletExit):
-            app.logger.info("Received exeception. exit processing")
+            app.logger.info("Received exception. exit processing")
             return
         time_observer.notify_time_past()
         last_status_or_timer = status_or_timer
         sleep_time = calculate_sleep_time(last_status)
-        app.logger.info("Finished in {}".format(time.time() - loop_start))
-        eventlet.sleep(sleep_time)
+        loop_execution_time = time.time() - loop_start
+        eventlet.sleep(max([0.0, sleep_time - loop_execution_time]))
+
     app.logger.info("finished listening, leaving event loop")
 
 
