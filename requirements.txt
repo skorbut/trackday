@@ -6,7 +6,7 @@ carreralib==0.7.0
 Click==7.0
 dnspython==1.16.0
 dominate==2.3.5
-eventlet==0.24.1
+eventlet==0.31.0
 Flask==1.1.2
 Flask-Babel==2.0.0
 Flask-Bootstrap4==4.0.2
