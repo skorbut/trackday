@@ -265,7 +265,7 @@ class Statistics:
 
     def maximum_laps(self):
         laps_for_controller = []
-        for grid_entry in self.parsed_grid():
+        for grid_entry in self.race.parsed_grid():
             laps_for_controller.append(self.lap_count_by_controller(grid_entry['controller']))
         return max(laps_for_controller)
 

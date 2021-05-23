@@ -35,6 +35,9 @@ def listen(status_observer, time_observer):
         except (eventlet.StopServe, greenlet.GreenletExit):
             app.logger.info("Received exception. exit processing")
             return
+        except (connection.TimeoutError):
+            app.logger.info("Received timeout error while reading, retrying")
+            continue
         time_observer.notify_time_past()
         last_status_or_timer = status_or_timer
         sleep_time = calculate_sleep_time(last_status)

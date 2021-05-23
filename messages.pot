@@ -1,14 +1,14 @@
 # Translations template for PROJECT.
-# Copyright (C) 2020 ORGANIZATION
+# Copyright (C) 2021 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-11-11 19:48+0100\n"
+"POT-Creation-Date: 2021-05-23 10:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,63 +56,75 @@ msgid "unlimited"
 msgstr ""
 
 #: app/forms.py:26
-msgid "5 Minutes"
+msgid "1 Minute"
 msgstr ""
 
 #: app/forms.py:27
-msgid "10 Minutes"
+msgid "5 Minutes"
 msgstr ""
 
 #: app/forms.py:28
-msgid "20 Minutes"
+msgid "10 Minutes"
 msgstr ""
 
 #: app/forms.py:29
-msgid "100 Laps"
+msgid "20 Minutes"
 msgstr ""
 
 #: app/forms.py:30
+msgid "100 Laps"
+msgstr ""
+
+#: app/forms.py:31
 msgid "500 Laps"
 msgstr ""
 
-#: app/forms.py:35
+#: app/forms.py:36
 msgid "Start Race"
 msgstr ""
 
-#: app/forms.py:39 app/forms.py:49
+#: app/forms.py:40 app/forms.py:50
 msgid "Name"
 msgstr ""
 
-#: app/forms.py:40
+#: app/forms.py:41
 msgid "Register Racer"
 msgstr ""
 
-#: app/forms.py:45
+#: app/forms.py:46
 msgid "Racer already registered."
 msgstr ""
 
-#: app/forms.py:50 app/forms.py:62
+#: app/forms.py:51 app/forms.py:63
 msgid "description"
 msgstr ""
 
-#: app/forms.py:51
+#: app/forms.py:52
 msgid "Order No."
 msgstr ""
 
-#: app/forms.py:52
+#: app/forms.py:53
 msgid "Image URL"
 msgstr ""
 
-#: app/forms.py:53
+#: app/forms.py:54
 msgid "Add to Car Park"
 msgstr ""
 
-#: app/forms.py:58
+#: app/forms.py:59
 msgid "Car already registered"
 msgstr ""
 
+#: app/forms.py:64
+msgid "season_from"
+msgstr ""
+
 #: app/forms.py:65
-msgid "Add Season"
+msgid "season_to"
+msgstr ""
+
+#: app/forms.py:66
+msgid "Save Season"
 msgstr ""
 
 #: app/routes.py:55
@@ -123,7 +135,7 @@ msgstr ""
 msgid "Race deleted"
 msgstr ""
 
-#: app/routes.py:84 app/routes.py:149
+#: app/routes.py:84 app/routes.py:186
 msgid "New race registered."
 msgstr ""
 
@@ -131,20 +143,24 @@ msgstr ""
 msgid "No control unit connection!"
 msgstr ""
 
-#: app/routes.py:127
-msgid "New racer registered"
+#: app/routes.py:136
+msgid "New season created"
 msgstr ""
 
-#: app/routes.py:152
-msgid "Race not started. No control unit connection!"
+#: app/routes.py:150
+msgid "Season updated"
 msgstr ""
 
 #: app/routes.py:164
-msgid "New car added to car park"
+msgid "New racer registered"
 msgstr ""
 
-#: app/routes.py:181
-msgid "New season created"
+#: app/routes.py:189
+msgid "Race not started. No control unit connection!"
+msgstr ""
+
+#: app/routes.py:201
+msgid "New car added to car park"
 msgstr ""
 
 #: app/templates/404.html:4
@@ -298,22 +314,21 @@ msgid "Copy this race"
 msgstr ""
 
 #: app/templates/race.html:26 app/templates/race_result_0.html:26
-#: app/templates/race_result_1.html:26
 msgid "Race duration"
 msgstr ""
 
 #: app/templates/race.html:32 app/templates/race_result_0.html:32
-#: app/templates/race_result_1.html:32
+#: app/templates/race_result_1.html:26
 msgid "Fastest Lap"
 msgstr ""
 
 #: app/templates/race.html:38 app/templates/race_result_0.html:38
-#: app/templates/race_result_1.html:38
+#: app/templates/race_result_1.html:32
 msgid "Average Lap"
 msgstr ""
 
 #: app/templates/race.html:44 app/templates/race_result_0.html:44
-#: app/templates/race_result_1.html:44
+#: app/templates/race_result_1.html:38
 msgid "Slowest Lap"
 msgstr ""
 
@@ -355,7 +370,15 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: app/templates/season_registration.html:5 app/templates/seasons.html:6
+#: app/templates/season.html:4
+msgid "Edit this season"
+msgstr ""
+
+#: app/templates/season.html:7
+msgid "Season"
+msgstr ""
+
+#: app/templates/seasons.html:6
 msgid "Create a new season"
 msgstr ""
 
