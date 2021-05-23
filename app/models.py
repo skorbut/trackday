@@ -47,7 +47,7 @@ class Race(db.Model):
         self.finished_at = datetime.datetime.now()
 
     def start(self):
-        app.logger.info("setting race status to started and adding started_at timestamp")
+        app.logger.info("setting race status to started and adding started_at timestamp for race " + repr(self))
         self.status = "started"
         self.started_at = datetime.datetime.now()
         db.session.add(self)
@@ -70,6 +70,8 @@ class Race(db.Model):
 
     def save_lap(self, controller, time, racer_id, car_id):
         lap = Lap(race_id=self.id, controller=controller, time=time, racer_id=racer_id, car_id=car_id)
+
+        app.logger.info("Saving Lap: " + repr(lap))
         db.session.add(lap)
         db.session.commit()
         return lap
@@ -203,7 +205,7 @@ class Lap(db.Model):
     time = db.Column(db.Integer, index=False, unique=False)
 
     def __repr__(self):
-        return '<Lap {} {} {} {}>'.format(self.controller, self.time, self.racer_id, type(self.racer_id))
+        return '<Lap {} {} {}>'.format(self.controller, self.time, self.race_id)
 
     def to_json(self):
         return json.dumps({c.key: getattr(self, c.key) for c in inspect(self).mapper.column_attrs})
