@@ -59,8 +59,8 @@ class CarRegistrationForm(FlaskForm):
             raise ValidationError(_l('Car already registered'))
 
 
-class SeasonRegistrationForm(FlaskForm):
+class SeasonForm(FlaskForm):
     description = TextField(_l('description'), validators=[DataRequired()])
-    started_at = DateField('DatePicker', format='%Y-%m-%d')
-    ended_at = DateField('DatePicker', format='%Y-%m-%d', validators=(Optional(),))
-    submit = SubmitField(_l('Add Season'))
+    started_at = DateField(_l('season_from'), format='%Y-%m-%d')
+    ended_at = DateField(_l('season_to'), format='%Y-%m-%d', validators=(Optional(),))
+    submit = SubmitField(_l('Save Season'))

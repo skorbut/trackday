@@ -4,7 +4,7 @@ import json
 from flask import request, render_template, flash, redirect, url_for
 from flask_babel import lazy_gettext as _l
 from app import app, db, race_handler
-from app.forms import CarRegistrationForm, RaceRegistrationForm, RacerRegistrationForm, SeasonRegistrationForm
+from app.forms import CarRegistrationForm, RaceRegistrationForm, RacerRegistrationForm, SeasonForm
 from app.models import Car, Race, Racer, Season
 from app.track_listener import start_track_listener, stop_track_listener, track_listener_running
 from app.observers import LoggingDebugObserver
@@ -116,6 +116,43 @@ def seasons():
     return render_template('seasons.html', title='Saison', seasons=seasons)
 
 
+@app.route('/seasons/<int:season_id>')
+def season(season_id):
+    return render_template('season.html', title='Saison', season=Season.query.get(season_id))
+
+
+@app.route('/seasons/new', methods=['GET', 'POST'])
+def new_season():
+    form = SeasonForm()
+
+    if form.validate_on_submit():
+        season = Season(
+            description=form.description.data,
+            started_at=form.started_at.data,
+            ended_at=form.ended_at.data
+        )
+        db.session.add(season)
+        db.session.commit()
+        flash(_l('New season created'))
+        return redirect(url_for('seasons'))
+    return render_template('season_edit.html', title='Saison anlegen', form=form)
+
+
+@app.route('/seasons/<int:season_id>/edit', methods=['GET', 'POST'])
+def edit_season(season_id):
+    season = Season.query.get(season_id)
+    form = SeasonForm(obj=season)
+
+    if form.validate_on_submit():
+        form.populate_obj(season)
+        db.session.add(season)
+        db.session.commit()
+        flash(_l('Season updated'))
+        return redirect(url_for('seasons'))
+
+    return render_template('season_edit.html', title='Saison bearbeiten', form=form, season=season)
+
+
 @app.route('/racer_registration', methods=['GET', 'POST'])
 def racer_registration():
     form = RacerRegistrationForm()
@@ -164,23 +201,6 @@ def register():
         flash(_l('New car added to car park'))
         return redirect(url_for('index'))
     return render_template('car_registration.html', title='Neues Auto registrieren', form=form)
-
-
-@app.route('/season_registration', methods=['GET', 'POST'])
-def season_registration():
-    form = SeasonRegistrationForm()
-
-    if form.validate_on_submit():
-        season = Season(
-            description=form.description.data,
-            started_at=form.started_at.data,
-            ended_at=form.ended_at.data
-        )
-        db.session.add(season)
-        db.session.commit()
-        flash(_l('New season created'))
-        return redirect(url_for('seasons'))
-    return render_template('season_registration.html', title='Saison anlegen', form=form)
 
 
 @app.route('/track_listener')

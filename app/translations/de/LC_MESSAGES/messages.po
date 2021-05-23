@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-11-11 19:48+0100\n"
+"POT-Creation-Date: 2021-05-23 10:29+0200\n"
 "PO-Revision-Date: 2019-08-23 22:50+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -57,64 +57,76 @@ msgid "unlimited"
 msgstr "unbegrenzt"
 
 #: app/forms.py:26
+msgid "1 Minute"
+msgstr "1 Minute"
+
+#: app/forms.py:27
 msgid "5 Minutes"
 msgstr "5 Minuten"
 
-#: app/forms.py:27
+#: app/forms.py:28
 msgid "10 Minutes"
 msgstr "10 Minuten"
 
-#: app/forms.py:28
+#: app/forms.py:29
 msgid "20 Minutes"
 msgstr "20 Minuten"
 
-#: app/forms.py:29
-msgid "100 Laps"
-msgstr "100 Runnen"
-
 #: app/forms.py:30
+msgid "100 Laps"
+msgstr "100 Runden"
+
+#: app/forms.py:31
 msgid "500 Laps"
 msgstr "500 Runden"
 
-#: app/forms.py:35
+#: app/forms.py:36
 msgid "Start Race"
 msgstr "Rennen starten"
 
-#: app/forms.py:39 app/forms.py:49
+#: app/forms.py:40 app/forms.py:50
 msgid "Name"
 msgstr "Name"
 
-#: app/forms.py:40
+#: app/forms.py:41
 msgid "Register Racer"
 msgstr "Fahrer registrieren"
 
-#: app/forms.py:45
+#: app/forms.py:46
 msgid "Racer already registered."
 msgstr "Fahrer bereits registriert"
 
-#: app/forms.py:50 app/forms.py:62
+#: app/forms.py:51 app/forms.py:63
 msgid "description"
 msgstr "Beschreibung"
 
-#: app/forms.py:51
+#: app/forms.py:52
 msgid "Order No."
 msgstr "Bestellnummer"
 
-#: app/forms.py:52
+#: app/forms.py:53
 msgid "Image URL"
 msgstr "Bildlink"
 
-#: app/forms.py:53
+#: app/forms.py:54
 msgid "Add to Car Park"
 msgstr "Zum Fuhrpark hinzufügen"
 
-#: app/forms.py:58
+#: app/forms.py:59
 msgid "Car already registered"
 msgstr "Auto bereits registriert"
 
+#: app/forms.py:64
+msgid "season_from"
+msgstr "Von"
+
 #: app/forms.py:65
-msgid "Add Season"
-msgstr "Saison hinzufügen"
+msgid "season_to"
+msgstr "Bis"
+
+#: app/forms.py:66
+msgid "Save Season"
+msgstr "Saison speichern"
 
 #: app/routes.py:55
 msgid "Race stopped"
@@ -124,7 +136,7 @@ msgstr "Rennen gestoppt"
 msgid "Race deleted"
 msgstr "Rennen gelöscht"
 
-#: app/routes.py:84 app/routes.py:149
+#: app/routes.py:84 app/routes.py:186
 msgid "New race registered."
 msgstr "Neues Rennen angelegt"
 
@@ -132,21 +144,25 @@ msgstr "Neues Rennen angelegt"
 msgid "No control unit connection!"
 msgstr "Keine Verbindung zur Control Unit!"
 
-#: app/routes.py:127
+#: app/routes.py:136
+msgid "New season created"
+msgstr "Neue Saison hinzugefügt"
+
+#: app/routes.py:150
+msgid "Season updated"
+msgstr "Saison aktualisiert"
+
+#: app/routes.py:164
 msgid "New racer registered"
 msgstr "Neuer Fahrer registriert"
 
-#: app/routes.py:152
+#: app/routes.py:189
 msgid "Race not started. No control unit connection!"
 msgstr "Rennen nicht gestartet. Keine Verbindung zur Control Unit!"
 
-#: app/routes.py:164
+#: app/routes.py:201
 msgid "New car added to car park"
 msgstr "Neues Auto hinzugefügt"
-
-#: app/routes.py:181
-msgid "New season created"
-msgstr "Neue Saison hinzugefügt"
 
 #: app/templates/404.html:4
 msgid "Page not found"
@@ -304,22 +320,21 @@ msgid "Copy this race"
 msgstr "Rennen wie dieses anlegen"
 
 #: app/templates/race.html:26 app/templates/race_result_0.html:26
-#: app/templates/race_result_1.html:26
 msgid "Race duration"
 msgstr "Renndauer"
 
 #: app/templates/race.html:32 app/templates/race_result_0.html:32
-#: app/templates/race_result_1.html:32
+#: app/templates/race_result_1.html:26
 msgid "Fastest Lap"
 msgstr "Schnellste Runde"
 
 #: app/templates/race.html:38 app/templates/race_result_0.html:38
-#: app/templates/race_result_1.html:38
+#: app/templates/race_result_1.html:32
 msgid "Average Lap"
 msgstr "Durchschnittliche Rundenzeit"
 
 #: app/templates/race.html:44 app/templates/race_result_0.html:44
-#: app/templates/race_result_1.html:44
+#: app/templates/race_result_1.html:38
 msgid "Slowest Lap"
 msgstr "Langsamste Runde"
 
@@ -361,7 +376,15 @@ msgstr "Angelegt am"
 msgid "Status"
 msgstr "Status"
 
-#: app/templates/season_registration.html:5 app/templates/seasons.html:6
+#: app/templates/season.html:4
+msgid "Edit this season"
+msgstr "Saison bearbeiten"
+
+#: app/templates/season.html:7
+msgid "Season"
+msgstr "Saison"
+
+#: app/templates/seasons.html:6
 msgid "Create a new season"
 msgstr "Eine neue Saison anlegen"
 
@@ -391,4 +414,7 @@ msgstr "Tracklistener beenden"
 
 #~ msgid "Status of current race: "
 #~ msgstr "Status des aktuellen Rennens:"
+
+#~ msgid "Add Season"
+#~ msgstr "Saison hinzufügen"
 

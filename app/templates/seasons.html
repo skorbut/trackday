@@ -3,7 +3,7 @@
 
   <h1>{{ _('Seasons') }}</h1>
 
-  <a href="{{ url_for('season_registration') }}">{{ _('Create a new season') }}</a>
+  <a href="{{ url_for('new_season') }}">{{ _('Create a new season') }}</a>
 
   {% if seasons %}
     <div class = "season">
@@ -11,7 +11,9 @@
         <ul>
           {% for season in seasons %}
             <li>
-              <p> {{ season.started_at.strftime('%d.%m.%Y') }} - {% if season.ended_at != None %}{{ season.ended_at.strftime('%d.%m.%Y') }}{% endif %}: {{ season.description }}</p>
+              <a href="{{ url_for('season', season_id=season.id) }}">
+                <p> {{ season.started_at.strftime('%d.%m.%Y') }} - {% if season.ended_at != None %}{{ season.ended_at.strftime('%d.%m.%Y') }}{% endif %}: {{ season.description }}</p>
+              </a>
             </li>
           {% endfor %}
         </ul>
