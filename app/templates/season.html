@@ -7,5 +7,30 @@
   <h1>{{ _('Season') }} {{season.started_at.strftime('%d.%m.%Y')}} - {% if season.ended_at != None %}{{ season.ended_at.strftime('%d.%m.%Y') }}{% endif %}</h1>
 
   <p>{{ season.description }}</p>
+  <p>
+    {{ _('Controller Colors')}}<br />
+    <div>
+      <div style= "display: flex;">
+        <div class= "controller_color_number"> 1: </div>
+        <div id="color_0_color_field" class="controller_color_field", style="background-color: #{{season.controller_0_color}};" />
+      </div>
+      <div style= "display: flex;">
+        <div class= "controller_color_number"> 2: </div>
+        <div id="color_1_color_field" class="controller_color_field", style="background-color: #{{season.controller_1_color}};" />
+        </div>
+      </div>
+      <div style= "display: flex;">
+        <div class= "controller_color_number"> 3: </div>
+        <div id="color_2_color_field" class="controller_color_field", style="background-color: #{{season.controller_2_color}};" />
+        </div>
+      </div>
+      <div style= "display: flex;">
+        <div class= "controller_color_number"> 4: </div>
+        <div id="color_3_color_field" class="controller_color_field", style="background-color: #{{season.controller_3_color}};" />
+        </div>
+      </div>
+    </div>
+  </p>
+
 
 {% endblock %}

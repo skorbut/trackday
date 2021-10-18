@@ -230,6 +230,10 @@ class Season(db.Model):
     started_at = db.Column(db.DateTime)
     ended_at = db.Column(db.DateTime)
     description = db.Column(db.String(64), index=False, unique=False)
+    controller_0_color = db.Column(db.String(6), index=False, unique=False)
+    controller_1_color = db.Column(db.String(6), index=False, unique=False)
+    controller_2_color = db.Column(db.String(6), index=False, unique=False)
+    controller_3_color = db.Column(db.String(6), index=False, unique=False)
 
     def __repr__(self):
         return '<Season {} - {}>'.format(self.started_at, self.ended_at)

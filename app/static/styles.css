@@ -160,6 +160,22 @@ tr {
   font-size: 0.5rem;
 }
 
+.controller_color_list {
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.controller_color_number {
+  width: 20px;
+  vertical-align: middle;
+}
+
+.controller_color_field {
+   width: 100px;
+   vertical-align: middle;
+}
 
 @keyframes blinker {
   50% { opacity: 0; }

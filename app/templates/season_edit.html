@@ -20,11 +20,58 @@
             {% endfor %}
         </p>
         <p>
-            {{ form.description.label }}<br>
+            {{ form.description.label }}<br />
             {{ form.description(size=64) }}
             {% for error in form.description.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
+        </p>
+        <p>
+          {{ _('Controller Colors') }}</br>
+          <div style= "display: flex;">
+            <div class= "controller_color_number"> 1: </div>
+            <div>
+              #{{ form.controller_0_color(size=6) }}
+              {% for error in form.controller_0_color.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+            </div>
+            <div id="color_0_color_field" class="controller_color_field", style="background-color: #{{form.controller_0_color.data}};" />
+            </div>
+          </div>
+          <div style= "display: flex;">
+            <div class= "controller_color_number"> 2: </div>
+            <div>
+              #{{ form.controller_1_color(size=6) }}
+              {% for error in form.controller_1_color.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+            </div>
+            <div id="color_1_color_field" class="controller_color_field", style="background-color: #{{form.controller_1_color.data}};" />
+            </div>
+          </div>
+          <div style= "display: flex;">
+            <div class= "controller_color_number"> 3: </div>
+            <div>
+              #{{ form.controller_2_color(size=6) }}
+              {% for error in form.controller_2_color.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+            </div>
+            <div id="color_2_color_field" class="controller_color_field", style="background-color: #{{form.controller_2_color.data}};" />
+            </div>
+          </div>
+          <div style= "display: flex;">
+            <div class= "controller_color_number"> 4: </div>
+            <div>
+              #{{ form.controller_3_color(size=6) }}
+              {% for error in form.controller_3_color.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+            </div>
+            <div id="color_3_color_field" class="controller_color_field", style="background-color: #{{form.controller_3_color.data}};" />
+            </div>
+          </div>
         </p>
         <p>{{ form.submit() }}</p>
     </form>

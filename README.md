@@ -45,6 +45,9 @@ You can check via `ioreg -c IOSerialBSDClient | grep usb` where the serial conne
 
 ## Changes
 
+### 20210524
+Small changes for season handling
+
 ### 20201111
 Update to python 3.9, restructure the code handling track communication and race management.
 Add result pages for race types.

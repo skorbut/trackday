@@ -17,113 +17,129 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: app/forms.py:12
+#: app/forms.py:13
 msgid "Ghost"
 msgstr ""
 
-#: app/forms.py:13 app/templates/car.html:25 app/templates/car.html:39
+#: app/forms.py:14 app/templates/car.html:25 app/templates/car.html:39
 #: app/templates/car.html:53
 msgid "Racer"
 msgstr ""
 
-#: app/forms.py:14 app/templates/racers.html:27 app/templates/racers.html:41
+#: app/forms.py:15 app/templates/racers.html:27 app/templates/racers.html:41
 #: app/templates/racers.html:55
 msgid "Car"
 msgstr ""
 
-#: app/forms.py:20 app/templates/race_result_0.html:1
+#: app/forms.py:21 app/templates/race_result_0.html:1
 msgid "Free roam"
 msgstr ""
 
-#: app/forms.py:20 app/templates/race_result_1.html:1
+#: app/forms.py:21 app/templates/race_result_1.html:1
 msgid "Training"
 msgstr ""
 
-#: app/forms.py:20 app/templates/race_result_2.html:1
+#: app/forms.py:21 app/templates/race_result_2.html:1
 msgid "Qualifying"
 msgstr ""
 
-#: app/forms.py:20 app/templates/race_result_3.html:1
+#: app/forms.py:21 app/templates/race_result_3.html:1
 msgid "Race"
 msgstr ""
 
-#: app/forms.py:20 app/templates/race_result_4.html:1
+#: app/forms.py:21 app/templates/race_result_4.html:1
 msgid "Time trial"
 msgstr ""
 
-#: app/forms.py:25
+#: app/forms.py:26
 msgid "unlimited"
 msgstr ""
 
-#: app/forms.py:26
+#: app/forms.py:27
 msgid "1 Minute"
 msgstr ""
 
-#: app/forms.py:27
+#: app/forms.py:28
 msgid "5 Minutes"
 msgstr ""
 
-#: app/forms.py:28
+#: app/forms.py:29
 msgid "10 Minutes"
 msgstr ""
 
-#: app/forms.py:29
+#: app/forms.py:30
 msgid "20 Minutes"
 msgstr ""
 
-#: app/forms.py:30
+#: app/forms.py:31
 msgid "100 Laps"
 msgstr ""
 
-#: app/forms.py:31
+#: app/forms.py:32
 msgid "500 Laps"
 msgstr ""
 
-#: app/forms.py:36
+#: app/forms.py:37
 msgid "Start Race"
 msgstr ""
 
-#: app/forms.py:40 app/forms.py:50
+#: app/forms.py:41 app/forms.py:51
 msgid "Name"
 msgstr ""
 
-#: app/forms.py:41
+#: app/forms.py:42
 msgid "Register Racer"
 msgstr ""
 
-#: app/forms.py:46
+#: app/forms.py:47
 msgid "Racer already registered."
 msgstr ""
 
-#: app/forms.py:51 app/forms.py:63
+#: app/forms.py:52 app/forms.py:64
 msgid "description"
 msgstr ""
 
-#: app/forms.py:52
+#: app/forms.py:53
 msgid "Order No."
 msgstr ""
 
-#: app/forms.py:53
+#: app/forms.py:54
 msgid "Image URL"
 msgstr ""
 
-#: app/forms.py:54
+#: app/forms.py:55
 msgid "Add to Car Park"
 msgstr ""
 
-#: app/forms.py:59
+#: app/forms.py:60
 msgid "Car already registered"
 msgstr ""
 
-#: app/forms.py:64
+#: app/forms.py:65
 msgid "season_from"
 msgstr ""
 
-#: app/forms.py:65
+#: app/forms.py:66
 msgid "season_to"
 msgstr ""
 
-#: app/forms.py:66
+#: app/forms.py:67
+msgid "controller_0_color"
+msgstr ""
+
+#: app/forms.py:68
+msgid "controller_1_color"
+msgstr ""
+
+#: app/forms.py:69
+msgid "controller_2_color"
+msgstr ""
+
+#: app/forms.py:70
+msgid "controller_3_color"
+msgstr ""
+
+#: app/forms.py:71
 msgid "Save Season"
 msgstr ""
 
@@ -203,7 +219,6 @@ msgstr ""
 msgid "New race"
 msgstr ""
 
-#: app/templates/base.html:37 app/templates/index.html:35
 #: app/templates/races.html:4
 msgid "Previous races"
 msgstr ""
@@ -386,6 +401,10 @@ msgstr ""
 
 #: app/templates/season.html:7
 msgid "Season"
+msgstr ""
+
+#: app/templates/season.html:11 app/templates/season_edit.html:30
+msgid "Controller Colors"
 msgstr ""
 
 #: app/templates/seasons.html:6
