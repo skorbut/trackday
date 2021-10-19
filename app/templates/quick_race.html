@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+  <h1>{{ _('Quick race') }}</h1>
+
+  <div class="d-flex flex-row-reverse mb1 status">
+
+    <div class="p2 flex-fill">
+      <div class="p2 d-flex flex-row status-item">
+        <p class="p2 status-label">{{ _('CU') }}:</p>
+        <div class = "circle grey" id="cu-status"> </div>
+      </div>
+      <div class = "p2 d-flex flex-row status-item startlight-box">
+        <p class="p2 status-label">{{ _('Start') }}:</p>
+        {% for i in range(0,5) %}
+          <div class = "circle grey" id="startlight-{{i}}"> </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
+  <div class="d-flex flex-row justify-content-left  mb-3 bd-highlight ">
+    {% for controller in [0,1,2,6] %}
+      <div class= "p-2 flex-fill grid-entry">
+        <div class="horizontal-line" id="grid-entry-{{ controller }}">
+        </div>
+        <div class = "d-flex flex-row lap-data">
+          <div class="p-2 flex-fill laps">
+            <p>{{ _('Laps') }}:</p>
+            <p class="lap-number" id = "lap-number-{{ controller }}">0</p>
+          </div>
+        </div>
+        <div class="horizontal-line" id="grid-entry-{{ controller }}">
+        </div>
+        <div class = "d-flex flex-row lap-data">
+          <div id = "fuel-gauge-{{ controller }}" class = "d-flex flex-row">
+            <canvas id = "fuel-gauge-canvas-{{ controller }}"
+              data-type="radial-gauge"
+              data-width="150"
+              data-height="150"
+              data-units="false"
+              data-title="false"
+              data-value="1"
+              data-ticks-angle="120"
+              data-start-angle="45"
+              data-animate-on-init="true"
+              data-animated-value="true"
+              data-min-value="0"
+              data-max-value="15"
+              data-major-ticks="0,5,10,15"
+              data-minor-ticks="2"
+              data-stroke-ticks="true"
+              data-highlights='[
+                  { "from": 0, "to": 2, "color": "rgba(255,0,0,1)" },
+                  { "from": 2, "to": 15, "color": "rgba(0,255,0,1)" }
+              ]'
+              data-color-plate="transparent"
+              data-color-major-ticks="#f5f5f5"
+              data-color-minor-ticks="#ddd"
+              data-color-title="#fff"
+              data-color-units="#aaa"
+              data-color-numbers="transparent"
+              data-color-needle-start="rgba(0, 0, 0, 1)"
+              data-color-needle-end="rgba(0, 0, 0, .9)"
+              data-value-box="false"
+              data-animation-rule="bounce"
+              data-animation-duration="500"
+              data-border-outer-width="0"
+              data-border-middle-width="0"
+              data-border-inner-width="0"
+            ></canvas>
+            <div id = "gas-pump-{{ controller }}" class = "d-flex flex-row" style = "position: absolute; margin-left:60px;margin-top: 95px;">
+              <i class="fa fa-gas-pump p-2"></i>
+            </div>
+          </div>
+          <div class="p-2 flex-fill">
+            <p class="lap-time-label">{{ _('Last lap') }}:</p>
+            <p class="lap-time" id = "lap-time-{{ controller }}">0 s</p>
+            <p class="lap-time-label">{{ _('Best lap') }}:</p>
+            <p class="lap-time" id = "best-time-{{ controller }}">0 s</p>
+          </div>
+        </div>
+        <div class="horizontal-line" id="grid-entry-{{ controller }}">
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+  <script type="text/javascript" src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.2/radial/gauge.min.js"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='control_unit_events.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='startlight_events.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='fuel_events.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='pit_events.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='lap_events.js')}}"></script>
+{% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-05-23 10:29+0200\n"
+"POT-Creation-Date: 2021-10-19 19:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,31 +135,31 @@ msgstr ""
 msgid "Race deleted"
 msgstr ""
 
-#: app/routes.py:84 app/routes.py:186
+#: app/routes.py:84 app/routes.py:193
 msgid "New race registered."
 msgstr ""
 
-#: app/routes.py:103
+#: app/routes.py:103 app/routes.py:110
 msgid "No control unit connection!"
 msgstr ""
 
-#: app/routes.py:136
+#: app/routes.py:143
 msgid "New season created"
 msgstr ""
 
-#: app/routes.py:150
+#: app/routes.py:157
 msgid "Season updated"
 msgstr ""
 
-#: app/routes.py:164
+#: app/routes.py:171
 msgid "New racer registered"
 msgstr ""
 
-#: app/routes.py:189
+#: app/routes.py:196
 msgid "Race not started. No control unit connection!"
 msgstr ""
 
-#: app/routes.py:201
+#: app/routes.py:208
 msgid "New car added to car park"
 msgstr ""
 
@@ -175,7 +175,7 @@ msgstr ""
 msgid "Index"
 msgstr ""
 
-#: app/templates/base.html:31 app/templates/index.html:22
+#: app/templates/base.html:31 app/templates/index.html:30
 #: app/templates/seasons.html:4
 msgid "Seasons"
 msgstr ""
@@ -185,7 +185,7 @@ msgid "Racers"
 msgstr ""
 
 #: app/templates/base.html:33 app/templates/cars.html:4
-#: app/templates/index.html:18
+#: app/templates/index.html:25
 msgid "Car park"
 msgstr ""
 
@@ -193,7 +193,17 @@ msgstr ""
 msgid "Current race"
 msgstr ""
 
-#: app/templates/base.html:35 app/templates/index.html:26
+#: app/templates/base.html:35 app/templates/index.html:9
+#: app/templates/quick_race.html:4
+msgid "Quick race"
+msgstr ""
+
+#: app/templates/base.html:36 app/templates/index.html:15
+#: app/templates/race_registration.html:5
+msgid "New race"
+msgstr ""
+
+#: app/templates/base.html:37 app/templates/index.html:35
 #: app/templates/races.html:4
 msgid "Previous races"
 msgstr ""
@@ -224,11 +234,11 @@ msgstr ""
 msgid "Add new car to car park"
 msgstr ""
 
-#: app/templates/current_race.html:10
+#: app/templates/current_race.html:10 app/templates/quick_race.html:10
 msgid "CU"
 msgstr ""
 
-#: app/templates/current_race.html:14
+#: app/templates/current_race.html:14 app/templates/quick_race.html:14
 msgid "Start"
 msgstr ""
 
@@ -244,17 +254,17 @@ msgstr ""
 msgid "Start a new race"
 msgstr ""
 
-#: app/templates/current_race.html:50 app/templates/race.html:20
-#: app/templates/race_result_0.html:20 app/templates/race_result_1.html:20
-#: app/templates/races.html:22
+#: app/templates/current_race.html:50 app/templates/quick_race.html:30
+#: app/templates/race.html:20 app/templates/race_result_0.html:20
+#: app/templates/race_result_1.html:20 app/templates/races.html:22
 msgid "Laps"
 msgstr ""
 
-#: app/templates/current_race.html:98
+#: app/templates/current_race.html:98 app/templates/quick_race.html:78
 msgid "Last lap"
 msgstr ""
 
-#: app/templates/current_race.html:100
+#: app/templates/current_race.html:100 app/templates/quick_race.html:80
 msgid "Best lap"
 msgstr ""
 
@@ -269,31 +279,31 @@ msgid ""
 "here."
 msgstr ""
 
-#: app/templates/index.html:9 app/templates/race_registration.html:5
-msgid "New race"
+#: app/templates/index.html:11
+msgid "Click the headline to go to the quick race page."
 msgstr ""
 
-#: app/templates/index.html:11
+#: app/templates/index.html:17
 msgid "Click the headline to configure and start a new race."
 msgstr ""
 
-#: app/templates/index.html:14 app/templates/racers.html:4
+#: app/templates/index.html:20 app/templates/racers.html:4
 msgid "Registered racers"
 msgstr ""
 
-#: app/templates/index.html:16
+#: app/templates/index.html:22
 msgid "Find all registered racers and add new racers."
 msgstr ""
 
-#: app/templates/index.html:20
+#: app/templates/index.html:27
 msgid "Here you find all available race cars."
 msgstr ""
 
-#: app/templates/index.html:24
+#: app/templates/index.html:32
 msgid "Create new seasons"
 msgstr ""
 
-#: app/templates/index.html:28
+#: app/templates/index.html:37
 msgid "Have a look at past races."
 msgstr ""
 

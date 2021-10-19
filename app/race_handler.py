@@ -1,6 +1,6 @@
 from app import app
 from app import track_listener
-from app.observers import EmittingRaceStatusObserver, EmittingRaceTimeObserver
+from app.observers import EmittingRaceStatusObserver, EmittingRaceTimeObserver, EmittingQuickRaceStatusObserver, EmittingQuickRaceTimeObserver
 
 
 def start(race):
@@ -15,6 +15,12 @@ def attach(race):
     if not track_listener.track_listener_running():
         track_listener.start_track_listener(EmittingRaceStatusObserver(race), EmittingRaceTimeObserver(race))
 
+    return track_listener.track_listener_running()
+
+
+def attach_quick_race():
+    if not track_listener.track_listener_running():
+        track_listener.start_track_listener(EmittingQuickRaceStatusObserver(), EmittingQuickRaceTimeObserver())
     return track_listener.track_listener_running()
 
 
