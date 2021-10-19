@@ -27,17 +27,15 @@ def cars():
 def car(car_id):
     car = Car.query.get(car_id)
     last_season = Season.query.filter(Season.ended_at.isnot(None)).order_by(Season.ended_at.desc()).first()
-    current_season = Season.query.filter(Season.ended_at.is_(None)).order_by(Season.started_at.desc()).first()
-    return render_template('car.html', title='Auto', car=car, last_season=last_season, current_season=current_season)
+    return render_template('car.html', title='Auto', car=car, last_season=last_season, current_season=Season.current())
 
 
 @app.route('/racers')
 def racers():
     racers = Racer.query.all()
     last_season = Season.query.filter(Season.ended_at.isnot(None)).order_by(Season.ended_at.desc()).first()
-    current_season = Season.query.filter(Season.ended_at.is_(None)).order_by(Season.started_at.desc()).first()
     app.logger.info('got racers:' + repr(racers))
-    return render_template('racers.html', title='Fahrer', racers=racers, last_season=last_season, current_season=current_season)
+    return render_template('racers.html', title='Fahrer', racers=racers, last_season=last_season, current_season=Season.current())
 
 
 @app.route('/races')

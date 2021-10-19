@@ -3,6 +3,7 @@ from flask_babel import lazy_gettext as _l
 from wtforms import StringField, TextField, SubmitField, SelectField, FieldList, FormField, HiddenField
 from wtforms.validators import ValidationError, DataRequired, Optional
 from wtforms.fields.html5 import DateField
+from wtforms_components import ColorField
 from app.models import Racer, Car
 
 
@@ -63,4 +64,8 @@ class SeasonForm(FlaskForm):
     description = TextField(_l('description'), validators=[DataRequired()])
     started_at = DateField(_l('season_from'), format='%Y-%m-%d')
     ended_at = DateField(_l('season_to'), format='%Y-%m-%d', validators=(Optional(),))
+    controller_0_color = TextField(_l('controller_0_color'), validators=[Optional()])
+    controller_1_color = TextField(_l('controller_1_color'), validators=[Optional()])
+    controller_2_color = TextField(_l('controller_2_color'), validators=[Optional()])
+    controller_3_color = TextField(_l('controller_3_color'), validators=[Optional()])
     submit = SubmitField(_l('Save Season'))

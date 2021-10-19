@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-10-19 19:52+0200\n"
+"POT-Creation-Date: 2021-10-19 21:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,149 +17,165 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: app/forms.py:12
+#: app/forms.py:13
 msgid "Ghost"
 msgstr ""
 
-#: app/forms.py:13 app/templates/car.html:25 app/templates/car.html:39
+#: app/forms.py:14 app/templates/car.html:25 app/templates/car.html:39
 #: app/templates/car.html:53
 msgid "Racer"
 msgstr ""
 
-#: app/forms.py:14 app/templates/racers.html:27 app/templates/racers.html:41
+#: app/forms.py:15 app/templates/racers.html:27 app/templates/racers.html:41
 #: app/templates/racers.html:55
 msgid "Car"
 msgstr ""
 
-#: app/forms.py:20 app/templates/race_result_0.html:1
+#: app/forms.py:21 app/templates/race_result_0.html:1
 msgid "Free roam"
 msgstr ""
 
-#: app/forms.py:20 app/templates/race_result_1.html:1
+#: app/forms.py:21 app/templates/race_result_1.html:1
 msgid "Training"
 msgstr ""
 
-#: app/forms.py:20 app/templates/race_result_2.html:1
+#: app/forms.py:21 app/templates/race_result_2.html:1
 msgid "Qualifying"
 msgstr ""
 
-#: app/forms.py:20 app/templates/race_result_3.html:1
+#: app/forms.py:21 app/templates/race_result_3.html:1
 msgid "Race"
 msgstr ""
 
-#: app/forms.py:20 app/templates/race_result_4.html:1
+#: app/forms.py:21 app/templates/race_result_4.html:1
 msgid "Time trial"
 msgstr ""
 
-#: app/forms.py:25
+#: app/forms.py:26
 msgid "unlimited"
 msgstr ""
 
-#: app/forms.py:26
+#: app/forms.py:27
 msgid "1 Minute"
 msgstr ""
 
-#: app/forms.py:27
+#: app/forms.py:28
 msgid "5 Minutes"
 msgstr ""
 
-#: app/forms.py:28
+#: app/forms.py:29
 msgid "10 Minutes"
 msgstr ""
 
-#: app/forms.py:29
+#: app/forms.py:30
 msgid "20 Minutes"
 msgstr ""
 
-#: app/forms.py:30
+#: app/forms.py:31
 msgid "100 Laps"
 msgstr ""
 
-#: app/forms.py:31
+#: app/forms.py:32
 msgid "500 Laps"
 msgstr ""
 
-#: app/forms.py:36
+#: app/forms.py:37
 msgid "Start Race"
 msgstr ""
 
-#: app/forms.py:40 app/forms.py:50
+#: app/forms.py:41 app/forms.py:51
 msgid "Name"
 msgstr ""
 
-#: app/forms.py:41
+#: app/forms.py:42
 msgid "Register Racer"
 msgstr ""
 
-#: app/forms.py:46
+#: app/forms.py:47
 msgid "Racer already registered."
 msgstr ""
 
-#: app/forms.py:51 app/forms.py:63
+#: app/forms.py:52 app/forms.py:64
 msgid "description"
 msgstr ""
 
-#: app/forms.py:52
+#: app/forms.py:53
 msgid "Order No."
 msgstr ""
 
-#: app/forms.py:53
+#: app/forms.py:54
 msgid "Image URL"
 msgstr ""
 
-#: app/forms.py:54
+#: app/forms.py:55
 msgid "Add to Car Park"
 msgstr ""
 
-#: app/forms.py:59
+#: app/forms.py:60
 msgid "Car already registered"
 msgstr ""
 
-#: app/forms.py:64
+#: app/forms.py:65
 msgid "season_from"
 msgstr ""
 
-#: app/forms.py:65
+#: app/forms.py:66
 msgid "season_to"
 msgstr ""
 
-#: app/forms.py:66
+#: app/forms.py:67
+msgid "controller_0_color"
+msgstr ""
+
+#: app/forms.py:68
+msgid "controller_1_color"
+msgstr ""
+
+#: app/forms.py:69
+msgid "controller_2_color"
+msgstr ""
+
+#: app/forms.py:70
+msgid "controller_3_color"
+msgstr ""
+
+#: app/forms.py:71
 msgid "Save Season"
 msgstr ""
 
-#: app/routes.py:55
+#: app/routes.py:53
 msgid "Race stopped"
 msgstr ""
 
-#: app/routes.py:67
+#: app/routes.py:65
 msgid "Race deleted"
 msgstr ""
 
-#: app/routes.py:84 app/routes.py:193
+#: app/routes.py:82 app/routes.py:191
 msgid "New race registered."
 msgstr ""
 
-#: app/routes.py:103 app/routes.py:110
+#: app/routes.py:101 app/routes.py:108
 msgid "No control unit connection!"
 msgstr ""
 
-#: app/routes.py:143
+#: app/routes.py:141
 msgid "New season created"
 msgstr ""
 
-#: app/routes.py:157
+#: app/routes.py:155
 msgid "Season updated"
 msgstr ""
 
-#: app/routes.py:171
+#: app/routes.py:169
 msgid "New racer registered"
 msgstr ""
 
-#: app/routes.py:196
+#: app/routes.py:194
 msgid "Race not started. No control unit connection!"
 msgstr ""
 
-#: app/routes.py:208
+#: app/routes.py:206
 msgid "New car added to car park"
 msgstr ""
 
@@ -386,6 +402,10 @@ msgstr ""
 
 #: app/templates/season.html:7
 msgid "Season"
+msgstr ""
+
+#: app/templates/season.html:11 app/templates/season_edit.html:30
+msgid "Controller Colors"
 msgstr ""
 
 #: app/templates/seasons.html:6

@@ -12,7 +12,9 @@
           {% for season in seasons %}
             <li>
               <a href="{{ url_for('season', season_id=season.id) }}">
-                <p> {{ season.started_at.strftime('%d.%m.%Y') }} - {% if season.ended_at != None %}{{ season.ended_at.strftime('%d.%m.%Y') }}{% endif %}: {{ season.description }}</p>
+                {{ season.started_at.strftime('%d.%m.%Y') }} - {% if season.ended_at != None %}{{ season.ended_at.strftime('%d.%m.%Y') }}{% endif %}
+              </a>:
+              <p>{{ season.description }}</p>
               </a>
             </li>
           {% endfor %}

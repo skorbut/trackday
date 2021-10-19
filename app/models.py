@@ -142,6 +142,13 @@ class Race(db.Model):
     def statistics(self):
         return Statistics(self)
 
+    def season(self):
+        season = None
+        if(self.created_at is not None):
+            season = Season.containing_date(self.created_at)
+        if(season is None):
+            return Season.current()
+
     @staticmethod
     def current():
         current_race = next(iter(Race.query.filter(Race.status == 'started').all()), None)
@@ -230,9 +237,34 @@ class Season(db.Model):
     started_at = db.Column(db.DateTime)
     ended_at = db.Column(db.DateTime)
     description = db.Column(db.String(64), index=False, unique=False)
+    controller_0_color = db.Column(db.String(6), index=False, unique=False)
+    controller_1_color = db.Column(db.String(6), index=False, unique=False)
+    controller_2_color = db.Column(db.String(6), index=False, unique=False)
+    controller_3_color = db.Column(db.String(6), index=False, unique=False)
 
     def __repr__(self):
         return '<Season {} - {}>'.format(self.started_at, self.ended_at)
+
+    def controller_color(self, id):
+        options = {
+            0: self.controller_0_color,
+            1: self.controller_1_color,
+            2: self.controller_2_color,
+            3: self.controller_3_color
+        }
+
+        if int(id) not in options:
+            return '000000'
+
+        return options[int(id)]
+
+    @staticmethod
+    def containing_date(date):
+        return Season.query.filter(Season.started_at > date).order_by(Season.started_at.asc()).first()
+
+    @staticmethod
+    def current():
+        return Season.query.filter(Season.ended_at.is_(None)).order_by(Season.started_at.desc()).first()
 
 
 class Timing(object):
