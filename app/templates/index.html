@@ -6,6 +6,12 @@
       {{ _('Here you have access to all race information, registered racers, the car park and the history of previous races. And you can start a new race here.') }}
     </p>
 
+    <h3><a href="{{ url_for('quick_race') }}">{{ _('Quick race') }}</a></h3>
+    <p>
+      {{ _('Click the headline to go to the quick race page.') }}
+
+    </p>
+
     <h3><a href="{{ url_for('race_registration') }}">{{ _('New race') }}</a></h3>
     <p>
       {{ _('Click the headline to configure and start a new race.') }}
@@ -15,14 +21,17 @@
     <p>
       {{ _('Find all registered racers and add new racers.') }}
     </p>
+
     <h3><a href="{{ url_for('cars') }}">{{ _('Car park') }}</a></h3>
     <p>
       {{ _('Here you find all available race cars.') }}
     </p>
+
     <h3><a href="{{ url_for('seasons') }}">{{ _('Seasons') }}</a></h3>
     <p>
       {{ _('Create new seasons') }}
     </p>
+
     <h3><a href="{{ url_for('races') }}">{{ _('Previous races') }}</a></h3>
     <p>
       {{ _('Have a look at past races.') }}

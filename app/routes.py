@@ -104,6 +104,13 @@ def current_race():
     return render_template('current_race.html', title='Aktuelles Rennen', current_race=race)
 
 
+@app.route('/quick_race')
+def quick_race():
+    if not race_handler.attach_quick_race():
+        flash(_l('No control unit connection!'))
+    return render_template('quick_race.html', title='Quick Race')
+
+
 @app.route('/races/<int:race_id>')
 def race(race_id):
     return render_template('race.html', title='Rennen vom ', race=Race.query.get(race_id))
