@@ -39,7 +39,7 @@
     <div class="d-flex flex-row justify-content-left  mb-3 bd-highlight ">
       {% for grid_entry in current_race.parsed_grid()%}
       <div class= "p-2 flex-fill grid-entry">
-        <div class="horizontal-line" id="grid-entry-{{grid_entry['controller']}}">
+        <div class="horizontal-line" id="grid-entry-{{grid_entry['controller']}}" style="background-color: #{{current_race.season().controller_color(grid_entry['controller'])}};">
         </div>
         <div class= "racer-and-car">
           <p class= "racer-name">{{ grid_entry['racer'].name }}</p>
@@ -51,7 +51,7 @@
             <p class="lap-number" id = "lap-number-{{ grid_entry['controller'] }}">0</p>
           </div>
         </div>
-        <div class="horizontal-line" id="grid-entry-{{grid_entry['controller']}}">
+        <div class="horizontal-line" id="grid-entry-{{grid_entry['controller']}}" style="background-color: #{{current_race.season().controller_color(grid_entry['controller'])}};">
         </div>
         <div class = "d-flex flex-row lap-data">
           <div id = "fuel-gauge-{{ grid_entry['controller'] }}" class = "d-flex flex-row">
@@ -101,7 +101,7 @@
             <p class="lap-time" id = "best-time-{{ grid_entry['controller'] }}">0 s</p>
           </div>
         </div>
-        <div class="horizontal-line" id="grid-entry-{{grid_entry['controller']}}">
+        <div class="horizontal-line" id="grid-entry-{{grid_entry['controller']}}" style="background-color: #{{current_race.season().controller_color(grid_entry['controller'])}};">
         </div>
       </div>
       {% endfor %}
