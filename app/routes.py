@@ -106,7 +106,7 @@ def current_race():
 def quick_race():
     if not race_handler.attach_quick_race():
         flash(_l('No control unit connection!'))
-    return render_template('quick_race.html', title='Quick Race')
+    return render_template('quick_race.html', title='Quick Race', current_season=Season.current())
 
 
 @app.route('/races/<int:race_id>')
