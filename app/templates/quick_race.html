@@ -23,7 +23,7 @@
   <div class="d-flex flex-row justify-content-left  mb-3 bd-highlight ">
     {% for controller in [0,1,2,6] %}
       <div class= "p-2 flex-fill grid-entry">
-        <div class="horizontal-line" id="grid-entry-{{ controller }}">
+        <div class="horizontal-line" id="grid-entry-{{controller}}" style="background-color: #{{current_season.controller_color(controller)}};">
         </div>
         <div class = "d-flex flex-row lap-data">
           <div class="p-2 flex-fill laps">
@@ -31,7 +31,7 @@
             <p class="lap-number" id = "lap-number-{{ controller }}">0</p>
           </div>
         </div>
-        <div class="horizontal-line" id="grid-entry-{{ controller }}">
+        <div class="horizontal-line" id="grid-entry-{{controller}}" style="background-color: #{{current_season.controller_color(controller)}};">
         </div>
         <div class = "d-flex flex-row lap-data">
           <div id = "fuel-gauge-{{ controller }}" class = "d-flex flex-row">
@@ -81,7 +81,7 @@
             <p class="lap-time" id = "best-time-{{ controller }}">0 s</p>
           </div>
         </div>
-        <div class="horizontal-line" id="grid-entry-{{ controller }}">
+        <div class="horizontal-line" id="grid-entry-{{controller}}" style="background-color: #{{current_season.controller_color(controller)}};">
         </div>
       </div>
     {% endfor %}
