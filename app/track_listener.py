@@ -7,6 +7,7 @@ from app.sleep_calculator import calculate_sleep_time
 from app.control_unit_connection import ControlUnitConnection
 
 from carreralib import ControlUnit
+from carreralib.connection import TimeoutError
 
 eventlet.monkey_patch()
 track_listener_thread = None
@@ -35,7 +36,7 @@ def listen(status_observer, time_observer):
         except (eventlet.StopServe, greenlet.GreenletExit):
             app.logger.info("Received exception. exit processing")
             return
-        except (connection.TimeoutError):
+        except (TimeoutError):
             app.logger.info("Received timeout error while reading, retrying")
             continue
         time_observer.notify_time_past()

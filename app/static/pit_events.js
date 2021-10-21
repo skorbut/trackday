@@ -22,3 +22,20 @@ socket.on('pit_status', function(msg) {
     }
   });
 });
+
+socket.on('pit_stops', function(msg) {
+  console.log("Pit stops: " + msg)
+  var pit_stops = JSON.parse(msg);
+  pit_stops.forEach(function(stops, index) {
+    for(var i=0; i < 10; i++) {
+      var selector = $("#pit_stops-" + index + "-" + i)
+      if(i >= 10 - stops) {
+        selector.removeClass('grey')
+        selector.addClass('red')
+      } else {
+        selector.removeClass('red')
+        selector.addClass('grey')
+      }
+    }
+  });
+});

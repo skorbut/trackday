@@ -287,6 +287,32 @@ class Timing(object):
         self.time = timer.timestamp
 
 
+class PitStop(object):
+    def __init__(self, num):
+        self.num = num
+        self.in_pit = False
+        self.fuel_level = 0
+        self.stops = 0
+
+    def __repr__(self):
+        return '<PitStop({}): in_pit: {}, stops {}>'.format(self.num, self.in_pit, self.stops)
+
+    def pit(self, fuel_level):
+        if not self.in_pit:
+            self.fuel_level = fuel_level
+            self.in_pit = True
+            app.logger.info("{} entered pit with fuel level".format(self.num, self.fuel_level))
+
+    def track(self, fuel_level):
+        pit_stops_increased = False
+        if self.in_pit and fuel_level > self.fuel_level:
+            self.stops += 1
+            pit_stops_increased = True
+            app.logger.info("{}. Pitstop finished for {} changing fuel level from {} to {}".format(self.stops, self.num, self.fuel_level, fuel_level))
+        self.in_pit = False
+        return pit_stops_increased
+
+
 class Statistics:
     def __init__(self, race):
         self.race = race
