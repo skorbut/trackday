@@ -9,28 +9,6 @@ class EmittingRaceStatusObserver:
         self.pit_stops = [PitStop(num) for num in range(0, 8)]
 
     def notify_status(self, status):
-        app.logger.info("Processing a new status")
-        if self.update_pit_stops(status):
-            emit_pit_stops(self.pit_stops)
-        emit_status(status)
-
-    def update_pit_stops(self, status):
-        # identify pit status change
-        for controller in range(0, 8):
-            fuel = status.fuel[controller]
-            pit_stop = self.pit_stops[controller]
-            if status.pit[controller]:
-                pit_stop.pit(fuel)
-            else:
-                pit_stop.track(fuel)
-
-
-class EmittingQuickRaceStatusObserver:
-    def __init__(self):
-        self.pit_stops = [PitStop(num) for num in range(0, 8)]
-
-    def notify_status(self, status):
-        app.logger.info("Processing a new status")
         if self.update_pit_stops(status):
             emit_pit_stops(self.pit_stops)
         emit_status(status)
@@ -41,7 +19,28 @@ class EmittingQuickRaceStatusObserver:
         for controller in range(0, 8):
             fuel = status.fuel[controller]
             pit_stop = self.pit_stops[controller]
-            app.logger.info("updating pit status for {}".format(pit_stop))
+            if status.pit[controller]:
+                pit_stop.pit(fuel)
+            else:
+                changed = changed or pit_stop.track(fuel)
+        return changed
+
+
+class EmittingQuickRaceStatusObserver:
+    def __init__(self):
+        self.pit_stops = [PitStop(num) for num in range(0, 8)]
+
+    def notify_status(self, status):
+        if self.update_pit_stops(status):
+            emit_pit_stops(self.pit_stops)
+        emit_status(status)
+
+    def update_pit_stops(self, status):
+        # identify pit status change
+        changed = False
+        for controller in range(0, 8):
+            fuel = status.fuel[controller]
+            pit_stop = self.pit_stops[controller]
             if status.pit[controller]:
                 pit_stop.pit(fuel)
             else:
