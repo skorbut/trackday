@@ -3,7 +3,8 @@ import time
 
 from app import app
 from app.socket_connection import emit_cu_status
-from carreralib import ControlUnit, connection
+from carreralib import ControlUnit
+from carreralib.connection import TimeoutError
 
 
 class ControlUnitConnection:
@@ -12,7 +13,15 @@ class ControlUnitConnection:
         self.connect()
 
     def connect(self):
-        serial_ports = ['/dev/ttyUSB0', '/dev/ttyUSB1', '/dev/ttyUSB2', '/dev/ttyUSB3', '/dev/tty.usbserial']
+        serial_ports = [
+            '/dev/ttyUSB0',
+            '/dev/ttyUSB1',
+            '/dev/ttyUSB2',
+            '/dev/ttyUSB3',
+            '/dev/tty.usbserial',
+            '/dev/tty.usbserial-14110',
+            '/dev/tty.usbserial-141220'
+        ]
         for serial_port in serial_ports:
             app.logger.info("trying " + str(serial_port))
 
@@ -22,7 +31,7 @@ class ControlUnitConnection:
                 break
             except serial.serialutil.SerialException:
                 emit_cu_status('not_connected', serial_port)
-            except connection.TimeoutError:
+            except TimeoutError:
                 emit_cu_status('timeout', serial_port)
         app.logger.info(" not connected")
 
@@ -35,7 +44,7 @@ class ControlUnitConnection:
         except serial.serialutil.SerialException:
             emit_cu_status('not_connected')
             return False
-        except connection.TimeoutError:
+        except TimeoutError:
             emit_cu_status('timeout')
             return False
         return True
@@ -46,7 +55,7 @@ class ControlUnitConnection:
                 self.cu.reset()
                 self.cu.start()
                 return True
-            except connection.TimeoutError:
+            except TimeoutError:
                 app.logger.error("Timeout while resetting track")
                 time.sleep(0.1)
 

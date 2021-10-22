@@ -8,6 +8,11 @@ def emit_status(status):
     socketio.emit('startlight_status', status.start, namespace='/startlight_events')
 
 
+def emit_pit_stops(pit_stops):
+    pit_stop_counts = list(map(lambda pit_stop: pit_stop.stops, pit_stops))
+    socketio.emit('pit_stops', json.dumps(pit_stop_counts), namespace='/pit_events')
+
+
 def emit_lap(timer, timing):
     socketio.emit('lap_finished', json.dumps({'controller': timer.address,
                                               'lap_number': timing.laps,

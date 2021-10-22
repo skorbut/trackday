@@ -34,6 +34,11 @@
         <div class="horizontal-line" id="grid-entry-{{controller}}" style="background-color: #{{current_season.controller_color(controller)}};">
         </div>
         <div class = "d-flex flex-row lap-data">
+          <div id = "pit-stops-{{ controller}}" class = "d-flex flex-column pit-stops-box">
+            {% for i in range(0,10) %}
+              <div class = "dot grey" id="pit_stops-{{controller}}-{{i}}"> </div>
+            {% endfor %}
+          </div>
           <div id = "fuel-gauge-{{ controller }}" class = "d-flex flex-row">
             <canvas id = "fuel-gauge-canvas-{{ controller }}"
               data-type="radial-gauge"
@@ -74,7 +79,7 @@
               <i class="fa fa-gas-pump p-2"></i>
             </div>
           </div>
-          <div class="p-2 flex-fill">
+          <div class="p-2 flex-fill times-box">
             <p class="lap-time-label">{{ _('Last lap') }}:</p>
             <p class="lap-time" id = "lap-time-{{ controller }}">0 s</p>
             <p class="lap-time-label">{{ _('Best lap') }}:</p>

@@ -54,6 +54,11 @@
         <div class="horizontal-line" id="grid-entry-{{grid_entry['controller']}}" style="background-color: #{{current_race.season().controller_color(grid_entry['controller'])}};">
         </div>
         <div class = "d-flex flex-row lap-data">
+          <div id = "pit-stops-{{ controller}}" class = "d-flex flex-column pit-stops-box">
+            {% for i in range(0,10) %}
+              <div class = "dot grey" id="pit_stops-{{grid_entry['controller']}}-{{i}}"> </div>
+            {% endfor %}
+          </div>
           <div id = "fuel-gauge-{{ grid_entry['controller'] }}" class = "d-flex flex-row">
             <canvas id = "fuel-gauge-canvas-{{ grid_entry['controller'] }}"
               data-type="radial-gauge"
