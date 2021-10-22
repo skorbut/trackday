@@ -3,7 +3,6 @@ from flask_babel import lazy_gettext as _l
 from wtforms import StringField, TextField, SubmitField, SelectField, FieldList, FormField, HiddenField
 from wtforms.validators import ValidationError, DataRequired, Optional
 from wtforms.fields.html5 import DateField
-from wtforms_components import ColorField
 from app.models import Racer, Car
 
 
