@@ -87,10 +87,14 @@ class Race(db.Model):
             return False
 
     def has_reached_laps(self, laps_to_reach):
-        return self.statistics().maximum_laps() >= laps_to_reach
+        max_laps_in_race = self.statistics().maximum_laps()
+        app.logger.info("Laps: {} / {}".format(max_laps_in_race, laps_to_reach))
+        return max_laps_in_race >= laps_to_reach
 
     def has_reached_time(self, minutes_to_reach):
-        return datetime.datetime.now() - self.started_at >= datetime.timedelta(minutes=minutes_to_reach)
+        race_time = datetime.datetime.now() - self.started_at
+        app.logger.info("Time: {} / {}".format(race_time, datetime.timedelta(minutes=minutes_to_reach)))
+        return race_time >= datetime.timedelta(minutes=minutes_to_reach)
 
     def racer(self, controller):
         for grid_entry in self.parsed_grid():
@@ -278,7 +282,7 @@ class Timing(object):
     def newlap(self, timer):
         if self.time is not None:
             self.lap_time = timer.timestamp - self.time
-        if self.best_time is None or self.lap_time < self.best_time:
+        if self.lap_time > 0 and (self.best_time is None or self.lap_time < self.best_time):
             self.best_time = self.lap_time
         if self.laps is None:
             self.laps = 0
