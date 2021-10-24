@@ -69,11 +69,13 @@ class Race(db.Model):
         return self.save_lap(controller, time, racer.id, car.id)
 
     def save_lap(self, controller, time, racer_id, car_id):
+        start_time = time.time()
         lap = Lap(race_id=self.id, controller=controller, time=time, racer_id=racer_id, car_id=car_id)
 
         app.logger.info("Saving Lap: " + repr(lap))
         db.session.add(lap)
         db.session.commit()
+        print("Saved Lap in %s" % (time.time() - start_time))
         return lap
 
     def has_reached_duration(self):
