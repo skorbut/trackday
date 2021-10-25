@@ -284,7 +284,7 @@ class Timing(object):
     def newlap(self, timer):
         if self.time is not None:
             self.lap_time = timer.timestamp - self.time
-        if self.lap_time > 0 and (self.best_time is None or self.lap_time < self.best_time):
+        if self.lap_time is not None and self.lap_time > 0 and (self.best_time is None or self.lap_time < self.best_time):
             self.best_time = self.lap_time
         if self.laps is None:
             self.laps = 0
