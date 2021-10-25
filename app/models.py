@@ -1,6 +1,7 @@
 from operator import attrgetter
 import datetime
 import json
+import time
 from sqlalchemy import inspect, func
 from app import app, db
 
@@ -60,17 +61,17 @@ class Race(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    def add_lap(self, controller, time):
+    def add_lap(self, controller, lap_time):
         racer = self.racer(controller)
         car = self.car(controller)
         if racer is None or car is None:
             app.logger.info("Lap not added for unknown racer or car.")
             return None
-        return self.save_lap(controller, time, racer.id, car.id)
+        return self.save_lap(controller, lap_time, racer.id, car.id)
 
-    def save_lap(self, controller, time, racer_id, car_id):
+    def save_lap(self, controller, lap_time, racer_id, car_id):
         start_time = time.time()
-        lap = Lap(race_id=self.id, controller=controller, time=time, racer_id=racer_id, car_id=car_id)
+        lap = Lap(race_id=self.id, controller=controller, time=lap_time, racer_id=racer_id, car_id=car_id)
 
         app.logger.info("Saving Lap: " + repr(lap))
         db.session.add(lap)
