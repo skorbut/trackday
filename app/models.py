@@ -72,11 +72,9 @@ class Race(db.Model):
     def save_lap(self, controller, lap_time, racer_id, car_id):
         start_time = time.time()
         lap = Lap(race_id=self.id, controller=controller, time=lap_time, racer_id=racer_id, car_id=car_id)
-
-        app.logger.info("Saving Lap: " + repr(lap))
         db.session.add(lap)
         db.session.commit()
-        print("Saved Lap in %s" % (time.time() - start_time))
+        app.logger.info("Saved Lap in %s" % (time.time() - start_time))
         return lap
 
     def has_reached_duration(self):
@@ -91,7 +89,6 @@ class Race(db.Model):
 
     def has_reached_laps(self, laps_to_reach):
         max_laps_in_race = self.statistics().maximum_laps()
-        app.logger.info("Laps: {} / {}".format(max_laps_in_race, laps_to_reach))
         return max_laps_in_race >= laps_to_reach
 
     def has_reached_time(self, minutes_to_reach):
