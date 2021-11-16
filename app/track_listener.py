@@ -38,6 +38,7 @@ def listen(status_observer, time_observer):
             return
         except (TimeoutError):
             app.logger.info("Received timeout error while reading, retrying")
+            connection.connect()
             continue
         time_observer.notify_time_past()
         last_status_or_timer = status_or_timer

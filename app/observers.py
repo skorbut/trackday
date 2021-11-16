@@ -92,5 +92,9 @@ class LoggingDebugObserver:
     def notify_timer(self, time):
         app.logger.info("received a new time {}".format(time))
 
+    def notify_time_past(self):
+        return None
+
+
     def notify_status(self, status):
         app.logger.info("received a new status {}".format(status))

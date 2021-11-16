@@ -1,6 +1,7 @@
 from operator import attrgetter
 import datetime
 import json
+import time
 from sqlalchemy import inspect, func
 from app import app, db
 
@@ -60,20 +61,20 @@ class Race(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    def add_lap(self, controller, time):
+    def add_lap(self, controller, lap_time):
         racer = self.racer(controller)
         car = self.car(controller)
         if racer is None or car is None:
             app.logger.info("Lap not added for unknown racer or car.")
             return None
-        return self.save_lap(controller, time, racer.id, car.id)
+        return self.save_lap(controller, lap_time, racer.id, car.id)
 
-    def save_lap(self, controller, time, racer_id, car_id):
-        lap = Lap(race_id=self.id, controller=controller, time=time, racer_id=racer_id, car_id=car_id)
-
-        app.logger.info("Saving Lap: " + repr(lap))
+    def save_lap(self, controller, lap_time, racer_id, car_id):
+        start_time = time.time()
+        lap = Lap(race_id=self.id, controller=controller, time=lap_time, racer_id=racer_id, car_id=car_id)
         db.session.add(lap)
         db.session.commit()
+        app.logger.info("Saved Lap in %s" % (time.time() - start_time))
         return lap
 
     def has_reached_duration(self):
@@ -87,10 +88,13 @@ class Race(db.Model):
             return False
 
     def has_reached_laps(self, laps_to_reach):
-        return self.statistics().maximum_laps() >= laps_to_reach
+        max_laps_in_race = self.statistics().maximum_laps()
+        return max_laps_in_race >= laps_to_reach
 
     def has_reached_time(self, minutes_to_reach):
-        return datetime.datetime.now() - self.started_at >= datetime.timedelta(minutes=minutes_to_reach)
+        race_time = datetime.datetime.now() - self.started_at
+        app.logger.info("Time: {} / {}".format(race_time, datetime.timedelta(minutes=minutes_to_reach)))
+        return race_time >= datetime.timedelta(minutes=minutes_to_reach)
 
     def racer(self, controller):
         for grid_entry in self.parsed_grid():
@@ -278,7 +282,7 @@ class Timing(object):
     def newlap(self, timer):
         if self.time is not None:
             self.lap_time = timer.timestamp - self.time
-        if self.best_time is None or self.lap_time < self.best_time:
+        if self.lap_time is not None and self.lap_time > 0 and (self.best_time is None or self.lap_time < self.best_time):
             self.best_time = self.lap_time
         if self.laps is None:
             self.laps = 0
